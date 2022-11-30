@@ -5,9 +5,15 @@ namespace WebApiTemplate.BootSetup;
 /// </summary>
 public static class WebAppExtensions
 {
-    public static WebApplication UseWebApi(this WebApplication app)
+    public static WebApplication UseWebApiFeatures(this WebApplication app)
     {
         app.UseFastEndpoints();
+        return app;
+    }
+
+    public static WebApplication UseCORS(this WebApplication app)
+    {
+        //app.UseCors();
         return app;
     }
 

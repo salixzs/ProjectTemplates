@@ -7,6 +7,7 @@ public class Program
 {
     public static async Task<int> Main(string[] args)
     {
+#pragma warning disable CA1305 // Specify IFormatProvider
 #if DEBUG
         Log.Logger = new LoggerConfiguration()
             .WriteTo.Console()
@@ -17,21 +18,26 @@ public class Program
             .WriteTo.ApplicationInsights(TelemetryConfiguration.CreateDefault(), TelemetryConverter.Traces, Serilog.Events.LogEventLevel.Verbose)
             .CreateBootstrapLogger();
 #endif
+#pragma warning restore CA1305 // Specify IFormatProvider
         try
         {
             Log.Information("Starting up API. Setup and Configuration...");
 
             var builder = WebApplication.CreateBuilder(args)
-                .UseSerilogLogging()
-                .UseApplicationInsights()
-                .ConfigureApi()
-                .UseAuth()
-                .RegisterDependencies()
-                .UseSwaggerServices();
+                .AddSerilogLogging()
+                .AddApplicationInsights()
+                .AddWebApiFeatures()
+                .AddAuth()
+                .AddHttpsSsl()
+                .AddCorsUrls()
+                .AddDependencies()
+                .AddSwaggerServices();
 
-            var app = builder.Build();
-            app.UseWebApi()
+            var app = builder.Build()
+                .UseWebApiFeatures()
+                .UseCORS()
                 .UseAuth()
+                //.UseHealthChecking()
                 .UseSwaggerPage();
 
             app.UseHttpsRedirection();

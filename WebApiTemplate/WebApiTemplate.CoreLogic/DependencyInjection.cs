@@ -1,13 +1,22 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+//using WebApiTemplate.CoreLogic.Security;
 
 namespace WebApiTemplate.CoreLogic;
 
 public static class DependencyInjection
 {
-    public static void SetupDependencies(this IServiceCollection services)
+    public static void SetupDependencies(this IServiceCollection services, IConfiguration configuration)
     {
+        services.RegisterConfigurationObjects(configuration);
         services.RegisterHandlers();
+    }
+
+    private static IServiceCollection RegisterConfigurationObjects(this IServiceCollection services, IConfiguration configuration)
+    {
+        //services.ConfigureValidatableSetting<SecurityConfigurationOptions>(configuration.GetSection(SecurityConfigurationOptions.ConfigurationSectionName));
+        return services;
     }
 
     private static IServiceCollection RegisterHandlers(this IServiceCollection services)
