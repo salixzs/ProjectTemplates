@@ -27,5 +27,5 @@ public class SecurityConfigurationOptions : IValidatableConfiguration
 public class CorsOptions
 {
     public List<string> Origins { get; set; } = new List<string>();
-    public override string ToString() => "dfd";
+    public override string ToString() => string.Join(',', Origins);
 }

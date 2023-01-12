@@ -13,26 +13,33 @@ public class FrontpageGet : EndpointWithoutRequest<ContentResult>
 
     public override void Configure()
     {
-        Get(Urls.Pages.BaseUri);
-        Options(opts => opts.WithTags("Puke"));
+        Get(Urls.Pages.FrontPage);
+        Options(opts => opts.WithTags("Pages"));
         AllowAnonymous();
     }
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var configurationItems = _configLoader.GetConfigurationValues(new HashSet<string>
+        var whitelistedConfigurationValues = new HashSet<string>
         {
             "REGION",
             "WEBSITE_SITE_NAME",
             "WEBSITE_PHYSICAL_MEM",
             "ENVIRONMENT",
+            "OS",
             "NUMBER_OF_PROCESSORS",
-            "contentRoot",
-            "AllowedHosts",
-            "Serilog/MinimumLevel",
-            "ConnectionStrings",
-        });
+        };
+#if DEBUG
+        whitelistedConfigurationValues.Add("Serilog/MinimumLevel");
+        whitelistedConfigurationValues.Add("AllowedHosts");
+        whitelistedConfigurationValues.Add("Security");
+        whitelistedConfigurationValues.Add("ConnectionStrings");
+#endif
+        var configurationItems = _configLoader.GetConfigurationValues(whitelistedConfigurationValues);
         var obfuscatedConfig = ObfuscateConfigurationValues(configurationItems!);
+        obfuscatedConfig.Add("Local Server Timezone", TimeZoneInfo.Local.DisplayName);
+        obfuscatedConfig.Add("Current Culture", System.Globalization.CultureInfo.CurrentCulture.DisplayName);
+        obfuscatedConfig.Add("Current UI Culture", System.Globalization.CultureInfo.CurrentUICulture.DisplayName);
 
         var apiAssembly = Assembly.GetAssembly(typeof(Program));
         var apiAssemblyVersion = apiAssembly!.GetName().Version ?? new Version(1, 0, 0, 0);
@@ -43,10 +50,11 @@ public class FrontpageGet : EndpointWithoutRequest<ContentResult>
             .SetHostingEnvironment(Env.EnvironmentName)
             .SetVersion(apiAssemblyVersion.ToString())    // Reads version from Assembly info
             .SetBuildTime(GetBuildTime(                   // Setting build time calculated from Assemly auto-incrementing approach
-                new DateTime(2023, 1, 1, 9, 0, 0),       // Latest version "start" date - sync with data in CSPROJ
+                new DateTime(2023, 1, 1, 9, 0, 0),        // Latest version "start" date - sync with date in CSPROJ
                 apiAssemblyVersion.Build,
                 apiAssemblyVersion.Revision))
             .AddLinkButton("Swagger", "/swagger/index.html")
+            .AddLinkButton("Health", "/healthpage")
             .SetConfigurationValues(obfuscatedConfig)
             .IncludeContentFile("build_data.html");
 #if DEBUG

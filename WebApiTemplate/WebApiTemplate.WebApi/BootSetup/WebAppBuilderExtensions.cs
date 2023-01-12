@@ -1,3 +1,4 @@
+using ConfigurationValidation.AspNetCore;
 using FastEndpoints.Swagger;
 using Serilog;
 using WebApiTemplate.CoreLogic.Security;
@@ -137,5 +138,11 @@ public static class WebAppBuilderExtensions
         }
 
         return true;
+    }
+
+    public static WebApplicationBuilder AddHealthChecks(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddConfigurationHealthCheck(builder.Environment.IsDevelopment());
+        return builder;
     }
 }

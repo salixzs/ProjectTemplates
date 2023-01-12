@@ -1,3 +1,8 @@
+using ConfigurationValidation.AspNetCore;
+using Salix.AspNetCore.HealthCheck;
+using Salix.AspNetCore.JsonExceptionHandler;
+using WebApiTemplate.WebApi.Middleware;
+
 namespace WebApiTemplate.BootSetup;
 
 /// <summary>
@@ -8,6 +13,17 @@ public static class WebAppExtensions
     public static WebApplication UseWebApiFeatures(this WebApplication app)
     {
         app.UseFastEndpoints();
+        return app;
+    }
+
+    public static WebApplication UseJsonErrorHandling(this WebApplication app)
+    {
+        app.AddJsonExceptionHandler<ApiJsonErrorMiddleware>(
+            new ApiJsonExceptionOptions
+            {
+                OmitSources = new HashSet<string> { "Middleware" },
+                ShowStackTrace = true
+            });
         return app;
     }
 
@@ -48,6 +64,14 @@ public static class WebAppExtensions
             });
         }
 
+        return app;
+    }
+
+    public static WebApplication UseHealthChecking(this WebApplication app)
+    {
+        app.UseConfigurationValidationErrorPage();
+        app.UseJsonHealthChecks("/health", app.Environment.IsDevelopment());
+        app.UseHealthChecks("/health");
         return app;
     }
 }

@@ -31,13 +31,15 @@ public class Program
                 .AddHttpsSsl()
                 .AddCorsUrls()
                 .AddDependencies()
-                .AddSwaggerServices();
+                .AddSwaggerServices()
+                .AddHealthChecks();
 
             var app = builder.Build()
                 .UseWebApiFeatures()
+                .UseJsonErrorHandling()
                 .UseCORS()
                 .UseAuth()
-                //.UseHealthChecking()
+                .UseHealthChecking()
                 .UseSwaggerPage();
 
             app.UseHttpsRedirection();

@@ -39,6 +39,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     <PackageReference Include="Salix.AspNetCore.FrontPage" Version="1.0.0" />
     <PackageReference Include="Salix.AspNetCore.HealthCheck" Version="1.0.0" />
+    <PackageReference Include="Salix.AspNetCore.JsonExceptionHandler" Version="1.0.0" />
 		<PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
 		<PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
 	</ItemGroup>
