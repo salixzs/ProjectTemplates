@@ -16,7 +16,7 @@ public class SecurityConfigurationOptions : IValidatableConfiguration
         {
             if (!Uri.IsWellFormedUriString(corsUrl, UriKind.Absolute))
             {
-                validations.ValidateAddCustom(c => c.Cors, "Could not load any CORS URL.");
+                validations.ValidateAddCustom(c => c.Cors, $"{corsUrl} is not valid abolute URL.");
             }
         }
 

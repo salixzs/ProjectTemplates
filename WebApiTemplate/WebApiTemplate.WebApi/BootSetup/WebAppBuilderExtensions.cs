@@ -1,5 +1,7 @@
 using FastEndpoints.Swagger;
 using Serilog;
+using WebApiTemplate.CoreLogic.Security;
+using WebApiTemplate.Crosscut.Exceptions;
 
 namespace WebApiTemplate.BootSetup;
 
@@ -52,23 +54,26 @@ public static class WebAppBuilderExtensions
 
     public static WebApplicationBuilder AddCorsUrls(this WebApplicationBuilder builder)
     {
-        //var securityOptions = builder.Configuration
-        //    .GetSection(ConfigurationSecuritySettings.ConfigField)
-        //    .Get<ConfigurationSecuritySettings>();
+        var securityOptions = builder.Configuration
+            .GetSection(SecurityConfigurationOptions.ConfigurationSectionName)
+            .Get<SecurityConfigurationOptions>();
 
-        //if (securityOptions == null)
-        //{
-        //    throw new Domain.Exceptions.DomainException($"Missing \"{ConfigurationSecuritySettings.ConfigField}\" configuration section or its contents are wrong.");
-        //}
+        if (securityOptions == null)
+        {
+            throw new BusinessException($"Missing \"{SecurityConfigurationOptions.ConfigurationSectionName}\" configuration section or its contents are wrong.", BusinessExceptionType.ConfigurationError, 1);
+        }
 
-        // var origins = securityOptions.CorsOrigins.Split(";");
+        if (securityOptions.Cors.Origins == null || securityOptions.Cors.Origins.Count == 0)
+        {
+            throw new BusinessException($"Missing CORS URLs in \"{SecurityConfigurationOptions.ConfigurationSectionName}\" configuration section.", BusinessExceptionType.ConfigurationError, 2);
+        }
 
-        //builder.Services.AddCors(options => options.AddDefaultPolicy(
-        //    builder => builder
-        //        .WithOrigins()
-        //        .WithExposedHeaders("Content-Disposition")
-        //        .AllowAnyHeader()
-        //        .AllowAnyMethod()));
+        builder.Services.AddCors(options => options.AddDefaultPolicy(
+            builder => builder
+                .WithOrigins(securityOptions.Cors.Origins.ToArray())
+                .WithExposedHeaders("Content-Disposition")
+                .AllowAnyHeader()
+                .AllowAnyMethod()));
 
         return builder;
     }
@@ -111,9 +116,26 @@ public static class WebAppBuilderExtensions
                 settings.Version = "v1.0";
                 settings.DocumentName = "Version-1.0";
                 settings.Description = "Here goes a longer and detailed description on API purpose and usage.";
-            });
+                settings.EndpointFilter(EndpointDocumentationFilter);
+            },
+            tagIndex: 0);
         }
 
         return builder;
+    }
+
+    /// <summary>
+    /// Filters out which Endponts appear in Swagger OpenApi documentation.
+    /// </summary>
+    /// <param name="endpoint">endpoint description</param>
+    /// <returns>True - appears, False - does not appear.</returns>
+    private static bool EndpointDocumentationFilter(EndpointDefinition endpoint)
+    {
+        if (endpoint.EndpointTags != null && endpoint.EndpointTags.Contains("Pages"))
+        {
+            return false;
+        }
+
+        return true;
     }
 }

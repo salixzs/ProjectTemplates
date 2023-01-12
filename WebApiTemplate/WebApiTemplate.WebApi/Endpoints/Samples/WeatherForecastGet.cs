@@ -12,6 +12,7 @@ public class WeatherForecastGet : EndpointWithoutRequest<IEnumerable<WeatherFore
     public override void Configure()
     {
         Get(Urls.Samples.WeatherForecast);
+        Options(opts => opts.WithTags("Samples"));
         AllowAnonymous();
     }
 

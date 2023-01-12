@@ -12,11 +12,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.Domain", "WebApiTemplate.Domain\WebApiTemplate.Domain.csproj", "{D1769B44-EC02-46C3-A6FB-2E04854B75B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Domain", "WebApiTemplate.Domain\WebApiTemplate.Domain.csproj", "{D1769B44-EC02-46C3-A6FB-2E04854B75B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.Urls", "WebApiTemplate.Urls\WebApiTemplate.Urls.csproj", "{F38DA634-1161-44AE-9E8D-4126DE657C7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Urls", "WebApiTemplate.Urls\WebApiTemplate.Urls.csproj", "{F38DA634-1161-44AE-9E8D-4126DE657C7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.CoreLogic", "WebApiTemplate.CoreLogic\WebApiTemplate.CoreLogic.csproj", "{31BFFE9F-1D97-468A-B526-17332DE7862F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.CoreLogic", "WebApiTemplate.CoreLogic\WebApiTemplate.CoreLogic.csproj", "{31BFFE9F-1D97-468A-B526-17332DE7862F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.Crosscut", "WebApiTemplate.Crosscut\WebApiTemplate.Crosscut.csproj", "{52624D57-EE92-4CF0-86E6-A30C770A170F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,10 @@ Global
 		{31BFFE9F-1D97-468A-B526-17332DE7862F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31BFFE9F-1D97-468A-B526-17332DE7862F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31BFFE9F-1D97-468A-B526-17332DE7862F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52624D57-EE92-4CF0-86E6-A30C770A170F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52624D57-EE92-4CF0-86E6-A30C770A170F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52624D57-EE92-4CF0-86E6-A30C770A170F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52624D57-EE92-4CF0-86E6-A30C770A170F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
