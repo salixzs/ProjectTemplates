@@ -14,8 +14,9 @@ public class FrontpageGet : EndpointWithoutRequest<ContentResult>
     public override void Configure()
     {
         Get(Urls.Pages.FrontPage);
-        Options(opts => opts.WithTags("Pages"));
         AllowAnonymous();
+        Tags("Pages");
+        Options(opts => opts.WithTags("Pages"));
     }
 
     public override async Task HandleAsync(CancellationToken ct)
@@ -53,11 +54,11 @@ public class FrontpageGet : EndpointWithoutRequest<ContentResult>
                 new DateTime(2023, 1, 1, 9, 0, 0),        // Latest version "start" date - sync with date in CSPROJ
                 apiAssemblyVersion.Build,
                 apiAssemblyVersion.Revision))
-            .AddLinkButton("Swagger", "/swagger/index.html")
             .AddLinkButton("Health", "/healthpage")
             .SetConfigurationValues(obfuscatedConfig)
             .IncludeContentFile("build_data.html");
 #if DEBUG
+        indexPage.AddLinkButton("Swagger", "/swagger/index.html");
         indexPage.SetBuildMode("#DEBUG (Should not be in production!)");
 #else
         indexPage.SetBuildMode("Release");

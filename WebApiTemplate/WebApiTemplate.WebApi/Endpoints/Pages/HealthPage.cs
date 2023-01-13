@@ -1,10 +1,7 @@
-using System.Net;
-using System.Reflection;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Salix.AspNetCore.HealthCheck;
-using Salix.AspNetCore.TitlePage;
 
 namespace WebApiTemplate.Endpoints.Samples;
 
@@ -18,6 +15,7 @@ public class HealthPageGet : EndpointWithoutRequest<ContentResult>
     public override void Configure()
     {
         Get(Urls.Pages.HealthPage);
+        Tags("Pages");
         Options(opts => opts.WithTags("Pages"));
         AllowAnonymous();
     }
