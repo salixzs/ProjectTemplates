@@ -15,7 +15,7 @@ public class Program
             .CreateBootstrapLogger();
 #else
         Log.Logger = new LoggerConfiguration()
-            .WriteTo.ApplicationInsights(TelemetryConfiguration.CreateDefault(), TelemetryConverter.Traces, Serilog.Events.LogEventLevel.Verbose)
+            .WriteTo.ApplicationInsights(Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration.CreateDefault(), TelemetryConverter.Traces, Serilog.Events.LogEventLevel.Verbose)
             .CreateBootstrapLogger();
 #endif
 #pragma warning restore CA1305 // Specify IFormatProvider
@@ -35,8 +35,8 @@ public class Program
                 .AddHealthChecks();
 
             var app = builder.Build()
-                .UseWebApiFeatures()
                 .UseJsonErrorHandling()
+                .UseWebApiFeatures()
                 .UseCORS()
                 .UseAuth()
                 .UseHealthChecking()

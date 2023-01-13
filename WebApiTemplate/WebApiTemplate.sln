@@ -18,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Urls", "WebA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.CoreLogic", "WebApiTemplate.CoreLogic\WebApiTemplate.CoreLogic.csproj", "{31BFFE9F-1D97-468A-B526-17332DE7862F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.Crosscut", "WebApiTemplate.Crosscut\WebApiTemplate.Crosscut.csproj", "{52624D57-EE92-4CF0-86E6-A30C770A170F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Crosscut", "WebApiTemplate.Crosscut\WebApiTemplate.Crosscut.csproj", "{52624D57-EE92-4CF0-86E6-A30C770A170F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
