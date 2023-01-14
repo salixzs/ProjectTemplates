@@ -6,6 +6,11 @@ Solution template for REST WebApi.
 - Serilog
   - Debug/Console sinks (in dev)
   - ApplicationInsights sink
+- Salix.AspNetUtilities
+  - JSON error handling
+  - Front page
+  - HealthCheck transformer and page
+  - Configuration validation
 
 # Solution projects
 
@@ -21,4 +26,6 @@ It is separated in case these are shared with come C# client as strongly typed a
 **CoreLogic** is project where all business logic and data sources are accessed.
 
 **Domain** contains WebApi data contracts (DTOs).
+
+**Crosscut** contains classes, shareable in any of other projects (Exceptions, Types, Extensions (to .Net types/classes, NOT Business!)).
 

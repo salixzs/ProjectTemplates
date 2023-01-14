@@ -11,7 +11,7 @@ public class StringsResponse
     public string CurrentDateTimeToString { get; set; } = DateTime.Now.ToString("D");
 
     /// <summary>
-    /// Siple string with ASCII characters only.
+    /// Simple string with ASCII characters only.
     /// </summary>
     public string SimpleString { get; set; } = "Brown Fox Jumped Over Lazy Dog";
 

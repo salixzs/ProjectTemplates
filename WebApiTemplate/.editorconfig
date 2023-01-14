@@ -538,6 +538,9 @@ dotnet_diagnostic.IDE2000.severity = error
 
 # IDE0022: Use expression body for methods
 dotnet_diagnostic.IDE0022.severity = suggestion
+# CA1852: Non-inherited class should be s
+ealed
+dotnet_diagnostic.CA1852.severity = error
 
 # CA1848: Use the LoggerMessage delegates
 dotnet_diagnostic.CA1848.severity = silent
@@ -570,3 +573,6 @@ dotnet_diagnostic.CS8629.severity = error
 
 # XML Documentation stuff
 dotnet_diagnostic.RCS1141.severity = silent
+
+# Logging should be specific format
+dotnet_diagnostic.CA2254.severity = suggestion

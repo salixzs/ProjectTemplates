@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-//using WebApiTemplate.CoreLogic.Security;
+using WebApiTemplate.Database.Orm;
 
 namespace WebApiTemplate.CoreLogic;
 
@@ -9,6 +9,7 @@ public static class DependencyInjection
 {
     public static void SetupDependencies(this IServiceCollection services, IConfiguration configuration)
     {
+        ContextRegistration.AddDatabaseContext(services, configuration);
         services.RegisterHandlers();
     }
 
