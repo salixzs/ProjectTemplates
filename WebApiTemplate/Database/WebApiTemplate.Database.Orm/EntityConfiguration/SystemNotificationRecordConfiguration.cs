@@ -1,3 +1,5 @@
+using WebApiTemplate.Enumerations;
+
 namespace WebApiTemplate.Database.Orm.EntityConfiguration;
 
 internal sealed class SystemNotificationRecordConfiguration : IEntityTypeConfiguration<SystemNotificationRecord>
@@ -21,7 +23,7 @@ internal sealed class SystemNotificationRecordConfiguration : IEntityTypeConfigu
 
         builder.Property(e => e.Type)
             .IsRequired()
-            .HasDefaultValue(0)
+            .HasDefaultValue(SystemNotificationType.Normal)
             .HasConversion<int>();
 
         builder.Property(e => e.EmphasizeSince)
@@ -30,7 +32,7 @@ internal sealed class SystemNotificationRecordConfiguration : IEntityTypeConfigu
 
         builder.Property(e => e.EmphasizeType)
             .IsRequired()
-            .HasDefaultValue(0)
+            .HasDefaultValue(SystemNotificationType.Normal)
             .HasConversion<int>();
 
         builder.Property(e => e.CountdownSince)

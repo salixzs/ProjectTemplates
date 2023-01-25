@@ -1,3 +1,4 @@
+using System.Net;
 using WebApiTemplate.Domain.Sandbox;
 
 namespace WebApiTemplate.WebApi.Endpoints.Sandbox;
@@ -8,17 +9,17 @@ public class DateTimesGet : EndpointWithoutRequest<DateTimeResponse>
     {
         // Endpoint setup (behavior)
         Get(Urls.Sandbox.DateTimes);
-        Tags("Sandbox");
+        Tags(Urls.Sandbox.SwaggerTag);
         AllowAnonymous();
 
         // Swagger documentation
         Description(swagger => swagger
-            .WithTags("Sandbox"));
+            .WithTags(Urls.Sandbox.SwaggerTag));
         Summary(swagger =>
         {
             swagger.Summary = "Display Data and Time object serialization.";
             swagger.Description = "Returns object with static and dynamic (current) dates, times, timespans and related .Net types serialized into JSON.";
-            swagger.Responses[200] = "Returns Dates and Times.";
+            swagger.Response<DateTimeResponse>((int)HttpStatusCode.OK, "Returns dates and times values.");
         });
     }
 

@@ -4,7 +4,7 @@ internal sealed class SystemNotificationMessageRecordConfiguration : IEntityType
 {
     public void Configure(EntityTypeBuilder<SystemNotificationMessageRecord> builder)
     {
-        builder.ToTable("SystemNotifications");
+        builder.ToTable("SystemNotificationMessages");
 
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Id)

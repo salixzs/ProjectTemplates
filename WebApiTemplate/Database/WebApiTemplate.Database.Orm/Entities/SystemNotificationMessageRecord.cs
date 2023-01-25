@@ -19,7 +19,8 @@ public class SystemNotificationMessageRecord
     public int Id { get; set; }
 
     /// <summary>
-    /// Two-letter language code for this record message language.
+    /// Two-letter language code for this record message language.<br/>
+    /// Reference: <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO Language codes</a>
     /// <code>
     /// [LanguageCode] CHAR(2) NOT NULL
     /// </code>
@@ -41,5 +42,5 @@ public class SystemNotificationMessageRecord
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     [ExcludeFromCodeCoverage]
-    private string DebuggerDisplay => $"{LanguageCode.ToUpperInvariant()}: {Message}";
+    private string DebuggerDisplay => $"{LanguageCode.ToLowerInvariant()}: {Message}";
 }

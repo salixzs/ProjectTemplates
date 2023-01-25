@@ -12,7 +12,7 @@ public static class WebAppExtensions
 {
     public static WebApplication UseWebApiFeatures(this WebApplication app)
     {
-        app.UseFastEndpoints();
+        app.UseFastEndpoints(config => config.Endpoints.ShortNames = true);
         return app;
     }
 
@@ -21,7 +21,7 @@ public static class WebAppExtensions
         app.AddJsonExceptionHandler<ApiJsonErrorMiddleware>(
             new ApiJsonExceptionOptions
             {
-                OmitSources = new HashSet<string> { "Middleware" },
+                OmitSources = new HashSet<string> { "Middleware", "ThrowIfRequestValidationFailed" },
                 ShowStackTrace = true
             });
         return app;

@@ -1,3 +1,4 @@
+using System.Net;
 using Salix.AspNetCore.JsonExceptionHandler;
 using WebApiTemplate.CoreLogic.Handlers.Sandbox;
 
@@ -13,19 +14,19 @@ public class ExceptionThrow : EndpointWithoutRequest<string>
     {
         // Endpoint setup (behavior)
         Get(Urls.Sandbox.Exception);
-        Tags("Sandbox");
+        Tags(Urls.Sandbox.SwaggerTag);
         AllowAnonymous();
 
         // Swagger documentation
         Description(swagger => swagger
-            .WithTags("Sandbox")
+            .WithTags(Urls.Sandbox.SwaggerTag)
             .Produces<ApiError>(500, "application/json+problem"));
         Summary(swagger =>
         {
             swagger.Summary = "Throws exception on purpose.";
             swagger.Description = "Shows error handling behavior in API.";
-            swagger.Responses[200] = "Returns string if exception is not thrown (impossible).";
-            swagger.Responses[500] = "Returns exception/error with details.";
+            swagger.Response<string>((int)HttpStatusCode.OK, "Returns string if exception is not thrown (impossible).");
+            swagger.Response<ApiError>((int)HttpStatusCode.InternalServerError, "Returns 500 with Json error object with error details.");
         });
     }
 

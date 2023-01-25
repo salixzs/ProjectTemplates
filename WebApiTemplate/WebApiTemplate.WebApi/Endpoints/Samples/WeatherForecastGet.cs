@@ -1,3 +1,4 @@
+using System.Net;
 using WebApiTemplate.CoreLogic.Handlers.Samples;
 using WebApiTemplate.Domain.Samples;
 
@@ -13,17 +14,17 @@ public class WeatherForecastGet : EndpointWithoutRequest<IEnumerable<WeatherFore
     {
         // Endpoint setup (behavior)
         Get(Urls.Samples.WeatherForecast);
-        Tags("Samples");
+        Tags(Urls.Samples.SwaggerTag);
         AllowAnonymous();
 
         // Swagger documentation
         Description(swagger => swagger
-            .WithTags("Samples"));
+            .WithTags(Urls.Samples.SwaggerTag));
         Summary(swagger =>
         {
             swagger.Summary = "Classic VS template sample of weather data.";
             swagger.Description = "Returns list of objects with random weather data.";
-            swagger.Responses[200] = "Returns short list of weather data.";
+            swagger.Response<WeatherForecast>((int)HttpStatusCode.OK, "Returns short list of weather data.");
             swagger.ResponseExamples[200] = new WeatherForecast { Date = new DateOnly(2023, 1, 12), TemperatureC = 12, Summary = "Chilly" };
         });
     }

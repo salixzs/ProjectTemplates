@@ -2,6 +2,8 @@ namespace WebApiTemplate.Urls;
 
 public static class Sandbox
 {
+    public const string SwaggerTag = "Sandbox";
+
     public const string BaseUri = Global.ApiRoot + "/sandbox";
     public const string Numbers = BaseUri + "/numbers";
     public const string DateTimes = BaseUri + "/datetimes";

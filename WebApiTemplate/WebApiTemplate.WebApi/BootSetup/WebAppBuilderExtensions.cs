@@ -118,8 +118,10 @@ public static class WebAppBuilderExtensions
                 settings.DocumentName = "Version-1.0";
                 settings.Description = "Here goes a longer and detailed description on API purpose and usage.";
                 settings.EndpointFilter(EndpointDocumentationFilter);
+                settings.GenerateEnumMappingDescription = true;
             },
-            tagIndex: 0);
+            tagIndex: 0,
+            shortSchemaNames: true);
         }
 
         return builder;

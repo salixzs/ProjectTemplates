@@ -8,4 +8,9 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WebApiTemplate.Crosscut\WebApiTemplate.Crosscut.csproj" />
+    <ProjectReference Include="..\WebApiTemplate.Enumerations\WebApiTemplate.Enumerations.csproj" />
+  </ItemGroup>
+
 </Project>

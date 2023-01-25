@@ -13,6 +13,9 @@ public static class DependencyInjection
         services.RegisterHandlers();
     }
 
+    /// <summary>
+    /// Automatic registration of Interface+Implementation pairs under Handlers namespace.
+    /// </summary>
     private static IServiceCollection RegisterHandlers(this IServiceCollection services)
     {
         var handlerClasses = typeof(Handlers.Samples.WeatherForecastHandler).Assembly.GetExportedTypes()
