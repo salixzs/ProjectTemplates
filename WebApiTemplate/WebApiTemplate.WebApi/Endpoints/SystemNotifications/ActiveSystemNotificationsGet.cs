@@ -23,11 +23,12 @@ public class ActiveSystemNotificationsGet : EndpointWithoutRequest<List<ActiveSy
             .WithTags(Urls.SystemNotifications.SwaggerTag));
         Summary(swagger =>
         {
-            swagger.Summary = "Returns active system notifications.";
-            swagger.Description = "Only active system notifications transformed for fast display on UI. Empty list if no active notification exist.";
+            swagger.Summary = "Returns ACTIVE system notifications.";
+            swagger.Description = "Returns ONLY ACTIVE system notifications transformed for fast display on UI. Empty list if no active notification exist.";
             swagger.Response<List<ActiveSystemNotification>>((int)HttpStatusCode.OK, "Returns active notification(s) or empty list if no active notifications found.");
-            swagger.Response<ApiError>((int)HttpStatusCode.InternalServerError, "Error occured in server during data retrieval.");
-            swagger.ResponseExamples[200] = new List<ActiveSystemNotification> {
+            swagger.Response<ApiError>((int)HttpStatusCode.InternalServerError, "Error occurred in server during data retrieval.");
+            swagger.ResponseExamples[(int)HttpStatusCode.InternalServerError] = EndpointHelpers.ExampleApiError();
+            swagger.ResponseExamples[(int)HttpStatusCode.OK] = new List<ActiveSystemNotification> {
                 new ActiveSystemNotification {
                     Id = 1001,
                     ShowCountdown = false,

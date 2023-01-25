@@ -19,8 +19,7 @@ public class ExceptionThrow : EndpointWithoutRequest<string>
 
         // Swagger documentation
         Description(swagger => swagger
-            .WithTags(Urls.Sandbox.SwaggerTag)
-            .Produces<ApiError>(500, "application/json+problem"));
+            .WithTags(Urls.Sandbox.SwaggerTag));
         Summary(swagger =>
         {
             swagger.Summary = "Throws exception on purpose.";

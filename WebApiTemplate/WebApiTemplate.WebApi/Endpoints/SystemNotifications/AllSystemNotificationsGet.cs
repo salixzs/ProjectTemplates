@@ -5,15 +5,15 @@ using WebApiTemplate.Domain.SystemNotifications;
 
 namespace WebApiTemplate.WebApi.Endpoints.SystemNotifications;
 
-public class SingleSystemNotificationGet : EndpointWithoutRequest<SystemNotification>
+public class AllSystemNotificationsGet : EndpointWithoutRequest<List<ActiveSystemNotification>>
 {
     private readonly ISystemNotificationQueries _queryHandler;
 
-    public SingleSystemNotificationGet(ISystemNotificationQueries queryHandler) => _queryHandler = queryHandler;
+    public AllSystemNotificationsGet(ISystemNotificationQueries queryHandler) => _queryHandler = queryHandler;
 
     public override void Configure()
     {
-        Get(Urls.SystemNotifications.GetById);
+        Get(Urls.SystemNotifications.All);
         Tags(Urls.SystemNotifications.SwaggerTag);
         AllowAnonymous();
         DontCatchExceptions();
@@ -23,10 +23,9 @@ public class SingleSystemNotificationGet : EndpointWithoutRequest<SystemNotifica
             .WithTags(Urls.SystemNotifications.SwaggerTag));
         Summary(swagger =>
         {
-            swagger.Summary = "Returns system notification by its Id.";
-            swagger.Description = "Returns full data of system notification by given ID value.";
-            swagger.Response<SystemNotification>((int)HttpStatusCode.OK, "Returns requested system notification with full data contract.");
-            swagger.Response((int)HttpStatusCode.NotFound, "System notification record by given ID was not found.");
+            swagger.Summary = "Returns all system notifications.";
+            swagger.Description = "Returns all system notifications in full contract, including expired.";
+            swagger.Response<List<SystemNotification>>((int)HttpStatusCode.OK, "Returns existing notification(s) or empty list if no notifications exist.");
             swagger.Response<ApiError>((int)HttpStatusCode.InternalServerError, "Error occurred in server during data retrieval.");
             swagger.ResponseExamples[(int)HttpStatusCode.InternalServerError] = EndpointHelpers.ExampleApiError();
         });
@@ -34,14 +33,8 @@ public class SingleSystemNotificationGet : EndpointWithoutRequest<SystemNotifica
 
     public override async Task HandleAsync(CancellationToken cancellationToken)
     {
-        var notificationId = Route<int>("id");
-        var notification = await _queryHandler.GetById(notificationId, cancellationToken);
-        if (notification != null)
-        {
-            await SendOkAsync(notification, cancellationToken);
-        }
-
-        await SendNotFoundAsync(cancellationToken);
+        var allNotifications = await _queryHandler.GetAll(cancellationToken);
+        await SendOkAsync(allNotifications, cancellationToken);
     }
 }
 

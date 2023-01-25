@@ -1,4 +1,5 @@
 using FluentValidation.Results;
+using Salix.AspNetCore.JsonExceptionHandler;
 
 namespace WebApiTemplate.WebApi.Endpoints;
 
@@ -24,4 +25,45 @@ internal static class EndpointHelpers
             throw validationException;
         }
     }
+
+    public static ApiError ExampleApiError() =>
+        new ApiError
+        {
+            ErrorType = ApiErrorType.ServerError,
+            ExceptionType = "ArgumentNullException",
+            RequestedUrl = "/api/MyEndpoint",
+            Status = 500,
+            Title = "This is example error message",
+            StackTrace = new List<string>
+                {
+                    "/Solution/Project/MyClass.cs, MyMethod, Line 19 (Col:8)",
+                    "/Solution/Project/MyOtherClass.cs, MyOtherMethod, Line 32 (Col:15)"
+                }
+        };
+
+    public static ApiError ExampleApiValidationError() =>
+        new ApiError
+        {
+            ErrorType = ApiErrorType.DataValidationError,
+            ExceptionType = "ValidationException",
+            RequestedUrl = "/api/MyEndpoint",
+            Status = 422,
+            Title = "There are problems with request data.",
+            StackTrace = new List<string>(),
+            ValidationErrors = new List<ApiDataValidationError>
+            {
+                new ApiDataValidationError
+                {
+                    PropertyName = "FirstName",
+                    AttemptedValue = string.Empty,
+                    Message = "First name cannot be empty."
+                },
+                new ApiDataValidationError
+                {
+                    PropertyName = "BirthDate",
+                    AttemptedValue = DateTime.Now.AddYears(1),
+                    Message = "Birth date cannot be in future."
+                }
+            }
+        };
 }

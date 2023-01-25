@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApiTemplate.Enumerations;
 
 namespace WebApiTemplate.Database.Orm.EntityConfiguration;
@@ -24,7 +25,7 @@ internal sealed class SystemNotificationRecordConfiguration : IEntityTypeConfigu
         builder.Property(e => e.Type)
             .IsRequired()
             .HasDefaultValue(SystemNotificationType.Normal)
-            .HasConversion<int>();
+            .HasConversion(new EnumToNumberConverter<SystemNotificationType, byte>());
 
         builder.Property(e => e.EmphasizeSince)
             .IsRequired()
@@ -33,7 +34,7 @@ internal sealed class SystemNotificationRecordConfiguration : IEntityTypeConfigu
         builder.Property(e => e.EmphasizeType)
             .IsRequired()
             .HasDefaultValue(SystemNotificationType.Normal)
-            .HasConversion<int>();
+            .HasConversion(new EnumToNumberConverter<SystemNotificationType, byte>());
 
         builder.Property(e => e.CountdownSince)
             .IsRequired()
