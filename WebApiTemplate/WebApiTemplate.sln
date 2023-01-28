@@ -24,9 +24,11 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "WebApiTemplate.Database.MsS
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{9FA73C1A-2A3E-4F33-8565-2460A36190AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.Database.Orm", "Database\WebApiTemplate.Database.Orm\WebApiTemplate.Database.Orm.csproj", "{AF856921-C95B-41B7-96AF-4B9FB5670964}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Database.Orm", "Database\WebApiTemplate.Database.Orm\WebApiTemplate.Database.Orm.csproj", "{AF856921-C95B-41B7-96AF-4B9FB5670964}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.Enumerations", "WebApiTemplate.Enumerations\WebApiTemplate.Enumerations.csproj", "{40A27C65-BAF0-44BD-8135-0A58B762B639}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Enumerations", "WebApiTemplate.Enumerations\WebApiTemplate.Enumerations.csproj", "{40A27C65-BAF0-44BD-8135-0A58B762B639}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.Domain.Fakes", "WebApiTemplate.Domain.Fakes\WebApiTemplate.Domain.Fakes.csproj", "{96AB9858-2020-4158-AD33-48934E5CC879}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,6 +70,10 @@ Global
 		{40A27C65-BAF0-44BD-8135-0A58B762B639}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40A27C65-BAF0-44BD-8135-0A58B762B639}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40A27C65-BAF0-44BD-8135-0A58B762B639}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96AB9858-2020-4158-AD33-48934E5CC879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96AB9858-2020-4158-AD33-48934E5CC879}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96AB9858-2020-4158-AD33-48934E5CC879}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96AB9858-2020-4158-AD33-48934E5CC879}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,3 @@
-using System.Net;
 using WebApiTemplate.CoreLogic.Handlers.Samples;
 using WebApiTemplate.Domain.Samples;
 

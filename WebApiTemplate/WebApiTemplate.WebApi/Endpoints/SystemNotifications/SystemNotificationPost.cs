@@ -1,6 +1,3 @@
-using System.Net;
-using FluentValidation.Results;
-using Salix.AspNetCore.JsonExceptionHandler;
 using WebApiTemplate.CoreLogic.Handlers.SystemNotifications;
 using WebApiTemplate.Domain.SystemNotifications;
 
@@ -16,6 +13,7 @@ public class SystemNotificationPost : Endpoint<SystemNotification>
     {
         Post(Urls.SystemNotifications.BaseUri);
         Tags(Urls.SystemNotifications.SwaggerTag);
+        Validator<SystemNotificationValidator>();
         AllowAnonymous();
 
         // This disables FastEndpoints built in error handlers (We have our own).
@@ -38,7 +36,7 @@ public class SystemNotificationPost : Endpoint<SystemNotification>
             swagger.ExampleRequest = new SystemNotification
             {
                 Id = 0,
-                StartTime = DateTime.UtcNow.AddMinutes(1),
+                StartTime = DateTime.UtcNow.AddSeconds(15),
                 EndTime = DateTime.UtcNow.AddMinutes(11),
                 EmphasizeSince = DateTime.UtcNow.AddMinutes(6),
                 CountdownSince = DateTime.UtcNow.AddMinutes(9),
@@ -48,11 +46,13 @@ public class SystemNotificationPost : Endpoint<SystemNotification>
                 {
                     new SystemNotificationMessage
                     {
+                        Id = 0,
                         Language = "en",
                         Message = "Maintenance will happen soon."
                     },
                     new SystemNotificationMessage
                     {
+                        Id = 0,
                         Language = "lv",
                         Message = "Drīz sāksies apkopes darbi."
                     }

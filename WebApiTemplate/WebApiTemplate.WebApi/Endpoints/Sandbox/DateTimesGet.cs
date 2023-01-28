@@ -1,4 +1,3 @@
-using System.Net;
 using WebApiTemplate.Domain.Sandbox;
 
 namespace WebApiTemplate.WebApi.Endpoints.Sandbox;

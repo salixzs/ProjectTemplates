@@ -18,4 +18,9 @@ public interface ISystemNotificationQueries
     /// NULL if not found.
     /// </summary>
     Task<SystemNotification?> GetById(int notificationId, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Returns fully all system notifications (including expired) with messages.
+    /// </summary>
+    Task<List<SystemNotification>> GetAll(CancellationToken cancellationToken);
 }

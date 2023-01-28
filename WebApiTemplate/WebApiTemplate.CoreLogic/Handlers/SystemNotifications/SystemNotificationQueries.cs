@@ -31,6 +31,7 @@ public sealed class SystemNotificationQueries : ISystemNotificationQueries
             ShowCountdown = dbRecord.CountdownSince <= DateTime.UtcNow,
             Messages = dbRecord.Messages.Select(message => new SystemNotificationMessage
             {
+                Id = message.Id,
                 Language = message.LanguageCode,
                 Message = message.Message,
             })
@@ -63,9 +64,36 @@ public sealed class SystemNotificationQueries : ISystemNotificationQueries
             CountdownSince = notificationRecord.CountdownSince,
             Messages = notificationRecord.Messages.Select(message => new SystemNotificationMessage
             {
+                Id = message.Id,
                 Language = message.LanguageCode,
                 Message = message.Message,
             }).ToList()
         };
+    }
+
+    /// <inheritdoc/>
+    public async Task<List<SystemNotification>> GetAll(CancellationToken cancellationToken)
+    {
+        var notificationRecords = await _db.SystemNotifications
+            .Include(notification => notification.Messages)
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return notificationRecords.ConvertAll(dbRecord => new SystemNotification
+        {
+            Id = dbRecord.Id,
+            StartTime = dbRecord.StartTime,
+            EndTime = dbRecord.EndTime,
+            Type = dbRecord.Type,
+            EmphasizeSince = dbRecord.EmphasizeSince,
+            EmphasizeType = dbRecord.EmphasizeType,
+            CountdownSince = dbRecord.CountdownSince,
+            Messages = dbRecord.Messages.Select(message => new SystemNotificationMessage
+            {
+                Id = message.Id,
+                Language = message.LanguageCode,
+                Message = message.Message,
+            }).ToList()
+        });
     }
 }

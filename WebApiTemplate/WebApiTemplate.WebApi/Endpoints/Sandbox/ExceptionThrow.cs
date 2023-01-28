@@ -1,5 +1,3 @@
-using System.Net;
-using Salix.AspNetCore.JsonExceptionHandler;
 using WebApiTemplate.CoreLogic.Handlers.Sandbox;
 
 namespace WebApiTemplate.WebApi.Endpoints.Sandbox;

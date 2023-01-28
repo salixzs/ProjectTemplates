@@ -504,9 +504,11 @@ dotnet_style_allow_statement_immediately_after_block_experimental = false:warnin
 # Add call to ConfigureAwait
 dotnet_diagnostic.RCS1090.severity = silent
 
-
 # IDE0161: Convert to file-scoped namespace
 dotnet_diagnostic.IDE0161.severity = suggestion
+
+# CS1591: XML Comments for public members
+dotnet_diagnostic.CS1591.severity = suggestion
 
 # IDE0005: Using directive is unnecessary.
 dotnet_diagnostic.IDE0005.severity = error

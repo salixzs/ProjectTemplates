@@ -12,6 +12,11 @@ namespace WebApiTemplate.Domain.SystemNotifications;
 public sealed class SystemNotificationMessage
 {
     /// <summary>
+    /// Unique identifier of system notification message.
+    /// </summary>
+    public int Id { get; set; }
+
+    /// <summary>
     /// Two-letter notification message language code (en, no, lv)<br/>
     /// Reference: <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">ISO Language codes</a>
     /// </summary>
