@@ -10,6 +10,13 @@ public class SystemNotificationValidator : Validator<SystemNotification>
         RuleFor(o => o.Messages)
             .NotEmpty()
             .WithMessage("Notification should have at least one message in any language!");
+        RuleForEach(o => o.Messages)
+            .ChildRules(msg =>
+            {
+                msg.RuleFor(x => x.Language).NotEmpty().Length(2).WithMessage("Language for message should be specified (2-letter code)");
+                msg.RuleFor(x => x.Message).NotEmpty().MinimumLength(2).WithMessage("System notification message should actually contain a message.");
+            });
+
         RuleFor(o => o.StartTime)
             .GreaterThan(DateTime.MinValue)
             .WithMessage("Start time should be specified!");

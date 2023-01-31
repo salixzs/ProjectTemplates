@@ -12,4 +12,14 @@ public interface ISystemNotificationCommands
     /// </summary>
     /// <returns>ID of the new created notification.</returns>
     Task<int> Create(SystemNotification notification, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Updates an existing system notification with new data.
+    /// </summary>
+    Task Update(SystemNotification notification, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Deletes the existing system notification.
+    /// </summary>
+    Task Delete(int notificationId, CancellationToken cancellationToken);
 }

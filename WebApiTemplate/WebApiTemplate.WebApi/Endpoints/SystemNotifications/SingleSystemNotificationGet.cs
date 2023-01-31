@@ -12,7 +12,7 @@ public class SingleSystemNotificationGet : EndpointWithoutRequest<SystemNotifica
 
     public override void Configure()
     {
-        Get(Urls.SystemNotifications.GetById);
+        Get(Urls.SystemNotifications.WithId);
         Tags(Urls.SystemNotifications.SwaggerTag);
         AllowAnonymous();
         DontCatchExceptions();

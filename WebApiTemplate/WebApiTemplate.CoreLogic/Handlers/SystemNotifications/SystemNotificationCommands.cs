@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using WebApiTemplate.Crosscut.Exceptions;
 using WebApiTemplate.Database.Orm;
 using WebApiTemplate.Database.Orm.Entities;
 using WebApiTemplate.Domain.SystemNotifications;
@@ -37,5 +39,53 @@ public sealed class SystemNotificationCommands : ISystemNotificationCommands
         _db.SystemNotifications.Add(newNotificationRecord);
         await _db.SaveChangesAsync(cancellationToken);
         return newNotificationRecord.Id;
+    }
+
+    /// <inheritdoc/>
+    public async Task Update(SystemNotification notification, CancellationToken cancellationToken)
+    {
+        var updateableRecord = await _db.SystemNotifications
+            .Include(notification => notification.Messages)
+            .Where(notification => notification.Id == notification.Id)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (updateableRecord == null)
+        {
+            throw new BusinessException($"System Notification update did not find existing record with Id: {notification.Id}", BusinessExceptionType.RequestError);
+        }
+
+        updateableRecord.StartTime = notification.StartTime;
+        updateableRecord.EndTime = notification.EndTime;
+        updateableRecord.Type = notification.Type;
+        updateableRecord.EmphasizeSince = notification.EmphasizeSince ?? notification.EndTime;
+        updateableRecord.EmphasizeType = notification.EmphasizeType ?? notification.Type;
+        updateableRecord.CountdownSince = notification.CountdownSince ?? notification.EndTime;
+
+        updateableRecord.Messages.Clear();
+        foreach (var message in notification.Messages)
+        {
+            updateableRecord.Messages.Add(new SystemNotificationMessageRecord
+            {
+                LanguageCode = message.Language,
+                Message = message.Message,
+            });
+        }
+
+        await _db.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task Delete(int notificationId, CancellationToken cancellationToken)
+    {
+        var notificationRecord = await _db.SystemNotifications
+            .Where(notification => notification.Id == notificationId)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (notificationRecord == null)
+        {
+            return;
+        }
+
+        _db.SystemNotifications.Remove(notificationRecord);
+        await _db.SaveChangesAsync(cancellationToken);
     }
 }
