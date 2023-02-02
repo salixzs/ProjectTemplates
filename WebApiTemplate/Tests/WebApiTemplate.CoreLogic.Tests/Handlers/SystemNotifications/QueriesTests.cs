@@ -26,7 +26,6 @@ public class QueriesTests : CoreLogicTestBase
     [Fact]
     public async Task QuerySingle_ValidId_ReturnsData()
     {
-        _dateTimeProvider.Setup(dt => dt.DateTimeOffsetNow).Returns(DateTimeOffset.Now);
         var result = await _sut.GetById(1011, default);
         result.Should().NotBeNull();
         result!.Messages.Should().HaveCount(1);
@@ -35,7 +34,6 @@ public class QueriesTests : CoreLogicTestBase
     [Fact]
     public async Task QuerySingle_WrongId_ReturnsNull()
     {
-        _dateTimeProvider.Setup(dt => dt.DateTimeOffsetNow).Returns(DateTimeOffset.Now);
         var result = await _sut.GetById(2000, default);
         result.Should().BeNull();
     }
@@ -54,7 +52,6 @@ public class QueriesTests : CoreLogicTestBase
     [Fact]
     public async Task QueryAll_ReturnsThree()
     {
-        _dateTimeProvider.Setup(dt => dt.DateTimeOffsetNow).Returns(DateTimeOffset.Now);
         var result = await _sut.GetAll(default);
         result.Should().NotBeEmpty();
         result.Should().HaveCount(3);
@@ -70,7 +67,39 @@ public class QueriesTests : CoreLogicTestBase
         result.Should().HaveCount(1);
         var resultItem = result.First();
         resultItem.Id.Should().Be(1012);
+        resultItem.IsEmphasized.Should().BeFalse();
+        resultItem.ShowCountdown.Should().BeFalse();
+        resultItem.MessageType.Should().Be(Enumerations.SystemNotificationType.Normal);
+        resultItem.Messages.Should().HaveCount(2);
+    }
 
+    [Fact]
+    public async Task QueryActive_Emphasized_Correct()
+    {
+        _dateTimeProvider.Setup(dt => dt.DateTimeOffsetNow).Returns(_testableBaseDateTime.AddMinutes(16));
+        var result = await _sut.GetActive(default);
+        result.Should().NotBeEmpty();
+        result.Should().HaveCount(1);
+        var resultItem = result.First();
+        resultItem.Id.Should().Be(1012);
+        resultItem.IsEmphasized.Should().BeTrue();
+        resultItem.ShowCountdown.Should().BeFalse();
+        resultItem.MessageType.Should().Be(Enumerations.SystemNotificationType.Warning);
+        resultItem.Messages.Should().HaveCount(2);
+    }
+
+    [Fact]
+    public async Task QueryActive_Countdown_Correct()
+    {
+        _dateTimeProvider.Setup(dt => dt.DateTimeOffsetNow).Returns(_testableBaseDateTime.AddMinutes(19));
+        var result = await _sut.GetActive(default);
+        result.Should().NotBeEmpty();
+        result.Should().HaveCount(1);
+        var resultItem = result.First();
+        resultItem.Id.Should().Be(1012);
+        resultItem.IsEmphasized.Should().BeTrue();
+        resultItem.ShowCountdown.Should().BeTrue();
+        resultItem.MessageType.Should().Be(Enumerations.SystemNotificationType.Warning);
         resultItem.Messages.Should().HaveCount(2);
     }
 
@@ -90,7 +119,7 @@ public class QueriesTests : CoreLogicTestBase
         sn2.EmphasizeSince = DateTimeOffset.Now.AddDays(-1).AddMinutes(Random.Shared.Next(15, 25));
         sn2.CountdownSince = DateTimeOffset.Now.AddDays(-1).AddMinutes(Random.Shared.Next(20, 27));
         var sn2m = EntityFakesFactory.Instance.GetTestObject<SystemNotificationMessageRecord>();
-        sn1.Messages.Add(sn2m);
+        sn2.Messages.Add(sn2m);
 
         // Testable
         _testable = new SystemNotificationRecord
@@ -108,6 +137,7 @@ public class QueriesTests : CoreLogicTestBase
 
         _db.SystemNotifications.Add(sn1);
         _db.SystemNotifications.Add(sn2);
+        _db.SystemNotifications.Add(_testable);
         _db.SaveChanges();
         DbLogger.LoggingDisabled = false;
     }
