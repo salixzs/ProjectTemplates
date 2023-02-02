@@ -1,11 +1,11 @@
 CREATE TABLE [dbo].[SystemNotifications]
 (
 	[Id] INT NOT NULL IDENTITY (1000, 1),
-    [StartTime] DATETIME NOT NULL, 
-    [EndTime] DATETIME NOT NULL, 
+    [StartTime] DATETIMEOFFSET(0) NOT NULL, 
+    [EndTime] DATETIMEOFFSET(0) NOT NULL, 
     [Type] TINYINT NOT NULL DEFAULT 0, 
-    [EmphasizeSince] DATETIME NOT NULL, 
+    [EmphasizeSince] DATETIMEOFFSET(0) NOT NULL, 
     [EmphasizeType] TINYINT NOT NULL DEFAULT 0, 
-    [CountdownSince] DATETIME NOT NULL, 
+    [CountdownSince] DATETIMEOFFSET(0) NOT NULL, 
     CONSTRAINT [PK_SystemNotifications] PRIMARY KEY CLUSTERED ([Id] ASC),
 )

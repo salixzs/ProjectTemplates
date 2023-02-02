@@ -15,12 +15,10 @@ internal sealed class SystemNotificationRecordConfiguration : IEntityTypeConfigu
             .UseIdentityColumn(1000, 1);
 
         builder.Property(e => e.StartTime)
-            .IsRequired()
-            .HasConversion(e => e, e => DateTime.SpecifyKind(e, DateTimeKind.Utc));
+            .IsRequired();
 
         builder.Property(e => e.EndTime)
-            .IsRequired()
-            .HasConversion(e => e, e => DateTime.SpecifyKind(e, DateTimeKind.Utc));
+            .IsRequired();
 
         builder.Property(e => e.Type)
             .IsRequired()
@@ -28,8 +26,7 @@ internal sealed class SystemNotificationRecordConfiguration : IEntityTypeConfigu
             .HasConversion(new EnumToNumberConverter<SystemNotificationType, byte>());
 
         builder.Property(e => e.EmphasizeSince)
-            .IsRequired()
-            .HasConversion(e => e, e => DateTime.SpecifyKind(e, DateTimeKind.Utc));
+            .IsRequired();
 
         builder.Property(e => e.EmphasizeType)
             .IsRequired()
@@ -37,7 +34,6 @@ internal sealed class SystemNotificationRecordConfiguration : IEntityTypeConfigu
             .HasConversion(new EnumToNumberConverter<SystemNotificationType, byte>());
 
         builder.Property(e => e.CountdownSince)
-            .IsRequired()
-            .HasConversion(e => e, e => DateTime.SpecifyKind(e, DateTimeKind.Utc));
+            .IsRequired();
     }
 }

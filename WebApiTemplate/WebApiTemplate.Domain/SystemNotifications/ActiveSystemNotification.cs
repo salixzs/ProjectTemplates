@@ -31,7 +31,7 @@ public sealed class ActiveSystemNotification
     /// <summary>
     /// End time of system notification. It is time to which <see cref="ShowCountdown"/> should countdown time.
     /// </summary>
-    public DateTime EndTime { get; set; }
+    public DateTimeOffset EndTime { get; set; }
 
     /// <summary>
     /// Type of the notification (decision for coloring, emphasizing).

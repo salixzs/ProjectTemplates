@@ -1,49 +1,47 @@
-global using Bogus;
-using Application.UnitTests.Faker.DynamicsDbFakes;
-using WebApiTemplate.Domain.SystemNotifications;
+using Bogus;
+using WebApiTemplate.Database.Orm.Entities;
+using WebApiTemplate.Database.Orm.Fakes.Fakes;
 
-namespace WebApiTemplate.Domain.Fakes;
-
+namespace WebApiTemplate.Database.Orm.Fakes;
 /// <summary>
-/// Use Factory in Tests/Docs to get fake Domain objects and their lists.
+/// Use Factory in Tests/Docs to get fake Database Entities and their lists.
 /// <code>
-/// DomainFakesFactory.Instance.GetTestObject&lt;User&gt;();
-/// DomainFakesFactory.Instance.GetTestObjects&lt;Account&gt;(10, 30);
+/// EntityFakesFactory.Instance.GetTestObject&lt;User&gt;();
+/// EntityFakesFactory.Instance.GetTestObjects&lt;Account&gt;(10, 30);
 /// </code>
 /// </summary>
-public sealed class DomainFakesFactory
+public sealed class EntityFakesFactory
 {
     private readonly Dictionary<string, Func<object>> _instantiators = new();
 
     /// <summary>
-    /// Prevents a default instance of <see cref="DomainFakesFactory"/> class from being created from outside.<br/>
+    /// Prevents a default instance of <see cref="EntityFakesFactory"/> class from being created from outside.<br/>
     /// Normal Singleton implementation where class is instantiated in static read-only field.<br/>
     /// Here into Dictionary of Domain API object fakes should be added.
     /// </summary>
-    private DomainFakesFactory()
+    private EntityFakesFactory()
     {
-        _instantiators.Add(typeof(SystemNotification).FullName!, SystemNotificationFake.GetBogus);
-        _instantiators.Add(typeof(ActiveSystemNotification).FullName!, ActiveSystemNotificationFake.GetBogus);
-        _instantiators.Add(typeof(SystemNotificationMessage).FullName!, SystemNotificationMessageFake.GetBogus);
+        _instantiators.Add(typeof(SystemNotificationRecord).FullName!, SystemNotificationRecordFake.GetBogus);
+        _instantiators.Add(typeof(SystemNotificationMessageRecord).FullName!, SystemNotificationMessageRecordFake.GetBogus);
     }
 
-    static DomainFakesFactory() { }
+    static EntityFakesFactory() { }
 
     /// <summary>
-    /// Use Factory in tests to get fake Domain API objects and their lists.
+    /// Use Factory in tests to get fake Database Entities objects and their lists.
     /// <code>
-    /// DomainFakesFactory.Instance.GetTestObject&lt;User&gt;();
-    /// DomainFakesFactory.Instance.GetTestObjects&lt;Account&gt;(10, 30);
+    /// EntityFakesFactory.Instance.GetTestObject&lt;User&gt;();
+    /// EntityFakesFactory.Instance.GetTestObjects&lt;Account&gt;(10, 30);
     /// </code>
     /// </summary>
-    public static DomainFakesFactory Instance { get; } = new();
+    public static EntityFakesFactory Instance { get; } = new();
 
     public bool HasFakeFor(string fullName) => _instantiators.ContainsKey(fullName);
 
     /// <summary>
     /// Method to get single fake Domain API object.
     /// <code>
-    /// DomainFakesFactory.Instance.GetTestObject&lt;User&gt;();
+    /// EntityFakesFactory.Instance.GetTestObject&lt;User&gt;();
     /// </code>
     /// </summary>
     public T GetTestObject<T>() where T : class
@@ -61,7 +59,7 @@ public sealed class DomainFakesFactory
     /// <summary>
     /// Method to get multiple fake Domain API objects.
     /// <code>
-    /// DomainFakesFactory.Instance.GetTestObjects&lt;User&gt;(minCount, maxCount);
+    /// EntityFakesFactory.Instance.GetTestObjects&lt;User&gt;(minCount, maxCount);
     /// </code>
     /// </summary>
     public List<T> GetTestObjects<T>(int min, int max) where T : class
@@ -79,7 +77,7 @@ public sealed class DomainFakesFactory
     /// <summary>
     /// Method to get multiple fake Domain API objects.
     /// <code>
-    /// DomainFakesFactory.Instance.GetTestObjects&lt;User&gt;(count);
+    /// EntityFakesFactory.Instance.GetTestObjects&lt;User&gt;(count);
     /// </code>
     /// </summary>
     /// <param name="count">Number of items to generate</param>

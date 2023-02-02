@@ -23,14 +23,14 @@ public class SystemNotification
     /// See also <see cref="EndTime">EndTime</see>.<br/>
     /// It is UTC time!
     /// </summary>
-    public DateTime StartTime { get; set; }
+    public DateTimeOffset StartTime { get; set; }
 
     /// <summary>
     /// Date and time when notification should cease to show up.<br/>
     /// See also <see cref="StartTime">StartTime</see>.<br/>
     /// It is UTC time!
     /// </summary>
-    public DateTime EndTime { get; set; }
+    public DateTimeOffset EndTime { get; set; }
 
     /// <summary>
     /// Type (usually - coloring) of notification.
@@ -45,7 +45,7 @@ public class SystemNotification
     /// It is UTC time!<br/>
     /// Leave empty (NULL) to disallow emphasizing of the system meessage.
     /// </summary>
-    public DateTime? EmphasizeSince { get; set; }
+    public DateTimeOffset? EmphasizeSince { get; set; }
 
     /// <summary>
     /// Type (usually - coloring) of notification when it is in emphasized mode.<br/>
@@ -61,7 +61,7 @@ public class SystemNotification
     /// It is UTC time!<br/>
     /// Leave empty (NULL) to not use countdown timer at all.
     /// </summary>
-    public DateTime? CountdownSince { get; set; }
+    public DateTimeOffset? CountdownSince { get; set; }
 
     /// <summary>
     /// Messages themselves with language codes they are written into.
@@ -75,15 +75,15 @@ public class SystemNotification
         get
         {
             var debugString = new StringBuilder();
-            if (DateTime.UtcNow.IsBetween(StartTime, EndTime))
+            if (DateTimeOffset.UtcNow.IsBetween(StartTime, EndTime))
             {
                 debugString.Append("ACTIVE");
-                if (DateTime.UtcNow.IsBetween(EmphasizeSince, EndTime))
+                if (DateTimeOffset.UtcNow.IsBetween(EmphasizeSince, EndTime))
                 {
                     debugString.Append("; EMPHASIZED");
                 }
 
-                if (DateTime.UtcNow.IsBetween(CountdownSince, EndTime))
+                if (DateTimeOffset.UtcNow.IsBetween(CountdownSince, EndTime))
                 {
                     debugString.Append("; with TIMER");
                 }
@@ -94,13 +94,13 @@ public class SystemNotification
             }
             else
             {
-                if (DateTime.UtcNow < StartTime)
+                if (DateTimeOffset.UtcNow < StartTime.UtcDateTime)
                 {
                     debugString.Append($"WILL START: ");
                     debugString.Append(StartTime.ToString("dd.MMM HH:mm", System.Globalization.CultureInfo.CurrentCulture));
                 }
 
-                if (DateTime.UtcNow > EndTime)
+                if (DateTimeOffset.UtcNow > EndTime.UtcDateTime)
                 {
                     debugString.Append($"ENDED: ");
                     debugString.Append(EndTime.ToString("dd.MMM HH:mm", System.Globalization.CultureInfo.CurrentCulture));

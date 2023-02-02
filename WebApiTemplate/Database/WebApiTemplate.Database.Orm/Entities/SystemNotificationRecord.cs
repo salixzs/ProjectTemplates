@@ -30,7 +30,7 @@ public class SystemNotificationRecord
     /// [StartTime] DATETIME NOT NULL
     /// </code>
     /// </summary>
-    public DateTime StartTime { get; set; }
+    public DateTimeOffset StartTime { get; set; }
 
     /// <summary>
     /// Date and time when notification should cease to show up.<br/>
@@ -40,7 +40,7 @@ public class SystemNotificationRecord
     /// [EndTime] DATETIME NOT NULL
     /// </code>
     /// </summary>
-    public DateTime EndTime { get; set; }
+    public DateTimeOffset EndTime { get; set; }
 
     /// <summary>
     /// Type (usually - coloring) of notification.
@@ -60,7 +60,7 @@ public class SystemNotificationRecord
     /// [EmphasizeSince] DATETIME NOT NULL
     /// </code>
     /// </summary>
-    public DateTime EmphasizeSince { get; set; }
+    public DateTimeOffset EmphasizeSince { get; set; }
 
     /// <summary>
     /// Type (usually - coloring) of notification when it is in emphasized mode.<br/>
@@ -81,7 +81,7 @@ public class SystemNotificationRecord
     /// [CountdownSince] DATETIME NOT NULL
     /// </code>
     /// </summary>
-    public DateTime CountdownSince { get; set; }
+    public DateTimeOffset CountdownSince { get; set; }
 
     /// <summary>
     /// Messages themselves with language codes they are written into.
@@ -98,15 +98,15 @@ public class SystemNotificationRecord
         get
         {
             var debugString = new StringBuilder();
-            if (DateTime.UtcNow.IsBetween(StartTime, EndTime))
+            if (DateTimeOffset.Now.IsBetween(StartTime, EndTime))
             {
                 debugString.Append("ACTIVE");
-                if (DateTime.UtcNow.IsBetween(EmphasizeSince, EndTime))
+                if (DateTimeOffset.UtcNow.IsBetween(EmphasizeSince, EndTime))
                 {
                     debugString.Append("; EMPHASIZED");
                 }
 
-                if (DateTime.UtcNow.IsBetween(CountdownSince, EndTime))
+                if (DateTimeOffset.UtcNow.IsBetween(CountdownSince, EndTime))
                 {
                     debugString.Append("; with TIMER");
                 }
@@ -117,13 +117,13 @@ public class SystemNotificationRecord
             }
             else
             {
-                if (DateTime.UtcNow < StartTime)
+                if (DateTimeOffset.UtcNow < StartTime.UtcDateTime)
                 {
                     debugString.Append($"WILL START: ");
                     debugString.Append(StartTime.ToString("dd.MMM HH:mm", System.Globalization.CultureInfo.CurrentCulture));
                 }
 
-                if (DateTime.UtcNow > EndTime)
+                if (DateTimeOffset.UtcNow > EndTime.UtcDateTime)
                 {
                     debugString.Append($"ENDED: ");
                     debugString.Append(EndTime.ToString("dd.MMM HH:mm", System.Globalization.CultureInfo.CurrentCulture));

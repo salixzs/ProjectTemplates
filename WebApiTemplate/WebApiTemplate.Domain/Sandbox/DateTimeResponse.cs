@@ -16,6 +16,16 @@ public class DateTimeResponse
     public DateTime UtcCurrentDateTimeValue { get; set; } = DateTime.UtcNow;
 
     /// <summary>
+    /// Current DateTimeOffset value.
+    /// </summary>
+    public DateTimeOffset CurrentDateTimeOffsetValue { get; set; } = DateTimeOffset.Now;
+
+    /// <summary>
+    /// Current DateTimeOffset UTC value (reused value from CurrentDateTimeOffsetValue).
+    /// </summary>
+    public DateTimeOffset CurrentDateTimeOffsetUtcValue => CurrentDateTimeOffsetValue.UtcDateTime;
+
+    /// <summary>
     /// Static value of DateTime (2023-Jan-17 14:15:16)).
     /// </summary>
     public DateTime DateTimeValue { get; set; } = new DateTime(2023, 1, 17, 14, 15, 16, kind: DateTimeKind.Local);
