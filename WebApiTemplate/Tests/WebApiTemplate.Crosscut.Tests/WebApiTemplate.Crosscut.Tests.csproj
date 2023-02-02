@@ -11,8 +11,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
     <PackageReference Include="FluentAssertions" Version="6.9.0" />
-    <PackageReference Include="Moq" Version="4.18.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.2" />
     <PackageReference Include="xunit" Version="2.4.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -29,9 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Database\WebApiTemplate.Database.Orm.Fakes\WebApiTemplate.Database.Orm.Fakes.csproj" />
-    <ProjectReference Include="..\..\WebApiTemplate.CoreLogic\WebApiTemplate.CoreLogic.csproj" />
-    <ProjectReference Include="..\..\WebApiTemplate.Domain.Fakes\WebApiTemplate.Domain.Fakes.csproj" />
+    <ProjectReference Include="..\..\WebApiTemplate.Crosscut\WebApiTemplate.Crosscut.csproj" />
   </ItemGroup>
 
 </Project>

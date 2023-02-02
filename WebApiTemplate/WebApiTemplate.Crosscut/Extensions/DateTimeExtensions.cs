@@ -107,4 +107,148 @@ public static class DateTimeExtensions
 
         return true;
     }
+
+    /// <summary>
+    /// Rounds DateTime value to nearest given hour/minute/second/millisecond.
+    /// </summary>
+    /// <param name="originalDateTime">Original DateTime value.</param>
+    /// <param name="ticksType">Use <c>TimeSpan.TicksPerSecond</c>, <c>TimeSpan.TicksPerMinute</c> and similar.</param>
+    /// <returns>Rounded DateTime value to nearest given ticks value.</returns>
+    public static DateTime Round(this DateTime originalDateTime, long ticksType = TimeSpan.TicksPerSecond)
+    {
+        if (ticksType > 1)
+        {
+            var fraction = originalDateTime.Ticks % ticksType;
+            if (fraction != 0)
+            {
+                if (fraction * 2 >= ticksType)
+                {
+                    // round up
+                    return new DateTime(originalDateTime.Ticks + ticksType - fraction);
+                }
+                else
+                {
+                    // round down
+                    return new DateTime(originalDateTime.Ticks - fraction);
+                }
+            }
+        }
+
+        return originalDateTime;
+    }
+
+    /// <summary>
+    /// Rounds DateTime value to nearest given hour/minute/second/millisecond.
+    /// </summary>
+    /// <param name="originalDateTime">Original DateTime value.</param>
+    /// <param name="ticksType">Use <c>TimeSpan.TicksPerSecond</c>, <c>TimeSpan.TicksPerMinute</c> and similar.</param>
+    /// <returns>Rounded DateTime value to nearest given ticks value.</returns>
+    public static DateTime? Round(this DateTime? originalDateTime, long ticksType = TimeSpan.TicksPerSecond)
+    {
+        if (originalDateTime.HasValue)
+        {
+            return originalDateTime.Value.Round(ticksType);
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Rounds DateTimeOffset value to nearest given hour/minute/second/millisecond.
+    /// </summary>
+    /// <param name="originalDateTimeOffset">Original DateTimeOffset value.</param>
+    /// <param name="ticksType">Use <c>TimeSpan.TicksPerSecond</c>, <c>TimeSpan.TicksPerMinute</c> and similar.</param>
+    /// <returns>Rounded DateTimeOffset value to nearest given ticks value.</returns>
+    public static DateTimeOffset Round(this DateTimeOffset originalDateTimeOffset, long ticksType = TimeSpan.TicksPerSecond)
+    {
+        if (ticksType > 1)
+        {
+            var fraction = originalDateTimeOffset.Ticks % ticksType;
+            if (fraction != 0)
+            {
+                if (fraction * 2 >= ticksType)
+                {
+                    // round up
+                    return new DateTimeOffset(originalDateTimeOffset.Ticks + ticksType - fraction, originalDateTimeOffset.Offset);
+                }
+                else
+                {
+                    // round down
+                    return new DateTimeOffset(originalDateTimeOffset.Ticks - fraction, originalDateTimeOffset.Offset);
+                }
+            }
+        }
+
+        return originalDateTimeOffset;
+    }
+
+    /// <summary>
+    /// Rounds DateTimeOffset value to nearest given hour/minute/second/millisecond.
+    /// </summary>
+    /// <param name="originalDateTimeOffset">Original DateTimeOffset value.</param>
+    /// <param name="ticksType">Use <c>TimeSpan.TicksPerSecond</c>, <c>TimeSpan.TicksPerMinute</c> and similar.</param>
+    /// <returns>Rounded DateTimeOffset value to nearest given ticks value.</returns>
+    public static DateTimeOffset? Round(this DateTimeOffset? originalDateTimeOffset, long ticksType = TimeSpan.TicksPerSecond)
+    {
+        if (originalDateTimeOffset.HasValue)
+        {
+            return originalDateTimeOffset.Value.Round(ticksType);
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Returns person/device age in years given his birthday/purchase/installation.
+    /// </summary>
+    /// <param name="birthDate">Date of birth of a person (or date of purchase).</param>
+    /// <param name="relativeYear">Calculate relative to given year. If null - takes current year.</param>
+    /// <returns>Age in years.</returns>
+    public static int Age(this DateTime birthDate, int? relativeYear = null)
+    {
+        var compareDate = DateTime.Now;
+        if (relativeYear.HasValue)
+        {
+            compareDate = new DateTime(relativeYear.Value, compareDate.Month, compareDate.Day, compareDate.Hour, compareDate.Minute, compareDate.Second);
+        }
+
+        if (birthDate > compareDate)
+        {
+            return 0;
+        }
+
+        var age = compareDate.Year - birthDate.Year;
+        if (compareDate < birthDate.AddYears(age))
+        {
+            age--;
+        }
+
+        return age;
+    }
+
+    /// <summary>
+    /// Returns person/device age in years given his birthday/purchase/installation.
+    /// </summary>
+    /// <param name="birthDate">Date of birth of a person (or date of purchase).</param>
+    /// <param name="relativeYear">Calculate relative to given year. If null - takes current year.</param>
+    /// <returns>Age in years.</returns>
+    public static int? Age(this DateTime? birthDate, int? relativeYear = null) => birthDate?.Age(relativeYear);
+
+    /// <summary>
+    /// Returns a list of all days in given year/month as DateTime objects.<br/>
+    /// Can be used in LINQ expressions to get specific days, like this for getting all Fridays:
+    /// <code>
+    /// var fridays = AllMonthDates(2022, 7).Where(x => x.DayOfWeek == DayOfWeek.Friday);
+    /// </code>
+    /// </summary>
+    public static IEnumerable<DateTime> AllMonthDates(this DateTime yearMonth)
+    {
+        var year = yearMonth.Year;
+        var month = yearMonth.Month;
+        var days = DateTime.DaysInMonth(year, month);
+        for (var day = 1; day <= days; day++)
+        {
+            yield return new DateTime(year, month, day);
+        }
+    }
 }
