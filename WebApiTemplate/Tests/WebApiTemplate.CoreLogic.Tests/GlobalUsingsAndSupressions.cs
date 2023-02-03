@@ -9,5 +9,4 @@ global using Xunit.Abstractions;
 using System.Diagnostics.CodeAnalysis;
 #pragma warning restore IDE0005 // Using directive is unnecessary.
 
-[assembly:
-    SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "Unit test naming")]
+[assembly: SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "Unit test naming")]

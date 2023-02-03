@@ -21,6 +21,16 @@ public class DateTimeExtensionsIsBetweenTests
         result.Should().Be(expected);
     }
 
+    [Theory]
+    [MemberData(nameof(BetweenNullData))]
+    public void DateTimeNullable_IsBetweenNull_ExpectedResult(DateTime? startTime, DateTime? endTime, DateTime testDate, bool expected)
+    {
+        var nullableStartTime = startTime;
+        var nullableEndTime = endTime;
+        var result = testDate.IsBetween(nullableStartTime, nullableEndTime);
+        result.Should().Be(expected);
+    }
+
     public static TheoryData<DateTime, DateTime, DateTime, bool> BetweenData =>
         new()
         {
@@ -29,6 +39,28 @@ public class DateTimeExtensionsIsBetweenTests
             { new DateTime(2017, 2, 1, 5, 59, 59), new DateTime(2017, 2, 1, 6, 0, 2), new DateTime(2017, 2, 1, 5, 59, 59), true },
             { new DateTime(2017, 2, 1, 5, 59, 59), new DateTime(2017, 2, 1, 6, 0, 2), new DateTime(2017, 2, 1, 6, 0, 2), true },
             { new DateTime(2017, 2, 1, 5, 59, 59), new DateTime(2017, 2, 1, 6, 0, 2), new DateTime(2017, 2, 1, 5, 59, 58), false },
-            { new DateTime(2017, 2, 1, 5, 59, 59), new DateTime(2017, 2, 1, 6, 0, 2), new DateTime(2017, 2, 1, 6, 0, 3), false }
+            { new DateTime(2017, 2, 1, 5, 59, 59), new DateTime(2017, 2, 1, 6, 0, 2), new DateTime(2017, 2, 1, 6, 0, 3), false },
+            { new DateTime(2017, 2, 1, 5, 59, 59), new DateTime(2017, 2, 1, 6, 0, 2), new DateTime(2017, 1, 29, 14, 25, 3), false },
+            { new DateTime(2017, 2, 1, 5, 59, 59), new DateTime(2017, 2, 1, 6, 0, 2), new DateTime(2017, 3, 29, 14, 25, 3), false }
         };
+
+    public static TheoryData<DateTime?, DateTime?, DateTime, bool> BetweenNullData =>
+        new()
+        {
+            { new DateTime(2017, 2, 1), null, new DateTime(2017, 2, 10), true },
+            { new DateTime(2017, 2, 1), null, new DateTime(2017, 1, 21), false },
+            { null, new DateTime(2017, 2, 18), new DateTime(2017, 2, 10), true },
+            { null, new DateTime(2017, 2, 18), new DateTime(2017, 2, 19), false },
+        };
+
+    [Fact]
+    public void DateTimeNullable_IsBetweenSwap_Throws()
+    {
+        var startDate = new DateTime(2017, 2, 15);
+        var endDate = new DateTime(2017, 2, 2);
+        var testDate = new DateTime(2017, 2, 10);
+        Action act = () => testDate.IsBetween(startDate, endDate);
+        act.Should().Throw<ArgumentException>();
+    }
+
 }

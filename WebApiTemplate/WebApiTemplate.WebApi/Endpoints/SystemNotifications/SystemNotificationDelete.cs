@@ -1,5 +1,4 @@
 using WebApiTemplate.CoreLogic.Handlers.SystemNotifications;
-using WebApiTemplate.Domain.SystemNotifications;
 
 namespace WebApiTemplate.WebApi.Endpoints.SystemNotifications;
 

@@ -59,10 +59,12 @@ public static class WebAppBuilderExtensions
             .GetSection(SecurityConfigurationOptions.ConfigurationSectionName)
             .Get<SecurityConfigurationOptions>();
 
+#pragma warning disable IDE0270 // Use coalesce expression
         if (securityOptions == null)
         {
             throw new BusinessException($"Missing \"{SecurityConfigurationOptions.ConfigurationSectionName}\" configuration section or its contents are wrong.", BusinessExceptionType.ConfigurationError, 1);
         }
+#pragma warning restore IDE0270 // Use coalesce expression
 
         if (securityOptions.Cors.Origins == null || securityOptions.Cors.Origins.Count == 0)
         {

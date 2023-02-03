@@ -107,7 +107,9 @@ public class SystemNotification
                 }
             }
 
+#pragma warning disable CA1305 // Specify IFormatProvider
             debugString.Append($"; {Messages.Count} languages");
+#pragma warning restore CA1305 // Specify IFormatProvider
             return debugString.ToString();
         }
     }

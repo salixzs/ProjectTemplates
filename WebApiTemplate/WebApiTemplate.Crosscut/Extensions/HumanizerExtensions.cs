@@ -207,7 +207,7 @@ public static class HumanizerExtensions
                 }
             }
 
-            for (int daysFromNow = 4; daysFromNow <= howManyDaysAsText; daysFromNow++)
+            for (var daysFromNow = 4; daysFromNow <= howManyDaysAsText; daysFromNow++)
             {
                 if (startDate.Date == DateTime.Now.Date.AddDays(daysFromNow))
                 {

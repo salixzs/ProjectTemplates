@@ -95,6 +95,7 @@ public class FrontpageGet : EndpointWithoutRequest<ContentResult>
 
             obfuscated.Add(original.Key, original.Value);
         }
+
         return obfuscated;
     }
 }

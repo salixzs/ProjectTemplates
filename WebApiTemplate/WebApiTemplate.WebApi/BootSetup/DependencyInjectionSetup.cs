@@ -13,7 +13,7 @@ public static class DependencyInjectionSetup
         CoreLogic.DependencyInjection.SetupDependencies(services, configuration);
 
         services.AddTransient<IConfigurationValuesLoader, ConfigurationValuesLoader>();
-        services.AddTransient<IDateTimeProvider, DateTimeProvider>();
+        services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
         return services;
     }
 

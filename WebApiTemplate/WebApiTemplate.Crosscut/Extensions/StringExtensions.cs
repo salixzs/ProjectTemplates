@@ -1,7 +1,8 @@
 namespace WebApiTemplate.Crosscut.Extensions;
 
 /// <summary>
-/// Some handy extensions to string values.
+/// Some handy extensions to string values.<br/>
+/// Some are usable in elaborate validation rules.
 /// </summary>
 public static class StringExtensions
 {
@@ -28,12 +29,10 @@ public static class StringExtensions
     /// </summary>
     /// <param name="stringToCheck">The string to check</param>
     /// <returns>True, is string does not contains anything else beside normal text</returns>
-    public static bool IsHumanName(this string stringToCheck)
-    {
-        return !string.IsNullOrWhiteSpace(stringToCheck)
+    public static bool IsHumanName(this string stringToCheck) =>
+        !string.IsNullOrWhiteSpace(stringToCheck)
                && stringToCheck.All(c => char.IsLetter(c) || c == ' ' || c == '-' || c == '`' || c == '\'')
                && stringToCheck.Count(char.IsLetter) > 1;
-    }
 
     /// <summary>
     /// Checks whether string contains only uppercase letters, including unicode letters.
@@ -72,31 +71,32 @@ public static class StringExtensions
     /// Non-letter characters are ignored. null/empty will return false.
     /// </summary>
     /// <param name="stringToCheck">The string to check.</param>
+    /// <param name="allowedUppercaseCount">Count of UPPERCASE letters, which are allowed to still consider string as lowercase.</param>
     /// <returns>True, is string contains all letters in their lowercase form, otherwise false.</returns>
-    public static bool IsLowercase(this string? stringToCheck)
+    public static bool IsLowercase(this string? stringToCheck, int allowedUppercaseCount = 0)
     {
         if (string.IsNullOrWhiteSpace(stringToCheck))
         {
             return false;
         }
 
+        var uppercaseCounter = allowedUppercaseCount;
         for (var i = 0; i < stringToCheck.Length; i++)
         {
             if (char.IsLetter(stringToCheck[i]) && !char.IsLower(stringToCheck[i]))
             {
+                if (uppercaseCounter > 0)
+                {
+                    uppercaseCounter--;
+                    continue;
+                }
+
                 return false;
             }
         }
 
         return true;
     }
-
-    /// <summary>
-    /// Checks whether string contains only letters, numbers, spaces and normal punctuation. Empty/null strings are not normal text.
-    /// </summary>
-    /// <param name="stringToCheck">The string to check</param>
-    /// <returns>True, if string does not contains anything else beside normal text</returns>
-    public static bool IsNormalText(this string stringToCheck) => !string.IsNullOrWhiteSpace(stringToCheck) && stringToCheck.All(c => char.IsLetterOrDigit(c) || char.IsPunctuation(c) || char.IsWhiteSpace(c) || char.IsControl(c) || c == '(' || c == ')' || c == '_');
 
     /// <summary>
     /// Checks string whether it contains any of Unicode characters that cannot be found in ASCII range (only Latin).
@@ -114,39 +114,29 @@ public static class StringExtensions
     public static bool IsWesternLanguage(this string stringToCheck) => string.IsNullOrWhiteSpace(stringToCheck) || stringToCheck.ToCharArray().All(c => c <= 0x017F);
 
     /// <summary>
-    /// Gives corresponding Excel Column name to given integer.
-    /// Specific is after reaching "Z" it will use two-letter names "AA".
+    /// Gives corresponding Excel Column name to given integer (zero-based, max value: 16383).<br/>
+    /// Specifics: after reaching "Z" it will use two-letter names "AA", after "ZZ" - "AAA".<br/>
+    /// 0 = "A", 25 = "Z", 701 = "ZZ", 10000 = "NTQ"
     /// </summary>
-    /// <param name="number">The number of column in Excel sheet.</param>
+    /// <param name="number">The number of column in Excel sheet (ZERO-based) Max value = 16383.</param>
     public static string ToExcelColumnName(this in int number)
     {
-        const string letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-        var value = string.Empty;
-        var index = number - 1;
-        if (index >= letters.Length)
+        if (number is < 0 or > 16383)
         {
-            value += letters[(index / letters.Length) - 1];
+            throw new ArgumentOutOfRangeException(nameof(number), "Excel column name index number should be in range of 0-16383");
         }
 
-        value += letters[index % letters.Length];
-        return value;
-    }
+        const byte letters = 'Z' - 'A' + 1;
+        var name = string.Empty;
 
-    /// <summary>
-    /// Returns letter by English alphabet based on given position (1 = A, 2 = B).
-    /// Number should be in range 1-26, otherwise empty string is returned.
-    /// </summary>
-    /// <param name="number">Sequence number in alphabet (1..26).</param>
-    /// <param name="asUppercase">True - UPPERCASE letter, false - lowercase. Default = UPPERCASE.</param>
-    public static string ToLetter(this in int number, in bool asUppercase = true)
-    {
-        if (number is < 1 or > 26)
+        var index = number;
+        do
         {
-            return string.Empty;
+            name = Convert.ToChar('A' + (index % letters)) + name;
+            index = (index / letters) - 1;
         }
+        while (index >= 0);
 
-        var c = (char)((asUppercase ? 65 : 97) + (number - 1));
-        return c.ToString();
+        return name;
     }
 }

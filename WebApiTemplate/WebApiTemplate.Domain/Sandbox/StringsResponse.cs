@@ -8,7 +8,7 @@ public class StringsResponse
     /// <summary>
     /// Current Local DateTime as Full string representation (non-static value).
     /// </summary>
-    public string CurrentDateTimeToString { get; set; } = DateTime.Now.ToString("D");
+    public string CurrentDateTimeToString { get; set; } = DateTime.Now.ToString("D", System.Globalization.CultureInfo.CurrentCulture);
 
     /// <summary>
     /// Simple string with ASCII characters only.

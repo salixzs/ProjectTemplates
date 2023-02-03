@@ -12,7 +12,7 @@ public class QueriesTests : CoreLogicTestBase
     private readonly SystemNotificationQueries _sut;
     private readonly Mock<IDateTimeProvider> _dateTimeProvider;
     private SystemNotificationRecord _testable = null!;
-    private DateTimeOffset _testableBaseDateTime = DateTimeOffset.Now.AddDays(1);
+    private readonly DateTimeOffset _testableBaseDateTime = DateTimeOffset.Now.AddDays(1);
 
     public QueriesTests(ITestOutputHelper output) : base(output)
     {
