@@ -1,8 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace WebApiTemplate.Domain.Sandbox;
 
 /// <summary>
 /// Several text types in .Net
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class StringsResponse
 {
     /// <summary>

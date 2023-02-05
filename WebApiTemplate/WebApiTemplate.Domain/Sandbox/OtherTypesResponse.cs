@@ -1,8 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace WebApiTemplate.Domain.Sandbox;
 
 /// <summary>
 /// Other types of .Net, not covered with text, numbers and Date/Times.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class OtherTypesResponse
 {
     /// <summary>

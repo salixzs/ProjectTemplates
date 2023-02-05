@@ -1,7 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using WebApiTemplate.Crosscut.Exceptions;
 
 namespace WebApiTemplate.CoreLogic.Handlers.Sandbox;
 
+[ExcludeFromCodeCoverage]
 public class SandboxHandler : ISandboxHandler
 {
     public string ThrowExceptionOnPurpose()

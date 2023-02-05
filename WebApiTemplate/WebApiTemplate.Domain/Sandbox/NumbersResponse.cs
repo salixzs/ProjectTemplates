@@ -1,8 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace WebApiTemplate.Domain.Sandbox;
 
 /// <summary>
 /// Object with several .Net types regarding numbers.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class NumbersResponse
 {
     /// <summary>

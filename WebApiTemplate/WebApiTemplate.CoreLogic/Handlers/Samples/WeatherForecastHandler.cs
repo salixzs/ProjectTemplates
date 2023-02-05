@@ -1,7 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using WebApiTemplate.Domain.Samples;
 
 namespace WebApiTemplate.CoreLogic.Handlers.Samples;
 
+[ExcludeFromCodeCoverage]
 public class WeatherForecastHandler : IWeatherForecastHandler
 {
     private static readonly string[] Summaries = new[]

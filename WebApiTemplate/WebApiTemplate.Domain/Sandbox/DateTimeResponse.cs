@@ -1,8 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace WebApiTemplate.Domain.Sandbox;
 
 /// <summary>
 /// Several types of Dates and Times in .Net
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class DateTimeResponse
 {
     /// <summary>

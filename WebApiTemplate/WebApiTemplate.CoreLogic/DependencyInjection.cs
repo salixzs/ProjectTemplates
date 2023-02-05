@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -5,6 +6,7 @@ using WebApiTemplate.Database.Orm;
 
 namespace WebApiTemplate.CoreLogic;
 
+[ExcludeFromCodeCoverage]
 public static class DependencyInjection
 {
     public static void SetupDependencies(this IServiceCollection services, IConfiguration configuration)

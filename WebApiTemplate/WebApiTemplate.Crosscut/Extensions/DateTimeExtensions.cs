@@ -170,5 +170,5 @@ public static class DateTimeExtensions
     /// </code>
     /// </summary>
     public static DateTime LastDayOfMonth(this DateTime value) =>
-        value.FirstDayOfMonth().AddMonths(1).AddTicks(-1);
+        value.FirstDayOfMonth().AddMonths(1).AddMicroseconds(-1);
 }

@@ -30,4 +30,8 @@
     <ProjectReference Include="..\..\WebApiTemplate.Crosscut\WebApiTemplate.Crosscut.csproj" />
   </ItemGroup>
 
+  <!--Remove test project from code coverage-->
+  <!--<ItemGroup>
+    <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute" />
+  </ItemGroup>-->
 </Project>

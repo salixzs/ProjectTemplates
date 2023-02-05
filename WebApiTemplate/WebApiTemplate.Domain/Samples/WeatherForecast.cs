@@ -1,8 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace WebApiTemplate.Domain.Samples;
 
 /// <summary>
 /// Weather data for specified date.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class WeatherForecast
 {
     /// <summary>
