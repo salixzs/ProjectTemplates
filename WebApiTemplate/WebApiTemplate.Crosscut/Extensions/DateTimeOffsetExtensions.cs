@@ -39,15 +39,15 @@ public static class DateTimeOffsetExtensions
     {
         if (startTime.HasValue && endTime.HasValue)
         {
-            return dateToCheck.IsBetween(startTime.Value, endTime.Value);
+            return dateToCheck.IsBetween(startTime.Value.UtcDateTime, endTime.Value.UtcDateTime);
         }
 
-        if (endTime.HasValue && dateToCheck.Ticks >= endTime.Value.Ticks)
+        if (endTime.HasValue && dateToCheck.UtcTicks >= endTime.Value.UtcTicks)
         {
             return false;
         }
 
-        if (startTime.HasValue && dateToCheck.Ticks <= startTime.Value.Ticks)
+        if (startTime.HasValue && dateToCheck.UtcTicks <= startTime.Value.UtcTicks)
         {
             return false;
         }
@@ -99,4 +99,22 @@ public static class DateTimeOffsetExtensions
 
         return null;
     }
+
+    /// <summary>
+    /// Returns the first day of month for given date (time: 0:0:0.0).<br/>
+    /// <code>
+    /// new DateTime(2023, 7, 8).FirstDayOfMonth() // = 2023.7.1 0:0:0
+    /// </code>
+    /// </summary>
+    public static DateTimeOffset FirstDayOfMonth(this DateTimeOffset value) =>
+        new DateTimeOffset(new DateTime(value.Year, value.Month, 1), value.Offset);
+
+    /// <summary>
+    /// Returns the last day of month for given date (time: 0:0:0.0).<br/>
+    /// <code>
+    /// new DateTime(2023, 6, 8).LastDayOfMonth() // = 2023.6.30 23:59:59
+    /// </code>
+    /// </summary>
+    public static DateTimeOffset LastDayOfMonth(this DateTimeOffset value) =>
+        value.FirstDayOfMonth().AddMonths(1).AddMicroseconds(-1);
 }
