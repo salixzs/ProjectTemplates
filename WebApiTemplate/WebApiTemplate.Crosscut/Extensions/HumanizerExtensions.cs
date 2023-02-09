@@ -129,104 +129,33 @@ public static class HumanizerExtensions
     }
 
     /// <summary>
-    /// Returns string of readable, nicely formatted, shortened and humanized date string (in English).
-    /// Using also "Today", "3 days ago" and 1.-2. February.
-    /// Year added if it is not current year.
+    /// Returns TimeSpan string representation in its shortest possible form.<br/>
+    /// Not recommended to use for times more than few minutes!<br/>
+    /// Examples: 304ms, 2.34s, 1 min 28.4323 sec.
     /// </summary>
-    /// <param name="startDate">The start date.</param>
-    /// <param name="endDate">The end date (optional).</param>
-    /// <param name="howManyDaysAsText">Days (from today) to use as textual (0 = today, 1 = tomorrow, yesterday, 2 = 2 days ago, 3 = 3 days ago etc.)</param>
-    public static string ToHumanEnglishDateTimeString(this in DateTime startDate, DateTime? endDate = null, int howManyDaysAsText = 1)
+    /// <param name="elapsedTime">The TimeSpan, usually elapsed time from Stopwatch.Elapsed.</param>
+    public static string ToStringHuman(this TimeSpan elapsedTime)
     {
-        var str = new StringBuilder();
-
-        // Handle multiple dates separately
-        if (endDate > startDate)
+        if (elapsedTime.TotalMilliseconds < 10)
         {
-            if (startDate.Month == endDate.Value.Month)
-            {
-                str.AppendFormat("{0}. – {1}. {2:MMMM}", startDate.Day, endDate.Value.Day, startDate);
-            }
-            else
-            {
-                str.AppendFormat("{0:M} – {1:M}", startDate, endDate.Value);
-            }
-
-            if (startDate.Year != DateTime.Now.Year)
-            {
-                str.AppendFormat(", {0}", startDate.Year);
-            }
-
-            return str.ToString();
+            return $"{elapsedTime.TotalMilliseconds:0.##0}ms";
         }
 
-        // Here goes single date handling, starting with close to today
-        if (startDate.Date.IsBetween(DateTime.Now.Date.AddDays(0 - howManyDaysAsText), DateTime.Now.Date.AddDays(howManyDaysAsText).AddHours(23).AddMinutes(59).AddSeconds(59)))
+        if (elapsedTime.TotalMilliseconds < 1000)
         {
-            if (startDate.Date == DateTime.Now.Date)
-            {
-                return $"Today ({startDate:t})";
-            }
-
-            if (howManyDaysAsText > 0)
-            {
-                if (startDate.Date == DateTime.Now.Date.AddDays(1))
-                {
-                    return "Tomorrow";
-                }
-
-                if (startDate.Date == DateTime.Now.Date.AddDays(-1))
-                {
-                    return $"Yesterday ({startDate:t})";
-                }
-            }
-
-            if (howManyDaysAsText > 1)
-            {
-                if (startDate.Date == DateTime.Now.Date.AddDays(2))
-                {
-                    return "The day after tomorrow";
-                }
-
-                if (startDate.Date == DateTime.Now.Date.AddDays(-2))
-                {
-                    return "The day before yesterday";
-                }
-            }
-
-            if (howManyDaysAsText > 2)
-            {
-                if (startDate.Date == DateTime.Now.Date.AddDays(3))
-                {
-                    return "Three days from now";
-                }
-
-                if (startDate.Date == DateTime.Now.Date.AddDays(-3))
-                {
-                    return "Three days ago";
-                }
-            }
-
-            for (var daysFromNow = 4; daysFromNow <= howManyDaysAsText; daysFromNow++)
-            {
-                if (startDate.Date == DateTime.Now.Date.AddDays(daysFromNow))
-                {
-                    return string.Format("{0} days from now", daysFromNow);
-                }
-
-                if (startDate.Date == DateTime.Now.Date.AddDays(0 - daysFromNow))
-                {
-                    return string.Format("{0} days ago", daysFromNow);
-                }
-            }
+            return $"{elapsedTime.TotalMilliseconds:0}ms";
         }
 
-        str.Append(startDate.ToString("M"));
-        if (startDate.Year != DateTime.Now.Year)
+        if (elapsedTime.Minutes > 0)
         {
-            str.AppendFormat(", {0}", startDate.Year);
+            return $"{elapsedTime.Minutes:D} min {elapsedTime.Seconds:D} sec";
         }
 
-        return str.ToString();
+        if (elapsedTime.Seconds < 10)
+        {
+            return $"{elapsedTime.Seconds:D}s {elapsedTime.Milliseconds:0}ms";
+        }
+
+        return $"{elapsedTime.Seconds:D}s";
     }
 }

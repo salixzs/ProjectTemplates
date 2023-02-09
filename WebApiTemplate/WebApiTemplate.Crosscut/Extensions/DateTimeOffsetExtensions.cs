@@ -3,7 +3,7 @@ namespace WebApiTemplate.Crosscut.Extensions;
 public static class DateTimeOffsetExtensions
 {
     /// <summary>
-    /// Determines whether the evaluated DateTimeOffset value is between (inclusive) two specified dates.
+    /// Determines whether the evaluated DateTimeOffset value is between (inclusive) two specified dates (UTC times are compared).<br/>
     /// Time part is significant. Take care if specify <paramref name="endTime" /> without Time part - it may give logically false results near endDate (time should be 23:59:59).
     /// </summary>
     /// <param name="dateToCheck">The date to check.</param>
@@ -24,8 +24,8 @@ public static class DateTimeOffsetExtensions
     }
 
     /// <summary>
-    /// Determines whether the evaluated DateTimeOffset value is between (inclusive) two specified dates.
-    /// Null values are considered as valid (produces true outcome).
+    /// Determines whether the evaluated DateTimeOffset value is between (inclusive) two specified dates (UTC times are compared).<br/>
+    /// Null values are considered as valid (produces true outcome).<br/>
     /// Time part is significant. Take care if specify <paramref name="endTime" /> without Time part - it may give logically false results near endDate (time should be 23:59:59).
     /// </summary>
     /// <param name="dateToCheck">The date to check.</param>

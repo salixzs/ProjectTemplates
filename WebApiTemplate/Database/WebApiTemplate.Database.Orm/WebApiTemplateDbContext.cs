@@ -43,6 +43,9 @@ public class WebApiTemplateDbContext : DbContext
                         .HasConversion(new DateTimeOffsetToBinaryConverter());
                 }
             }
+
+            // Make SQLite Case Insensitive, like MS SQL
+            modelBuilder.UseCollation("NOCASE");
         }
     }
 }

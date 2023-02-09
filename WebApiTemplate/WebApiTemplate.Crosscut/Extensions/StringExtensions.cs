@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace WebApiTemplate.Crosscut.Extensions;
 
 /// <summary>
@@ -139,4 +141,82 @@ public static class StringExtensions
 
         return name;
     }
+
+    /// <summary>
+    /// Similar to <seealso cref="string.Substring"/>, but returning original, if length is bigger than actual length of a string without throwing exception.
+    /// </summary>
+    /// <param name="original">Original string.</param>
+    /// <param name="maxLength">Maximum allowed length of a string.</param>
+    public static string? Truncate(this string? original, int maxLength)
+    {
+        if (original == null)
+        {
+            return null;
+        }
+
+        return original[..Math.Min(original.Length, maxLength)];
+    }
+
+    /// <summary>
+    /// Retrieves string part before given separator, if separator exists in source string.
+    /// Returns null/empty string if parameters are null/empty or separator string not found in original string.
+    /// </summary>
+    /// <param name="originalString">The string to retrieve substring from.</param>
+    /// <param name="separator">The separator, before which substring should be returned.</param>
+    public static string? SubstringBefore(this string? originalString, string? separator)
+    {
+        if (string.IsNullOrEmpty(originalString))
+        {
+            return originalString;
+        }
+
+        if (string.IsNullOrEmpty(separator))
+        {
+            return string.Empty;
+        }
+
+        var compareInfo = CultureInfo.InvariantCulture.CompareInfo;
+        var index = compareInfo.IndexOf(originalString, separator, CompareOptions.Ordinal);
+        return index < 0 ? string.Empty : originalString[..index];
+    }
+
+    /// <summary>
+    /// Retrieves string part after given separator, if separator exists in given source string.<br/>
+    /// Returns null/empty string if parameters are null/empty or separator string not found in original string.
+    /// </summary>
+    /// <param name="originalString">The string to retrieve substring from.</param>
+    /// <param name="separator">The separator, after which substring should be returned.</param>
+    public static string? SubstringAfter(this string? originalString, string? separator)
+    {
+        if (string.IsNullOrEmpty(originalString))
+        {
+            return originalString;
+        }
+
+        if (string.IsNullOrEmpty(separator))
+        {
+            return string.Empty;
+        }
+
+        var compareInfo = CultureInfo.InvariantCulture.CompareInfo;
+        var index = compareInfo.IndexOf(originalString, separator, CompareOptions.Ordinal);
+        if (index < 0)
+        {
+            // No such substring
+            return string.Empty;
+        }
+
+        return originalString[(index + separator.Length)..];
+    }
+
+    /// <summary>
+    /// Returns alternative Text if string is null or empty.
+    /// <code>
+    /// var actualOrDefaultValue = variableFromOutside.WhenEmpty("Def");
+    /// </code>
+    /// </summary>
+    /// <param name="stringInQuestion">Input string.</param>
+    /// <param name="alternativeText">Alternative/Default string.</param>
+    public static string WhenEmpty(this string? stringInQuestion, string alternativeText)
+        => string.IsNullOrEmpty(stringInQuestion) ? alternativeText : stringInQuestion;
 }

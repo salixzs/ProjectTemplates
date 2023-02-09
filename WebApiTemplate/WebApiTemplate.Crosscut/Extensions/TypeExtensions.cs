@@ -6,7 +6,8 @@ namespace WebApiTemplate.Crosscut.Extensions;
 public static class TypeExtensions
 {
     /// <summary>
-    /// Determines whether the specified type is primitive.<br/>
+    /// Determines whether the specified type is primitive/simple specific data holding type (not DTO or business class).<br/>
+    /// It returns true for framework types, like int, long, double and similar.<br/>
     /// NOTE: Also counts DateTime/DateOnly/TimeOnly/DateTimeOffset, Decimal and String as "primitives/simples".
     /// </summary>
     /// <param name="type">The type to check.</param>
@@ -27,6 +28,7 @@ public static class TypeExtensions
                || type.Equals(typeof(DateTime))
                || type.Equals(typeof(DateOnly))
                || type.Equals(typeof(TimeOnly))
+               || type.Equals(typeof(TimeSpan))
                || type.Equals(typeof(DateTimeOffset));
     }
 }

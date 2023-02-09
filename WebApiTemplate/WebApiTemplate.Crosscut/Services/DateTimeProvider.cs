@@ -1,6 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace WebApiTemplate.Crosscut.Services;
 
 /// <inheritdoc/>
+[ExcludeFromCodeCoverage(Justification = "One-liners")]
 public class DateTimeProvider : IDateTimeProvider
 {
     /// <inheritdoc/>
