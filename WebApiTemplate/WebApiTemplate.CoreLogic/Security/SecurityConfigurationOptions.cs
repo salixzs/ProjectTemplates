@@ -16,7 +16,7 @@ public class SecurityConfigurationOptions : IValidatableConfiguration
         {
             if (!Uri.IsWellFormedUriString(corsUrl, UriKind.Absolute))
             {
-                validations.ValidateAddCustom(c => c.Cors, $"{corsUrl} is not valid abolute URL.");
+                validations.ValidateAddCustom(c => c.Cors, $"{corsUrl} is not valid absolute URL.");
             }
         }
 
@@ -27,5 +27,6 @@ public class SecurityConfigurationOptions : IValidatableConfiguration
 public class CorsOptions
 {
     public List<string> Origins { get; set; } = new List<string>();
+
     public override string ToString() => string.Join(',', Origins);
 }

@@ -3,14 +3,34 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace WebApiTemplate.Database.Orm;
 
+/// <summary>
+/// MS SQL Database / Entity Framework context to use for database data query and modification.
+/// </summary>
 public class WebApiTemplateDbContext : DbContext
 {
+    /// <summary>
+    /// MS SQL Database / Entity Framework context to use for database data query and modification.
+    /// </summary>
     public WebApiTemplateDbContext() => ChangeTracker.LazyLoadingEnabled = false;
 
+    /// <summary>
+    /// MS SQL Database / Entity Framework context to use for database data query and modification.
+    /// </summary>
     public WebApiTemplateDbContext(DbContextOptions<WebApiTemplateDbContext> options)
         : base(options) => ChangeTracker.LazyLoadingEnabled = false;
 
+    /// <summary>
+    /// System-wide notifications/alerts for end-users.
+    /// <code>TABLE: dbo.SystemNotifications</code>
+    /// </summary>
     public virtual DbSet<SystemNotificationRecord> SystemNotifications { get; set; } = null!;
+
+    /// <summary>
+    /// Child objects of <see cref="SystemNotifications">System notifications</see> holding notification messages in one or more languages.<br/>
+    /// Cascade deleted if parent system notification is deleted.
+    /// <code>TABLE: dbo.SystemNotificationMessages</code>
+    /// </summary>
+    public virtual DbSet<SystemNotificationMessageRecord> SystemNotificationMessages { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
