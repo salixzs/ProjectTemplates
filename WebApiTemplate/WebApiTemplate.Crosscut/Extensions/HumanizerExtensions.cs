@@ -158,4 +158,112 @@ public static class HumanizerExtensions
 
         return $"{elapsedTime.Seconds:D}s";
     }
+
+    /// <summary>
+    /// Converts date/time to humanly readable string.<br/>
+    /// Ex. "Just now", "1 hour ago", "Yesterday", "2 days ago".<br/>
+    /// Time is compared with <c>DateTime.Now</c> (Local) if not given in <paramref name="relativeDate"/>.
+    /// </summary>
+    /// <param name="dateTime">Date/Time to be humanly readable.</param>
+    /// <param name="textDays">How many days to convert to "X days ago" (maximum/default: 5)</param>
+    /// <param name="relativeDate">To calculate human string, relative to given date/time, not default current date/time (LOCAL - not UTC).</param>
+    public static string ToStringHuman(this DateTime dateTime, int textDays = 5, DateTime? relativeDate = null)
+    {
+        var compareDate = relativeDate ?? DateTime.Now;
+        if (!dateTime.Date.IsBetween(compareDate.Date.AddDays(0 - textDays), compareDate.Date.AddDays(textDays).AddHours(23).AddMinutes(59).AddSeconds(59)))
+        {
+            if (dateTime.Year != compareDate.Year)
+            {
+                return $"{dateTime.ToString("M")}, {dateTime.Year}";
+            }
+
+            return dateTime.ToString("M");
+        }
+
+        if (dateTime.Date == compareDate.Date)
+        {
+            var differenceTimespan = compareDate > dateTime ? (compareDate - dateTime) : (dateTime - compareDate);
+            if (differenceTimespan > TimeSpan.FromHours(1))
+            {
+                var hourCount = Math.Round(differenceTimespan.TotalHours);
+                if (hourCount == 1)
+                {
+                    return compareDate > dateTime ? Translations.HourAgo : Translations.In1Hour;
+                }
+                else
+                {
+                    return string.Format((compareDate > dateTime ? Translations.HoursAgo : Translations.InHours), hourCount);
+                }
+            }
+
+            if (differenceTimespan > TimeSpan.FromMinutes(1))
+            {
+                var minuteCount = Math.Round(differenceTimespan.TotalMinutes);
+                if (minuteCount == 1)
+                {
+                    return compareDate > dateTime ? Translations.MinuteAgo : Translations.In1Minute;
+                }
+                else
+                {
+                    return string.Format((compareDate > dateTime ? Translations.MinutesAgo : Translations.InMinutes), minuteCount);
+                }
+            }
+
+            return Translations.JustNow;
+        }
+
+        if (textDays > 0)
+        {
+            if (dateTime.Date == compareDate.Date.AddDays(1))
+            {
+                return Translations.Tomorrow;
+            }
+
+            if (dateTime.Date == compareDate.Date.AddDays(-1))
+            {
+                return Translations.Yesterday;
+            }
+        }
+
+        if (textDays > 1)
+        {
+            if (dateTime.Date == compareDate.Date.AddDays(2))
+            {
+                return Translations.DayAfterTomorrow;
+            }
+
+            if (dateTime.Date == compareDate.Date.AddDays(-2))
+            {
+                return Translations.DayBeforeYesterday;
+            }
+        }
+
+        if (textDays > 2)
+        {
+            if (dateTime.Date == compareDate.Date.AddDays(3))
+            {
+                return Translations.ThreeDaysFromNow;
+            }
+
+            if (dateTime.Date == compareDate.Date.AddDays(-3))
+            {
+                return Translations.ThreeDaysAgo;
+            }
+        }
+
+        for (var daysFromNow = 4; daysFromNow <= textDays; daysFromNow++)
+        {
+            if (dateTime.Date == compareDate.Date.AddDays(daysFromNow))
+            {
+                return string.Format(Translations.DaysFromNow, daysFromNow);
+            }
+
+            if (dateTime.Date == compareDate.Date.AddDays(0 - daysFromNow))
+            {
+                return string.Format(Translations.DaysAgo, daysFromNow);
+            }
+        }
+
+        return dateTime.ToString("dd MMMM");
+    }
 }
