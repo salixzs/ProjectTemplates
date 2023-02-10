@@ -18,10 +18,10 @@ public class SystemNotificationValidator : Validator<SystemNotification>
             });
 
         RuleFor(o => o.StartTime)
-            .GreaterThan(DateTime.MinValue)
+            .GreaterThan(DateTimeOffset.MinValue)
             .WithMessage("Start time should be specified!");
         RuleFor(o => o.EndTime)
-            .GreaterThan(DateTime.MinValue)
+            .GreaterThan(DateTimeOffset.MinValue)
             .WithMessage("End time should be specified!");
         RuleFor(o => o.StartTime)
             .Must((notification, startTime) => notification.EndTime > startTime)
