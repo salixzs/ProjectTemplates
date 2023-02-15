@@ -44,7 +44,7 @@ public class DateTimeExtensionsAgeTests
         };
 }
 
-internal class TestDateTimeProvider : IDateTimeProvider
+internal sealed class TestDateTimeProvider : IDateTimeProvider
 {
     public TestDateTimeProvider(DateTime currentDateTime) =>
         DateTimeNow = currentDateTime;

@@ -11,7 +11,7 @@ jobs:
   workspace:
     clean: all
   pool:
-    vmImage: ubuntu-latest
+    vmImage: windows-latest
 
   variables:
     apiSolution: '**/WebApiTemplate.sln'
