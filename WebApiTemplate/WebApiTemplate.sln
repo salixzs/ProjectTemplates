@@ -36,7 +36,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.CoreLogic.Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Database.Orm.Fakes", "Database\WebApiTemplate.Database.Orm.Fakes\WebApiTemplate.Database.Orm.Fakes.csproj", "{15B5A1A5-A1CB-4FA7-A540-A854978804AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.Crosscut.Tests", "Tests\WebApiTemplate.Crosscut.Tests\WebApiTemplate.Crosscut.Tests.csproj", "{06781511-5ADC-4D00-9B50-A619ED6CB35B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Crosscut.Tests", "Tests\WebApiTemplate.Crosscut.Tests\WebApiTemplate.Crosscut.Tests.csproj", "{06781511-5ADC-4D00-9B50-A619ED6CB35B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "builds", "builds", "{E9BCD65C-70F4-49C9-9BAA-4655626D513B}"
+	ProjectSection(SolutionItems) = preProject
+		.azuredevops\pipelines\ci.yml = .azuredevops\pipelines\ci.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -104,6 +109,7 @@ Global
 		{851CCDAA-40AD-4F63-86D3-8B0E7CEF08AF} = {F194B8A0-5540-4943-883C-931E8D26A6BC}
 		{15B5A1A5-A1CB-4FA7-A540-A854978804AF} = {9FA73C1A-2A3E-4F33-8565-2460A36190AD}
 		{06781511-5ADC-4D00-9B50-A619ED6CB35B} = {F194B8A0-5540-4943-883C-931E8D26A6BC}
+		{E9BCD65C-70F4-49C9-9BAA-4655626D513B} = {A4A07774-66DD-4077-8BDD-E6F164EFDE8E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E405DE01-7FDC-469E-96BD-250AE7920F39}

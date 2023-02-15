@@ -1,0 +1,78 @@
+name: $(Date:yyyy\-MM\-dd)_API_CI_$(SourceBranchName)_$(Rev:r)
+
+trigger:
+  branches:
+   include:
+     - main
+
+jobs:
+- job: CI_API
+  timeoutInMinutes: 10
+  workspace:
+    clean: all
+  pool:
+    vmImage: ubuntu-latest
+
+  variables:
+    apiSolution: '**/WebApiTemplate.sln'
+    buildPlatform: 'Any CPU'
+    buildConfiguration: 'Release'
+    disable.coverage.autogenerate: 'true'
+
+  steps:
+  - checkout: self
+    displayName: 'Checkout latest code'
+    clean: false
+    fetchDepth: 20
+
+  - task: UseDotNet@2
+    displayName: 'Use .NET 7.x SDK'
+    inputs:
+      packageType: 'sdk'
+      version: '7.0.x'
+      includePreviewVersions: false
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Build API'
+    inputs:
+      command: 'build'
+      projects: $(apiSolution)
+      configuration: $(buildConfiguration)
+      arguments: '--configuration $(buildConfiguration)
+                  --nologo'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Run API tests'
+    inputs:
+      command: 'test'
+      projects: $(apiSolution)
+      testRunTitle: 'API'
+      configuration: $(buildConfiguration)
+      arguments: '--configuration $(buildConfiguration)
+                  --framework net7.0
+                  --no-restore
+                  --no-build
+                  --blame-hang
+                  --blame-hang-timeout 120s
+                  /Property:GenerateFullPaths=true
+                  /consoleloggerparameters:NoSummary
+                  /p:CollectCoverage=true
+                  /p:CoverletOutputFormat=cobertura
+                  /p:ExcludeByAttribute="ExcludeFromCodeCoverage"
+                  /p:Exclude=\"[*.UnitTests]*\"
+                  /p:SkipAutoProps=true
+                  /p:CoverletOutput="$(System.DefaultWorkingDirectory)/TestResults/"'
+
+  - task: reportgenerator@5
+    displayName: 'Generate code coverage'
+    inputs:
+      reports: '$(Build.SourcesDirectory)/tests/**/coverage.cobertura.xml'
+      targetdir: '$(Build.SourcesDirectory)/build_reports/code_coverage'
+      reporttypes: 'HtmlInline_AzurePipelines_Dark;Cobertura'
+      title: 'Code coverage'
+
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: 'Cobertura'
+      summaryFileLocation: '$(Build.SourcesDirectory)/build_reports/code_coverage/Cobertura.xml'
+      reportDirectory: '$(Build.SourcesDirectory)/build_reports/code_coverage'
