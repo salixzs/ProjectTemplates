@@ -66,7 +66,7 @@ jobs:
   - task: reportgenerator@5
     displayName: 'Generate code coverage'
     inputs:
-      reports: '$(Build.SourcesDirectory)/tests/**/coverage.cobertura.xml'
+      reports: '$(Build.SourcesDirectory)/WebApiTemplate/Tests/**/coverage.cobertura.xml'
       targetdir: '$(Build.SourcesDirectory)/build_reports/code_coverage'
       reporttypes: 'HtmlInline_AzurePipelines_Dark;Cobertura'
       title: 'Code coverage'
