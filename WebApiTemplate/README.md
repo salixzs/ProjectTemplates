@@ -104,3 +104,13 @@ Also there is a possibility to set a flag to show countdown timer (like for last
 Again - you may or may not implement such feature in your UI, but flag to set such up is there.
 
 Notification messages themselves can be set up in multiple languages, if you app is multilingual.
+
+
+# Builds
+Template includes YAML file for Azure DevOps service to build and run tests in its pipeline. 
+Testing also is configured to create code coverage report and show on Azure DevOps pipeline build report.
+
+`MsSqlProj` type projects are picky when it comes to command-line builds, so it is **switched off (removed) from release build**.
+
+Create separate pipeline for this project type, using `VSBuild` or `msbuild` tasks on windows-latest image.
+
