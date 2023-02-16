@@ -29,13 +29,13 @@
 	<!-- NuGet package references -->
 	<ItemGroup>
 		<PackageReference Include="ConfigurationValidation.AspNetCore" Version="1.0.0" />
-		<PackageReference Include="FastEndpoints" Version="5.7.0" />
-		<PackageReference Include="FastEndpoints.Generator" Version="5.7.0">
+		<PackageReference Include="FastEndpoints" Version="5.7.2" />
+		<PackageReference Include="FastEndpoints.Generator" Version="5.7.2">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="FastEndpoints.Security" Version="5.7.0" />
-		<PackageReference Include="FastEndpoints.Swagger" Version="5.7.0" />
+		<PackageReference Include="FastEndpoints.Security" Version="5.7.2" />
+		<PackageReference Include="FastEndpoints.Swagger" Version="5.7.2" />
 		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     <PackageReference Include="Salix.AspNetCore.FrontPage" Version="1.0.0" />
