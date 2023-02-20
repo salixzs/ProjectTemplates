@@ -73,11 +73,9 @@ public static class DateTimeOffsetExtensions
                     // round up
                     return new DateTimeOffset(originalDateTimeOffset.Ticks + ticksType - fraction, originalDateTimeOffset.Offset);
                 }
-                else
-                {
-                    // round down
-                    return new DateTimeOffset(originalDateTimeOffset.Ticks - fraction, originalDateTimeOffset.Offset);
-                }
+
+                // round down
+                return new DateTimeOffset(originalDateTimeOffset.Ticks - fraction, originalDateTimeOffset.Offset);
             }
         }
 
@@ -107,7 +105,7 @@ public static class DateTimeOffsetExtensions
     /// </code>
     /// </summary>
     public static DateTimeOffset FirstDayOfMonth(this DateTimeOffset value) =>
-        new DateTimeOffset(new DateTime(value.Year, value.Month, 1), value.Offset);
+        new(new DateTime(value.Year, value.Month, 1), value.Offset);
 
     /// <summary>
     /// Returns the last day of month for given date (time: 0:0:0.0).<br/>

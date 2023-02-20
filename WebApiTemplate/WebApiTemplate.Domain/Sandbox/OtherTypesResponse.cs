@@ -39,11 +39,16 @@ public class OtherTypesResponse
     public int[] IntegerArray { get; set; } = new int[3] { 1, 2, 3 };
 }
 
+/// <summary>
+/// Test enumeration.
+/// </summary>
 public enum SandboxType
 {
+#pragma warning disable RCS0012, CS1591 // Add blank line between single-line declarations.
     Undefined = 0,
     Numbers = 1,
     Strings = 2,
     DateTimes = 3,
     OtherTypes = 4,
+#pragma warning restore RCS0012, CS1591 // Add blank line between single-line declarations.
 }

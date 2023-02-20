@@ -1,5 +1,4 @@
 using Microsoft.IdentityModel.Tokens;
-using Salix.AspNetCore.JsonExceptionHandler;
 using WebApiTemplate.Crosscut.Exceptions;
 
 namespace WebApiTemplate.WebApi.Middleware;
@@ -83,12 +82,13 @@ public class ApiJsonErrorMiddleware : ApiJsonExceptionMiddleware
             {
                 foreach (var validationError in validation.Failures)
                 {
-                    apiError.ValidationErrors.Add(new ApiDataValidationError
-                    {
-                        PropertyName = validationError.PropertyName,
-                        AttemptedValue = validationError.AttemptedValue,
-                        Message = validationError.ErrorMessage,
-                    });
+                    apiError.ValidationErrors.Add(
+                        new ApiDataValidationError
+                        {
+                            PropertyName = validationError.PropertyName,
+                            AttemptedValue = validationError.AttemptedValue,
+                            Message = validationError.ErrorMessage,
+                        });
                 }
             }
         }

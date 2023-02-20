@@ -27,7 +27,9 @@ public sealed class DomainFakesFactory
         _instantiators.Add(typeof(SystemNotificationMessage).FullName!, SystemNotificationMessageFake.GetBogus);
     }
 
-    static DomainFakesFactory() { }
+    static DomainFakesFactory()
+    {
+    }
 
     /// <summary>
     /// Use Factory in tests to get fake Domain API objects and their lists.

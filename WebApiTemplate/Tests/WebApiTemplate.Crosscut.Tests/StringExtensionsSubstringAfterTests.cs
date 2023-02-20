@@ -12,6 +12,6 @@ public class StringExtensionsSubstringAfterTests
     [InlineData("qwerty", "", "")]
     [InlineData("dvorak", null, "")]
     [InlineData(null, "&", null)]
-    public void SubstringAfter_Theorem_ExpectedResult(string? input, string? separator, string? expected)
-        => input.SubstringAfter(separator).Should().Be(expected);
+    public void SubstringAfter_Theorem_ExpectedResult(string? input, string? separator, string? expected) =>
+        input.SubstringAfter(separator).Should().Be(expected);
 }

@@ -27,11 +27,11 @@ public class CollectionExtensionsTests
         var collection = new List<object?>();
         var values = new object?[5]
         {
-                new object(),
-                new object(),
-                null,
-                null,
-                new object(),
+            new object(),
+            new object(),
+            null,
+            null,
+            new object(),
         };
 
         foreach (var value in values)
@@ -48,13 +48,13 @@ public class CollectionExtensionsTests
         var collection = new List<int?>();
         var values = new int?[7]
         {
-                1,
-                2,
-                null,
-                null,
-                70,
-                null,
-                4,
+            1,
+            2,
+            null,
+            null,
+            70,
+            null,
+            4,
         };
 
         foreach (var value in values)

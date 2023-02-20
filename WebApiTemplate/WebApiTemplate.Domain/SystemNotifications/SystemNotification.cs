@@ -96,20 +96,18 @@ public class SystemNotification
             {
                 if (DateTimeOffset.UtcNow < StartTime.UtcDateTime)
                 {
-                    debugString.Append($"WILL START: ");
+                    debugString.Append("WILL START: ");
                     debugString.Append(StartTime.ToString("dd.MMM HH:mm", System.Globalization.CultureInfo.CurrentCulture));
                 }
 
                 if (DateTimeOffset.UtcNow > EndTime.UtcDateTime)
                 {
-                    debugString.Append($"ENDED: ");
+                    debugString.Append("ENDED: ");
                     debugString.Append(EndTime.ToString("dd.MMM HH:mm", System.Globalization.CultureInfo.CurrentCulture));
                 }
             }
 
-#pragma warning disable CA1305 // Specify IFormatProvider
-            debugString.Append($"; {Messages.Count} languages");
-#pragma warning restore CA1305 // Specify IFormatProvider
+            debugString.Append("; ").Append(Messages.Count).Append(" languages");
             return debugString.ToString();
         }
     }

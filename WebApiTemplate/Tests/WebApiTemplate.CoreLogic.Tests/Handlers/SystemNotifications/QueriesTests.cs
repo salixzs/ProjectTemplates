@@ -9,9 +9,13 @@ namespace WebApiTemplate.CoreLogic.Tests.Handlers.SystemNotifications;
 public class QueriesTests : CoreLogicTestBase
 {
     private readonly WebApiTemplateDbContext _db;
+
     private readonly SystemNotificationQueries _sut;
+
     private readonly Mock<IDateTimeProvider> _dateTimeProvider;
+
     private SystemNotificationRecord _testable = null!;
+
     private readonly DateTimeOffset _testableBaseDateTime = DateTimeOffset.Now.AddDays(1);
 
     public QueriesTests(ITestOutputHelper output) : base(output)
@@ -45,8 +49,8 @@ public class QueriesTests : CoreLogicTestBase
         var result = await _sut.GetActive(default);
         result.Should().NotBeEmpty();
         result.Should().HaveCount(1);
-        result.First().Id.Should().Be(1010);
-        result!.First().Messages.Should().HaveCount(1);
+        result[0].Id.Should().Be(1010);
+        result![0].Messages.Should().HaveCount(1);
     }
 
     [Fact]
@@ -55,7 +59,7 @@ public class QueriesTests : CoreLogicTestBase
         var result = await _sut.GetAll(default);
         result.Should().NotBeEmpty();
         result.Should().HaveCount(3);
-        result!.First().Messages.Should().HaveCountGreaterThan(0);
+        result![0].Messages.Should().HaveCountGreaterThan(0);
     }
 
     [Fact]
@@ -65,7 +69,7 @@ public class QueriesTests : CoreLogicTestBase
         var result = await _sut.GetActive(default);
         result.Should().NotBeEmpty();
         result.Should().HaveCount(1);
-        var resultItem = result.First();
+        var resultItem = result[0];
         resultItem.Id.Should().Be(1012);
         resultItem.IsEmphasized.Should().BeFalse();
         resultItem.ShowCountdown.Should().BeFalse();
@@ -80,7 +84,7 @@ public class QueriesTests : CoreLogicTestBase
         var result = await _sut.GetActive(default);
         result.Should().NotBeEmpty();
         result.Should().HaveCount(1);
-        var resultItem = result.First();
+        var resultItem = result[0];
         resultItem.Id.Should().Be(1012);
         resultItem.IsEmphasized.Should().BeTrue();
         resultItem.ShowCountdown.Should().BeFalse();
@@ -95,7 +99,7 @@ public class QueriesTests : CoreLogicTestBase
         var result = await _sut.GetActive(default);
         result.Should().NotBeEmpty();
         result.Should().HaveCount(1);
-        var resultItem = result.First();
+        var resultItem = result[0];
         resultItem.Id.Should().Be(1012);
         resultItem.IsEmphasized.Should().BeTrue();
         resultItem.ShowCountdown.Should().BeTrue();

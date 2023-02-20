@@ -11,7 +11,6 @@ namespace WebApiTemplate.BootSetup;
 /// </summary>
 public static class WebAppBuilderExtensions
 {
-
     public static WebApplicationBuilder AddWebApiFeatures(this WebApplicationBuilder builder)
     {
         builder.WebHost
@@ -62,13 +61,19 @@ public static class WebAppBuilderExtensions
 #pragma warning disable IDE0270 // Use coalesce expression
         if (securityOptions == null)
         {
-            throw new BusinessException($"Missing \"{SecurityConfigurationOptions.ConfigurationSectionName}\" configuration section or its contents are wrong.", BusinessExceptionType.ConfigurationError, 1);
+            throw new BusinessException(
+                $"Missing \"{SecurityConfigurationOptions.ConfigurationSectionName}\" configuration section or its contents are wrong.",
+                BusinessExceptionType.ConfigurationError,
+                1);
         }
 #pragma warning restore IDE0270 // Use coalesce expression
 
         if (securityOptions.Cors.Origins == null || securityOptions.Cors.Origins.Count == 0)
         {
-            throw new BusinessException($"Missing CORS URLs in \"{SecurityConfigurationOptions.ConfigurationSectionName}\" configuration section.", BusinessExceptionType.ConfigurationError, 2);
+            throw new BusinessException(
+                $"Missing CORS URLs in \"{SecurityConfigurationOptions.ConfigurationSectionName}\" configuration section.",
+                BusinessExceptionType.ConfigurationError,
+                2);
         }
 
         builder.Services.AddCors(options => options.AddDefaultPolicy(
@@ -130,19 +135,12 @@ public static class WebAppBuilderExtensions
     }
 
     /// <summary>
-    /// Filters out which Endponts appear in Swagger OpenApi documentation.
+    /// Filters out which Endpoints appear in Swagger OpenApi documentation.
     /// </summary>
     /// <param name="endpoint">endpoint description</param>
     /// <returns>True - appears, False - does not appear.</returns>
-    private static bool EndpointDocumentationFilter(EndpointDefinition endpoint)
-    {
-        if (endpoint.EndpointTags != null && endpoint.EndpointTags.Contains("Pages"))
-        {
-            return false;
-        }
-
-        return true;
-    }
+    private static bool EndpointDocumentationFilter(EndpointDefinition endpoint) =>
+        endpoint.EndpointTags?.Contains("Pages") != true;
 
     public static WebApplicationBuilder AddHealthChecks(this WebApplicationBuilder builder)
     {

@@ -63,7 +63,7 @@ public sealed class ActiveSystemNotification
                 debugString.Append(EndTime.ToString("d. MMM, HH:mm", CultureInfo.CurrentCulture));
             }
 
-            debugString.Append($"; {Messages.Count} languages");
+            debugString.Append("; ").Append(Messages.Count).Append(" languages");
             return debugString.ToString();
         }
     }

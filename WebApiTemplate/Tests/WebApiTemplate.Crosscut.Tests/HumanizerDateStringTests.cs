@@ -14,7 +14,7 @@ public class HumanizerDateStringTests
     {
         Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
         Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-        var compareDate = relativeDate == null ? DateTime.Now : relativeDate.Value;
+        var compareDate = relativeDate ?? DateTime.Now;
         _output.WriteLine("DateTime: " + dateTime.ToString("dd.MM.yyyy HH:mm"));
         _output.WriteLine("Compare2: " + compareDate.ToString("dd.MM.yyyy HH:mm"));
         _output.WriteLine("  Differ: " + (dateTime - compareDate).ToString());
@@ -22,12 +22,12 @@ public class HumanizerDateStringTests
         _output.WriteLine("Expected: " + expected);
         dateTime.ToStringHuman(textDays, relativeDate).Should().Be(expected);
     }
+
     public static IEnumerable<object[]> DateTimeToStringHumanEnglishTestData()
     {
         Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
         Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
         var relativeDate = new DateTime(2023, 2, 10, 12, 0, 0);
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
         yield return new object[] { new DateTime(2016, 2, 1), 5, relativeDate, "February 1, 2016" };
         yield return new object[] { new DateTime(2023, 1, 23), 5, relativeDate, "January 23" };
         yield return new object[] { new DateTime(2023, 2, 5), 4, relativeDate, "February 5" };
@@ -52,7 +52,6 @@ public class HumanizerDateStringTests
         yield return new object[] { new DateTime(2023, 2, 15), 5, relativeDate, "In 5 days" };
         yield return new object[] { new DateTime(2023, 2, 15), 4, relativeDate, "February 15" };
         yield return new object[] { new DateTime(2024, 4, 3), 4, relativeDate, "April 3, 2024" };
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
     }
 
     [Theory, MemberData(nameof(DateTimeToStringHumanNorwegianTestData))]
@@ -60,7 +59,7 @@ public class HumanizerDateStringTests
     {
         Thread.CurrentThread.CurrentCulture = new CultureInfo("nb-NO");
         Thread.CurrentThread.CurrentUICulture = new CultureInfo("nb-NO");
-        var compareDate = relativeDate == null ? DateTime.Now : relativeDate.Value;
+        var compareDate = relativeDate ?? DateTime.Now;
         _output.WriteLine("DateTime: " + dateTime.ToString("dd.MM.yyyy HH:mm"));
         _output.WriteLine("Compare2: " + compareDate.ToString("dd.MM.yyyy HH:mm"));
         _output.WriteLine("  Differ: " + (dateTime - compareDate).ToString());
@@ -74,7 +73,6 @@ public class HumanizerDateStringTests
         Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
         Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
         var relativeDate = new DateTime(2023, 2, 10, 12, 0, 0);
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
         yield return new object[] { new DateTime(2016, 2, 1), 5, relativeDate, "1. februar, 2016" };
         yield return new object[] { new DateTime(2023, 1, 23), 5, relativeDate, "23. januar" };
         yield return new object[] { new DateTime(2023, 2, 5), 4, relativeDate, "5. februar" };
@@ -99,6 +97,5 @@ public class HumanizerDateStringTests
         yield return new object[] { new DateTime(2023, 2, 15), 5, relativeDate, "Om 5 dager" };
         yield return new object[] { new DateTime(2023, 2, 15), 4, relativeDate, "15. februar" };
         yield return new object[] { new DateTime(2024, 4, 3), 4, relativeDate, "3. april, 2024" };
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
     }
 }

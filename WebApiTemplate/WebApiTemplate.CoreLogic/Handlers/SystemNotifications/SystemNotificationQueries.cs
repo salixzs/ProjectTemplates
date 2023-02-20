@@ -9,6 +9,7 @@ namespace WebApiTemplate.CoreLogic.Handlers.SystemNotifications;
 public sealed class SystemNotificationQueries : ISystemNotificationQueries
 {
     private readonly WebApiTemplateDbContext _db;
+
     private readonly IDateTimeProvider _dateTimeProvider;
 
     /// <inheritdoc cref="ISystemNotificationQueries"/>
@@ -29,21 +30,23 @@ public sealed class SystemNotificationQueries : ISystemNotificationQueries
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
-        return notificationRecords.ConvertAll(dbRecord => new ActiveSystemNotification
-        {
-            Id = dbRecord.Id,
-            MessageType = dbRecord.EmphasizeSince <= currentDateTime ? dbRecord.EmphasizeType : dbRecord.Type,
-            EndTime = dbRecord.EndTime,
-            IsEmphasized = dbRecord.EmphasizeSince <= currentDateTime,
-            ShowCountdown = dbRecord.CountdownSince <= currentDateTime,
-            Messages = dbRecord.Messages.Select(message => new SystemNotificationMessage
+        return notificationRecords.ConvertAll(
+            dbRecord => new ActiveSystemNotification
             {
-                Id = message.Id,
-                Language = message.LanguageCode,
-                Message = message.Message,
-            })
-            .ToList()
-        });
+                Id = dbRecord.Id,
+                MessageType = dbRecord.EmphasizeSince <= currentDateTime ? dbRecord.EmphasizeType : dbRecord.Type,
+                EndTime = dbRecord.EndTime,
+                IsEmphasized = dbRecord.EmphasizeSince <= currentDateTime,
+                ShowCountdown = dbRecord.CountdownSince <= currentDateTime,
+                Messages = dbRecord.Messages.Select(
+                    message => new SystemNotificationMessage
+                    {
+                        Id = message.Id,
+                        Language = message.LanguageCode,
+                        Message = message.Message,
+                    })
+                .ToList()
+            });
     }
 
     /// <inheritdoc/>

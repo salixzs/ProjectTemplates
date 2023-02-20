@@ -26,7 +26,8 @@ public class SystemNotificationPatch : Endpoint<SystemNotification>
         Summary(swagger =>
         {
             swagger.Summary = "Updates a system notification.";
-            swagger.Description = "Updates a data for of an existing system notification with new data (properties), including its messages. Missing messages gets deleted. Should have at least one message in data patched.";
+            swagger.Description = @"Updates a data for of an existing system notification with new data (properties),
+including its messages. Missing messages gets deleted. Should have at least one message in data patched.";
             swagger.Response<int>((int)HttpStatusCode.Created, "System notification is successfully updated.");
             swagger.Response<ApiError>((int)HttpStatusCode.InternalServerError, "Error occurred in server during notification update.");
             swagger.Response<ApiError>((int)HttpStatusCode.UnprocessableEntity, "Request (submitted notification data) has validation errors.");
@@ -56,7 +57,6 @@ public class SystemNotificationPatch : Endpoint<SystemNotification>
                         Language = "lv",
                         Message = "Drīz sāksies apkopes darbi."
                     }
-
                 }
             };
         });
@@ -74,4 +74,3 @@ public class SystemNotificationPatch : Endpoint<SystemNotification>
         await SendOkAsync(cancellation: cancellationToken);
     }
 }
-

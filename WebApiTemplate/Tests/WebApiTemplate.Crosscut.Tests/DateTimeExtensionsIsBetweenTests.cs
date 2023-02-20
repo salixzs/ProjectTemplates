@@ -1,6 +1,7 @@
 using WebApiTemplate.Crosscut.Extensions;
 
 namespace WebApiTemplate.Crosscut.Tests;
+
 public class DateTimeExtensionsIsBetweenTests
 {
     [Theory]
@@ -74,5 +75,4 @@ public class DateTimeExtensionsIsBetweenTests
         Action act = () => testDate.IsBetween(startDate, endDate);
         act.Should().Throw<ArgumentException>();
     }
-
 }

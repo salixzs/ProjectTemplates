@@ -1,6 +1,7 @@
 using WebApiTemplate.Crosscut.Extensions;
 
 namespace WebApiTemplate.Crosscut.Tests;
+
 public class DateTimeOffsetExtensionsRoundTests
 {
     [Theory]
@@ -27,6 +28,7 @@ public class DateTimeOffsetExtensionsRoundTests
         result.Should().Be(new DateTimeOffset(2023, 4, 5, 6, 7, 8, 0, 0, new TimeSpan(2, 0, 0)));
     }
 
+#pragma warning disable RCS0056 // A line is too long.
     public static TheoryData<DateTimeOffset, DateTimeOffset, long> RoundingData =>
         new()
         {
@@ -41,4 +43,5 @@ public class DateTimeOffsetExtensionsRoundTests
             { new DateTimeOffset(2023, 4, 5, 0, 0, 0, new TimeSpan(2, 0, 0)), new DateTimeOffset(2023, 4, 5, 0, 0, 0, new TimeSpan(2, 0, 0)), TimeSpan.TicksPerDay },
             { new DateTimeOffset(2023, 4, 5, 6, 7, 8, 0, new TimeSpan(2, 0, 0)), new DateTimeOffset(2023, 4, 5, 6, 7, 8, new TimeSpan(2, 0, 0)), TimeSpan.TicksPerSecond },
         };
+#pragma warning restore RCS0056 // A line is too long.
 }

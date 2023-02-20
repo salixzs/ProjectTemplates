@@ -1,6 +1,7 @@
 using WebApiTemplate.Crosscut.Extensions;
 
 namespace WebApiTemplate.Crosscut.Tests;
+
 public class DateTimeOffsetExtensionsIsBetweenTests
 {
     [Theory]
@@ -13,7 +14,11 @@ public class DateTimeOffsetExtensionsIsBetweenTests
 
     [Theory]
     [MemberData(nameof(BetweenData))]
-    public void DateTimeOffsetNullable_IsBetween_ExpectedResult(DateTimeOffset startTime, DateTimeOffset endTime, DateTimeOffset testDate, bool expected)
+    public void DateTimeOffsetNullable_IsBetween_ExpectedResult(
+        DateTimeOffset startTime,
+        DateTimeOffset endTime,
+        DateTimeOffset testDate,
+        bool expected)
     {
         DateTimeOffset? nullableStartTime = startTime;
         DateTimeOffset? nullableEndTime = endTime;
@@ -23,7 +28,11 @@ public class DateTimeOffsetExtensionsIsBetweenTests
 
     [Theory]
     [MemberData(nameof(BetweenNullData))]
-    public void DateTimeOffsetNullable_IsBetweenNull_ExpectedResult(DateTimeOffset? startTime, DateTimeOffset? endTime, DateTimeOffset testDate, bool expected)
+    public void DateTimeOffsetNullable_IsBetweenNull_ExpectedResult(
+        DateTimeOffset? startTime,
+        DateTimeOffset? endTime,
+        DateTimeOffset testDate,
+        bool expected)
     {
         var nullableStartTime = startTime;
         var nullableEndTime = endTime;
@@ -31,6 +40,7 @@ public class DateTimeOffsetExtensionsIsBetweenTests
         result.Should().Be(expected);
     }
 
+#pragma warning disable RCS0056 // A line is too long.
     public static TheoryData<DateTimeOffset, DateTimeOffset, DateTimeOffset, bool> BetweenData =>
         new()
         {
@@ -54,6 +64,7 @@ public class DateTimeOffsetExtensionsIsBetweenTests
             // TIMEZONEs
             { new DateTimeOffset(2017, 2, 1, 5, 59, 59, new TimeSpan(-2, 0, 0)), new DateTimeOffset(2017, 2, 1, 6, 0, 2, new TimeSpan(-2, 0, 0)), new DateTimeOffset(2017, 1, 4, 14, 25, 3, new TimeSpan(2, 0, 0)), false },
         };
+#pragma warning restore RCS0056 // A line is too long.
 
     public static TheoryData<DateTimeOffset?, DateTimeOffset?, DateTimeOffset, bool> BetweenNullData =>
         new()
@@ -73,5 +84,4 @@ public class DateTimeOffsetExtensionsIsBetweenTests
         Action act = () => testDate.IsBetween(startDate, endDate);
         act.Should().Throw<ArgumentException>();
     }
-
 }

@@ -2,6 +2,7 @@ using System.Globalization;
 using WebApiTemplate.Crosscut.Extensions;
 
 namespace WebApiTemplate.Crosscut.Tests;
+
 public class HumanizerTimeSpanToStringHumanTests
 {
     public HumanizerTimeSpanToStringHumanTests() => Thread.CurrentThread.CurrentCulture = new CultureInfo("lv-LV");

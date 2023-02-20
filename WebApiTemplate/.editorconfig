@@ -457,43 +457,153 @@ dotnet_naming_rule.parameters_rule.symbols              = parameters_group
 dotnet_naming_rule.parameters_rule.style = camel_case_style
 dotnet_naming_rule.parameters_rule.severity = error
 
-##########################################
-# License
-##########################################
-# The following applies as to the .editorconfig file ONLY, and is
-# included below for reference, per the requirements of the license
-# corresponding to this .editorconfig file.
-# See: https://github.com/RehanSaeed/EditorConfig
-#
-# MIT License
-#
-# Copyright (c) 2017-2019 Muhammad Rehan Saeed
-# Copyright (c) 2019 Henry Gabryjelski
-#
-# Permission is hereby granted, free of charge, to any
-# person obtaining a copy of this software and associated
-# documentation files (the "Software"), to deal in the
-# Software without restriction, including without limitation
-# the rights to use, copy, modify, merge, publish, distribute,
-# sublicense, and/or sell copies of the Software, and to permit
-# persons to whom the Software is furnished to do so, subject
-# to the following conditions:
-#
-# The above copyright notice and this permission notice shall be
-# included in all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-# OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-# WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
-##########################################
 
 #################################################
-# Custom or enforced rules, added by NHK project
+# Roslynator FORMATTING settings (RCS0xxx)
+# http://pihrt.net/Roslynator/Analyzers?Query=RCS0
+#################################################
+# Add blank line after embedded statement
+dotnet_diagnostic.rcs0001.severity = none
+# Add blank line after #region
+dotnet_diagnostic.rcs0002.severity = none
+# Add blank line after using directive list
+dotnet_diagnostic.rcs0003.severity = suggestion
+# Add blank line before #endregion
+dotnet_diagnostic.rcs0005.severity = none
+# Add blank line before using directive list
+dotnet_diagnostic.rcs0006.severity = none
+# Add blank line between accessors
+dotnet_diagnostic.rcs0007.severity = warning
+# Add blank line between closing brace and next statement
+dotnet_diagnostic.rcs0008.severity = error
+# Add blank line between declaration and documentation comment
+dotnet_diagnostic.rcs0009.severity = warning
+# Add blank line between declarations
+dotnet_diagnostic.rcs0010.severity = error
+# Add/remove blank line between single-line accessors
+dotnet_diagnostic.rcs0011.severity = none
+roslynator_blank_line_between_single_line_accessors = false
+# Add blank line between single-line declarations
+dotnet_diagnostic.rcs0012.severity = error
+# Add blank line between single-line declarations of different kind
+dotnet_diagnostic.rcs0013.severity = error
+# Add blank line between switch sections
+dotnet_diagnostic.rcs0014.severity = none
+# Options: roslynator_blank_line_between_closing_brace_and_switch_section
+# Add/remove blank line between using directives
+dotnet_diagnostic.rcs0015.severity = none
+# Options: roslynator_blank_line_between_using_directives
+# Put attribute list on its own line
+dotnet_diagnostic.rcs0016.severity = none
+# Format accessor's braces on a single line or multiple lines
+dotnet_diagnostic.rcs0020.severity = error
+roslynator_accessor_braces_style = multi_line
+# Format block's braces on a single line or multiple lines
+dotnet_diagnostic.rcs0021.severity = error
+roslynator_block_braces_style = multi_line
+# Add new line after opening brace of empty block
+dotnet_diagnostic.rcs0022.severity = none
+# Format type declaration's braces
+dotnet_diagnostic.rcs0023.severity = none
+# Add new line after switch label
+dotnet_diagnostic.rcs0024.severity = error
+# Put full accessor on its own line
+dotnet_diagnostic.rcs0025.severity = error
+# Place new line after/before binary operator
+dotnet_diagnostic.rcs0027.severity = warning
+roslynator_binary_operator_new_line = before
+# Place new line after/before '?:' operator
+dotnet_diagnostic.rcs0028.severity = warning
+roslynator_conditional_operator_new_line = before
+# Put constructor initializer on its own line
+dotnet_diagnostic.rcs0029.severity = none
+# Add new line before embedded statement
+dotnet_diagnostic.rcs0030.severity = none
+# Put enum member on its own line
+dotnet_diagnostic.rcs0031.severity = error
+# Place new line after/before arrow token
+dotnet_diagnostic.rcs0032.severity = warning
+roslynator_arrow_token_new_line = after
+# Add new line before statement
+dotnet_diagnostic.rcs0033.severity = error
+# Put type parameter constraint on its own line
+dotnet_diagnostic.rcs0034.severity = none
+# Remove blank line between single-line declarations of same kind
+dotnet_diagnostic.rcs0036.severity = none
+# Remove blank line between using directives with same root namespace
+dotnet_diagnostic.rcs0038.severity = warning
+# Remove new line before base list
+dotnet_diagnostic.rcs0039.severity = none
+# Remove new line between 'if' keyword and 'else' keyword
+dotnet_diagnostic.rcs0041.severity = warning
+# Put auto-accessors on a single line
+dotnet_diagnostic.rcs0042.severity = error
+# Format accessor's braces on a single line when expression is on single line
+dotnet_diagnostic.rcs0043.severity = none
+# Use carriage return + linefeed as new line
+dotnet_diagnostic.rcs0044.severity = none
+# Use linefeed as new line
+dotnet_diagnostic.rcs0045.severity = none
+# Use spaces instead of tab
+dotnet_diagnostic.rcs0046.severity = error
+# [deprecated] Wrap and indent each node in list
+dotnet_diagnostic.rcs0047.severity = none
+# Put initializer on a single line
+dotnet_diagnostic.rcs0048.severity = none
+# Add blank line after top comment
+dotnet_diagnostic.rcs0049.severity = none
+# Add blank line before top declaration
+dotnet_diagnostic.rcs0050.severity = error
+# Add/remove new line before 'while' in 'do' statement
+dotnet_diagnostic.rcs0051.severity = error
+roslynator_new_line_before_while_in_do_statement = true
+# Place new line after/before equals token
+dotnet_diagnostic.rcs0052.severity = none
+#OPTION: roslynator_equals_token_new_line = after
+# Fix formatting of a list
+dotnet_diagnostic.rcs0053.severity = warning
+# Fix formatting of a call chain
+dotnet_diagnostic.rcs0054.severity = none
+# Fix formatting of a binary expression chain
+dotnet_diagnostic.rcs0055.severity = error
+# A line is too long
+dotnet_diagnostic.rcs0056.severity = error
+roslynator_max_line_length = 150
+# Normalize whitespace at the beginning of a file
+dotnet_diagnostic.rcs0057.severity = error
+# Normalize whitespace at the end of a file
+dotnet_diagnostic.rcs0058.severity = error
+roslynator_new_line_at_end_of_file = true
+# Place new line after/before null-conditional operator
+dotnet_diagnostic.rcs0059.severity = warning
+roslynator_null_conditional_operator_new_line = after
+# Add/remove line after file scoped namespace declaration
+dotnet_diagnostic.rcs0060.severity = error
+roslynator_blank_line_after_file_scoped_namespace_declaration = true
+
+#################################################
+# Roslynator Analyzer settings (RCS1xxx)
+# http://pihrt.net/Roslynator/Analyzers?Query=RCS1
+#################################################
+
+#
+# Add call to ConfigureAwait
+dotnet_diagnostic.RCS1090.severity = silent
+# RCS1181: Convert comment to documentation comment.
+dotnet_diagnostic.RCS1181.severity = silent
+# RCS1154: Sort enum members.
+dotnet_diagnostic.RCS1154.severity = suggestion
+# RCS1161: ENum should specify values.
+dotnet_diagnostic.RCS1161.severity = error
+# RCS1201: Use method chaining.
+dotnet_diagnostic.RCS1201.severity = suggestion
+# XML Documentation stuff
+dotnet_diagnostic.RCS1141.severity = silent
+
+
+#################################################
+# Custom or enforced rules,
+# specific to company/project
 #################################################
 
 tab_width = 4
@@ -501,8 +611,16 @@ end_of_line = crlf
 dotnet_style_allow_multiple_blank_lines_experimental = false:error
 dotnet_style_allow_statement_immediately_after_block_experimental = false:warning
 
-# Add call to ConfigureAwait
-dotnet_diagnostic.RCS1090.severity = silent
+# Nullable stuff (https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/nullable-warnings)
+dotnet_diagnostic.CS8600.severity = error
+dotnet_diagnostic.CS8601.severity = error
+dotnet_diagnostic.CS8602.severity = error
+dotnet_diagnostic.CS8603.severity = error
+dotnet_diagnostic.CS8604.severity = error
+dotnet_diagnostic.CS8618.severity = error
+dotnet_diagnostic.CS8620.severity = error
+dotnet_diagnostic.CS8625.severity = error
+dotnet_diagnostic.CS8629.severity = error
 
 # IDE0161: Convert to file-scoped namespace
 dotnet_diagnostic.IDE0161.severity = suggestion
@@ -515,18 +633,6 @@ dotnet_diagnostic.IDE0005.severity = error
 
 # IDE0090: Use 'new(...)'
 dotnet_diagnostic.IDE0090.severity = suggestion
-
-# RCS1181: Convert comment to documentation comment.
-dotnet_diagnostic.RCS1181.severity = silent
-
-# RCS1154: Sort enum members.
-dotnet_diagnostic.RCS1154.severity = suggestion
-
-# RCS1161: ENum should specify values.
-dotnet_diagnostic.RCS1161.severity = error
-
-# RCS1201: Use method chaining.
-dotnet_diagnostic.RCS1201.severity = suggestion
 
 # IDE0010: Populate switch
 dotnet_diagnostic.IDE0010.severity = suggestion
@@ -562,19 +668,7 @@ dotnet_diagnostic.CA1507.severity = error
 # CA1001: Types that own disposable fields should be disposable
 dotnet_diagnostic.CA1001.severity = error
 
-# Nullable stuff (https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/nullable-warnings)
-dotnet_diagnostic.CS8600.severity = error
-dotnet_diagnostic.CS8601.severity = error
-dotnet_diagnostic.CS8602.severity = error
-dotnet_diagnostic.CS8603.severity = error
-dotnet_diagnostic.CS8604.severity = error
-dotnet_diagnostic.CS8618.severity = error
-dotnet_diagnostic.CS8620.severity = error
-dotnet_diagnostic.CS8625.severity = error
-dotnet_diagnostic.CS8629.severity = error
-
-# XML Documentation stuff
-dotnet_diagnostic.RCS1141.severity = silent
-
 # Logging should be specific format
 dotnet_diagnostic.CA2254.severity = suggestion
+
+

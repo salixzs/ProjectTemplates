@@ -12,6 +12,7 @@ namespace WebApiTemplate.CoreLogic.Tests.Handlers.SystemNotifications;
 public class CommandsTests : CoreLogicTestBase
 {
     private readonly WebApiTemplateDbContext _db;
+
     private readonly SystemNotificationCommands _sut;
 
     public CommandsTests(ITestOutputHelper output) : base(output)
@@ -34,7 +35,7 @@ public class CommandsTests : CoreLogicTestBase
         testResult.Should().NotBeEmpty();
         testResult.Should().HaveCount(1);
 
-        var verifyObject = testResult.First();
+        var verifyObject = testResult[0];
         verifyObject.Id.Should().Be(1);
         verifyObject.Messages.Should().HaveCount(1);
         verifyObject.StartTime.Should().BeCloseTo(testNotification.StartTime, TimeSpan.FromMilliseconds(1));
@@ -81,7 +82,7 @@ public class CommandsTests : CoreLogicTestBase
         testResult.Should().NotBeEmpty();
         testResult.Should().HaveCount(1);
 
-        var verifyObject = testResult.First();
+        var verifyObject = testResult[0];
         verifyObject.Id.Should().Be(2000);
         verifyObject.Messages.Should().HaveCount(1);
         verifyObject.StartTime.Should().BeCloseTo(updateNotification.StartTime, TimeSpan.FromSeconds(1));
@@ -91,7 +92,7 @@ public class CommandsTests : CoreLogicTestBase
         verifyObject.Type.Should().Be(updateNotification.Type);
         verifyObject.EmphasizeType.Should().Be(updateNotification.EmphasizeType);
 
-        var verifyMessage = verifyObject.Messages.First();
+        var verifyMessage = verifyObject.Messages[0];
         verifyMessage.Language.Should().Be("mx");
         verifyMessage.Message.Should().Be("Burritos and Tacos");
     }
@@ -132,7 +133,7 @@ public class CommandsTests : CoreLogicTestBase
         testResult.Should().NotBeEmpty();
         testResult.Should().HaveCount(1);
 
-        var verifyObject = testResult.First();
+        var verifyObject = testResult[0];
         verifyObject.EmphasizeSince.Should().BeCloseTo(updateNotification.EndTime, TimeSpan.FromSeconds(1));
         verifyObject.CountdownSince.Should().BeCloseTo(updateNotification.EndTime, TimeSpan.FromSeconds(1));
         verifyObject.EmphasizeType.Should().Be(updateNotification.Type);
@@ -161,6 +162,6 @@ public class CommandsTests : CoreLogicTestBase
         dbNotifications.Should().BeEmpty();
 
         var dbMessages = await _db.SystemNotificationMessages.ToListAsync();
-        dbNotifications.Should().BeEmpty();
+        dbMessages.Should().BeEmpty();
     }
 }

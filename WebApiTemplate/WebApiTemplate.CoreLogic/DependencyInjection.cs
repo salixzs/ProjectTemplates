@@ -22,10 +22,9 @@ public static class DependencyInjection
     {
         var handlerClasses = typeof(Handlers.Samples.WeatherForecastHandler).Assembly.GetExportedTypes()
                 .Where(type =>
-                    type.Namespace != null
-                    && type.Namespace.StartsWith("WebApiTemplate.CoreLogic.Handlers", StringComparison.OrdinalIgnoreCase))
-                .Where(type => type.GetInterfaces().Length > 0)
-                .Where(type => !type.IsEnum);
+                    type.Namespace?.StartsWith("WebApiTemplate.CoreLogic.Handlers", StringComparison.OrdinalIgnoreCase) == true
+                        && type.GetInterfaces().Length > 0
+                        && !type.IsEnum);
 
         foreach (var classImplementation in handlerClasses)
         {

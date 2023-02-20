@@ -17,6 +17,7 @@ namespace WebApiTemplate.CoreLogic.Tests;
 public sealed class XUnitLogger<T> : ILogger<T>, IDisposable
 {
     private readonly IMessageSink? _messageSink;
+
     private ITestOutputHelper? _outputHelper;
 
     /// <summary>
@@ -109,6 +110,7 @@ public sealed class XUnitLogger<T> : ILogger<T>, IDisposable
 public sealed class XUnitLogger : ILogger, IDisposable
 {
     private readonly IMessageSink? _messageSink;
+
     private ITestOutputHelper? _outputHelper;
 
     /// <summary>
@@ -193,7 +195,7 @@ public sealed class XUnitLogger : ILogger, IDisposable
     }
 }
 
-// <summary>
+/// <summary>
 /// Data contract for Logging statement, used in XUnitLogger.
 /// </summary>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]

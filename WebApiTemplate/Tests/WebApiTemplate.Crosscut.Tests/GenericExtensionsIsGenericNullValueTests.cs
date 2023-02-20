@@ -7,7 +7,7 @@ public class GenericExtensionsIsGenericNullValueTests
     [Fact]
     public void GenericsExt_IsGenericNullValueType_ReturnsFalse()
     {
-        var testable = 454L;
+        const long testable = 454L;
         testable.IsGenericValueNull().Should().BeFalse();
     }
 
@@ -28,14 +28,14 @@ public class GenericExtensionsIsGenericNullValueTests
     [Fact]
     public void GenericsExt_IsGenericNullString_ReturnsFalse()
     {
-        var testable = "This is ok";
+        const string testable = "This is ok";
         testable.IsGenericValueNull().Should().BeFalse();
     }
 
     [Fact]
     public void GenericsExt_IsGenericNullStringNull_ReturnsTrue()
     {
-        string? testable = null;
+        const string? testable = null;
         testable.IsGenericValueNull().Should().BeTrue();
     }
 

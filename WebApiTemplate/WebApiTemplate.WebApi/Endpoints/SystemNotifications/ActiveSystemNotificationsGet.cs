@@ -1,4 +1,3 @@
-using NSwag;
 using WebApiTemplate.CoreLogic.Handlers.SystemNotifications;
 using WebApiTemplate.Domain.Fakes;
 using WebApiTemplate.Domain.SystemNotifications;
@@ -24,8 +23,11 @@ public class ActiveSystemNotificationsGet : EndpointWithoutRequest<List<ActiveSy
         Summary(swagger =>
         {
             swagger.Summary = "Returns ACTIVE system notifications.";
-            swagger.Description = "Returns ONLY ACTIVE system notifications transformed for fast display on UI. Empty list if no active notification exist.";
-            swagger.Response<List<ActiveSystemNotification>>((int)HttpStatusCode.OK, "Returns active notification(s) or empty list if no active notifications found.");
+            swagger.Description =
+            "Returns ONLY ACTIVE system notifications transformed for fast display on UI. Empty list if no active notification exist.";
+            swagger.Response<List<ActiveSystemNotification>>(
+                (int)HttpStatusCode.OK,
+                "Returns active notification(s) or empty list if no active notifications found.");
             swagger.Response<ApiError>((int)HttpStatusCode.InternalServerError, "Error occurred in server during data retrieval.");
             swagger.ResponseExamples[(int)HttpStatusCode.InternalServerError] = EndpointHelpers.ExampleApiError();
             var example = DomainFakesFactory.Instance.GetTestObject<ActiveSystemNotification>();
@@ -40,4 +42,3 @@ public class ActiveSystemNotificationsGet : EndpointWithoutRequest<List<ActiveSy
         await SendOkAsync(activeNotifications, cancellationToken);
     }
 }
-

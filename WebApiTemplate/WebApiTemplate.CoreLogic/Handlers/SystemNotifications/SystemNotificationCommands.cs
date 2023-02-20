@@ -29,11 +29,12 @@ public sealed class SystemNotificationCommands : ISystemNotificationCommands
 
         foreach (var message in notification.Messages)
         {
-            newNotificationRecord.Messages.Add(new SystemNotificationMessageRecord
-            {
-                LanguageCode = message.Language,
-                Message = message.Message,
-            });
+            newNotificationRecord.Messages.Add(
+                new SystemNotificationMessageRecord
+                {
+                    LanguageCode = message.Language,
+                    Message = message.Message,
+                });
         }
 
         _db.SystemNotifications.Add(newNotificationRecord);
@@ -45,14 +46,12 @@ public sealed class SystemNotificationCommands : ISystemNotificationCommands
     public async Task Update(SystemNotification notification, CancellationToken cancellationToken)
     {
         var updateableRecord = await _db.SystemNotifications
-            .Include(notification => notification.Messages)
-            .Where(notification => notification.Id == notification.Id)
-            .FirstOrDefaultAsync(cancellationToken);
-
-        if (updateableRecord == null)
-        {
-            throw new BusinessException($"System Notification update did not find existing record with Id: {notification.Id}", BusinessExceptionType.RequestError);
-        }
+                .Include(notification => notification.Messages)
+                .Where(notification => notification.Id == notification.Id)
+                .FirstOrDefaultAsync(cancellationToken)
+            ?? throw new BusinessException(
+                $"System Notification update did not find existing record with Id: {notification.Id}",
+                BusinessExceptionType.RequestError);
 
         updateableRecord.StartTime = notification.StartTime;
         updateableRecord.EndTime = notification.EndTime;
@@ -64,11 +63,12 @@ public sealed class SystemNotificationCommands : ISystemNotificationCommands
         updateableRecord.Messages.Clear();
         foreach (var message in notification.Messages)
         {
-            updateableRecord.Messages.Add(new SystemNotificationMessageRecord
-            {
-                LanguageCode = message.Language,
-                Message = message.Message,
-            });
+            updateableRecord.Messages.Add(
+                new SystemNotificationMessageRecord
+                {
+                    LanguageCode = message.Language,
+                    Message = message.Message,
+                });
         }
 
         await _db.SaveChangesAsync(cancellationToken);

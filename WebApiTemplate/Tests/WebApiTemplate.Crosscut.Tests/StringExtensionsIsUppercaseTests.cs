@@ -22,7 +22,8 @@ public class StringExtensionsIsUppercaseTests
     [InlineData("PA$$W0RD", true)]
     [InlineData("This is Sentence.", false)]
     [InlineData("SCREAMING SENTENCE.", true)]
-    public void StringExtTests_IsUppercase_AsExpected(string testable, bool expected) => testable.IsUppercase().Should().Be(expected);
+    public void StringExtTests_IsUppercase_AsExpected(string testable, bool expected) =>
+        testable.IsUppercase().Should().Be(expected);
 
     [Theory]
     [InlineData(null, 1, false)]
@@ -42,5 +43,6 @@ public class StringExtensionsIsUppercaseTests
     [InlineData("ab1AB", 2, true)]
     [InlineData("PA$$W0RD", 1, true)]
     [InlineData("PA$$W0rd", 2, true)]
-    public void StringExtTests_IsUppercaseAllowed_AsExpected(string testable, int allowed, bool expected) => testable.IsUppercase(allowed).Should().Be(expected);
+    public void StringExtTests_IsUppercaseAllowed_AsExpected(string testable, int allowed, bool expected) =>
+        testable.IsUppercase(allowed).Should().Be(expected);
 }

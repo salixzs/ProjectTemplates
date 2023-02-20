@@ -4,7 +4,7 @@ public static class Sandbox
 {
     public const string SwaggerTag = "Sandbox";
 
-    public const string BaseUri = Global.ApiRoot + "/sandbox";
+    public const string BaseUri = Root.ApiRoot + "/sandbox";
     public const string Numbers = BaseUri + "/numbers";
     public const string DateTimes = BaseUri + "/datetimes";
     public const string Strings = BaseUri + "/strings";

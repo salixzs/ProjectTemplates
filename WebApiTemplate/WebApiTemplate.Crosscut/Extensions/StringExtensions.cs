@@ -15,14 +15,16 @@ public static class StringExtensions
     /// <returns>
     /// <c>true</c> if the specified string to check is integer; otherwise (incl. empty/null), <c>false</c>.
     /// </returns>
-    public static bool IsInteger(this string stringToCheck) => !string.IsNullOrWhiteSpace(stringToCheck) && stringToCheck.Trim().All(char.IsNumber);
+    public static bool IsInteger(this string stringToCheck) =>
+        !string.IsNullOrWhiteSpace(stringToCheck) && stringToCheck.Trim().All(char.IsNumber);
 
     /// <summary>
     /// Checks whether string contains only letters (words), including unicode letters. Empty/null strings are not alpha.
     /// </summary>
     /// <param name="stringToCheck">The string to check</param>
     /// <returns>True, is string does not contains anything else beside normal text</returns>
-    public static bool IsAlphaOnly(this string stringToCheck) => !string.IsNullOrEmpty(stringToCheck) && stringToCheck.All(c => char.IsLetter(c) || c == ' ');
+    public static bool IsAlphaOnly(this string stringToCheck) =>
+        !string.IsNullOrEmpty(stringToCheck) && stringToCheck.All(c => char.IsLetter(c) || c == ' ');
 
     /// <summary>
     /// Checks whether string contains only letters, space, dash (-) and apostrophes ('`). 
@@ -33,8 +35,8 @@ public static class StringExtensions
     /// <returns>True, is string does not contains anything else beside normal text</returns>
     public static bool IsHumanName(this string stringToCheck) =>
         !string.IsNullOrWhiteSpace(stringToCheck)
-               && stringToCheck.All(c => char.IsLetter(c) || c == ' ' || c == '-' || c == '`' || c == '\'')
-               && stringToCheck.Count(char.IsLetter) > 1;
+            && stringToCheck.All(c => char.IsLetter(c) || c == ' ' || c == '-' || c == '`' || c == '\'')
+            && stringToCheck.Count(char.IsLetter) > 1;
 
     /// <summary>
     /// Checks whether string contains only uppercase letters, including unicode letters.
@@ -106,14 +108,16 @@ public static class StringExtensions
     /// </summary>
     /// <param name="stringToCheck">The string to check</param>
     /// <returns>True, if string contains any non-Ascii character</returns>
-    public static bool ContainsUnicodeCharacter(this string stringToCheck) => !string.IsNullOrWhiteSpace(stringToCheck) && stringToCheck.ToCharArray().Any(c => c > 126);
+    public static bool ContainsUnicodeCharacter(this string stringToCheck) =>
+        !string.IsNullOrWhiteSpace(stringToCheck) && stringToCheck.ToCharArray().Any(c => c > 126);
 
     /// <summary>
     /// Determines whether the specified string to check contains characters only in western languages (not Greek, Russian, Arab, Chinese).
     /// Also handles empty/null strings accordingly.
     /// </summary>
     /// <param name="stringToCheck">The string to check.</param>
-    public static bool IsWesternLanguage(this string stringToCheck) => string.IsNullOrWhiteSpace(stringToCheck) || stringToCheck.ToCharArray().All(c => c <= 0x017F);
+    public static bool IsWesternLanguage(this string stringToCheck) =>
+        string.IsNullOrWhiteSpace(stringToCheck) || stringToCheck.ToCharArray().All(c => c <= 0x017F);
 
     /// <summary>
     /// Gives corresponding Excel Column name to given integer (zero-based, max value: 16383).<br/>

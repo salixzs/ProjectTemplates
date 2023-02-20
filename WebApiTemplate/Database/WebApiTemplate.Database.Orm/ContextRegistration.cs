@@ -8,10 +8,9 @@ namespace WebApiTemplate.Database.Orm;
 [ExcludeFromCodeCoverage]
 public static class ContextRegistration
 {
-    private static readonly string ConfigurationKey = "WebApiTemplateDatabase";
+    private const string ConfigurationKey = "WebApiTemplateDatabase";
 
-    public static void AddDatabaseContext(IServiceCollection services, IConfiguration configuration)
-    {
+    public static void AddDatabaseContext(IServiceCollection services, IConfiguration configuration) =>
         services.AddDbContext<WebApiTemplateDbContext>(options =>
         {
             options
@@ -60,5 +59,4 @@ public static class ContextRegistration
                 (CoreEventId.StateChanged, LogLevel.Debug)
             ));
         });
-    }
 }

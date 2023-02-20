@@ -75,12 +75,14 @@ public static class HumanizerExtensions
         {
             if (separateWords[wordIndex].StartsWith("Mc", StringComparison.OrdinalIgnoreCase))
             {
-                separateWords[wordIndex] = string.Concat("Mc", separateWords[wordIndex].Substring(2, 1).ToUpper(), separateWords[wordIndex].AsSpan(3));
+                separateWords[wordIndex] =
+                    string.Concat("Mc", separateWords[wordIndex].Substring(2, 1).ToUpper(), separateWords[wordIndex].AsSpan(3));
             }
 
             if (separateWords[wordIndex].StartsWith("Mac"))
             {
-                separateWords[wordIndex] = string.Concat("Mac", separateWords[wordIndex].Substring(3, 1).ToUpper(), separateWords[wordIndex].AsSpan(4));
+                separateWords[wordIndex] =
+                    string.Concat("Mac", separateWords[wordIndex].Substring(3, 1).ToUpper(), separateWords[wordIndex].AsSpan(4));
             }
         }
 
@@ -170,11 +172,13 @@ public static class HumanizerExtensions
     public static string ToStringHuman(this DateTime dateTime, int textDays = 5, DateTime? relativeDate = null)
     {
         var compareDate = relativeDate ?? DateTime.Now;
-        if (!dateTime.Date.IsBetween(compareDate.Date.AddDays(0 - textDays), compareDate.Date.AddDays(textDays).AddHours(23).AddMinutes(59).AddSeconds(59)))
+        if (!dateTime.Date.IsBetween(
+            compareDate.Date.AddDays(0 - textDays),
+            compareDate.Date.AddDays(textDays).AddHours(23).AddMinutes(59).AddSeconds(59)))
         {
             if (dateTime.Year != compareDate.Year)
             {
-                return $"{dateTime.ToString("M")}, {dateTime.Year}";
+                return $"{dateTime:M}, {dateTime.Year}";
             }
 
             return dateTime.ToString("M");
@@ -190,10 +194,8 @@ public static class HumanizerExtensions
                 {
                     return compareDate > dateTime ? Translations.HourAgo : Translations.In1Hour;
                 }
-                else
-                {
-                    return string.Format((compareDate > dateTime ? Translations.HoursAgo : Translations.InHours), hourCount);
-                }
+
+                return string.Format(compareDate > dateTime ? Translations.HoursAgo : Translations.InHours, hourCount);
             }
 
             if (differenceTimespan > TimeSpan.FromMinutes(1))
@@ -203,10 +205,8 @@ public static class HumanizerExtensions
                 {
                     return compareDate > dateTime ? Translations.MinuteAgo : Translations.In1Minute;
                 }
-                else
-                {
-                    return string.Format((compareDate > dateTime ? Translations.MinutesAgo : Translations.InMinutes), minuteCount);
-                }
+
+                return string.Format(compareDate > dateTime ? Translations.MinutesAgo : Translations.InMinutes, minuteCount);
             }
 
             return Translations.JustNow;

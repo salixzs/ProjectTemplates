@@ -38,4 +38,3 @@ public class SystemNotificationDelete : EndpointWithoutRequest
         await SendNoContentAsync(cancellationToken);
     }
 }
-

@@ -13,7 +13,8 @@ public static class GenericExtensions
     public static bool IsGenericValueNull<T>(this T value)
     {
         var type = typeof(T);
-        return (type.IsClass || Nullable.GetUnderlyingType(type) != null)
-               && EqualityComparer<T>.Default.Equals(value, default);
+        return (type.IsClass
+            || Nullable.GetUnderlyingType(type) != null)
+            && EqualityComparer<T>.Default.Equals(value, default);
     }
 }

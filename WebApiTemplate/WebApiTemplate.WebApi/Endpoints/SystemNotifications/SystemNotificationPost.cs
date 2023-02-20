@@ -56,7 +56,6 @@ public class SystemNotificationPost : Endpoint<SystemNotification>
                         Language = "lv",
                         Message = "Drīz sāksies apkopes darbi."
                     }
-
                 }
             };
         });
@@ -69,4 +68,3 @@ public class SystemNotificationPost : Endpoint<SystemNotification>
         await SendCreatedAtAsync<SingleSystemNotificationGet>(routeValues: new { id = newId }, responseBody: newId, cancellation: cancellationToken);
     }
 }
-

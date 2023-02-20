@@ -6,8 +6,12 @@ namespace WebApiTemplate.CoreLogic.Handlers.Sandbox;
 [ExcludeFromCodeCoverage]
 public class SandboxHandler : ISandboxHandler
 {
-    public string ThrowExceptionOnPurpose()
-    {
-        throw new BusinessException("This exception is thrown on puspose", new BusinessException("Inner exception showcase", BusinessExceptionType.NotImplemented), BusinessExceptionType.ServerError, 22);
-    }
+    public string ThrowExceptionOnPurpose() =>
+        throw new BusinessException(
+            "This exception is thrown on purpose",
+            new BusinessException(
+                "Showcase inner exception",
+                BusinessExceptionType.NotImplemented),
+            BusinessExceptionType.ServerError,
+            22);
 }

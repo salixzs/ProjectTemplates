@@ -23,12 +23,12 @@ public static class TypeExtensions
         }
 
         return type.IsPrimitive
-               || type.Equals(typeof(string))
-               || type.Equals(typeof(decimal))
-               || type.Equals(typeof(DateTime))
-               || type.Equals(typeof(DateOnly))
-               || type.Equals(typeof(TimeOnly))
-               || type.Equals(typeof(TimeSpan))
-               || type.Equals(typeof(DateTimeOffset));
+            || type.Equals(typeof(string))
+            || type.Equals(typeof(decimal))
+            || type.Equals(typeof(DateTime))
+            || type.Equals(typeof(DateOnly))
+            || type.Equals(typeof(TimeOnly))
+            || type.Equals(typeof(TimeSpan))
+            || type.Equals(typeof(DateTimeOffset));
     }
 }

@@ -3,6 +3,7 @@ using WebApiTemplate.Database.Orm.Entities;
 using WebApiTemplate.Database.Orm.Fakes.Fakes;
 
 namespace WebApiTemplate.Database.Orm.Fakes;
+
 /// <summary>
 /// Use Factory in Tests/Docs to get fake Database Entities and their lists.
 /// <code>
@@ -25,7 +26,9 @@ public sealed class EntityFakesFactory
         _instantiators.Add(typeof(SystemNotificationMessageRecord).FullName!, SystemNotificationMessageRecordFake.GetBogus);
     }
 
-    static EntityFakesFactory() { }
+    static EntityFakesFactory()
+    {
+    }
 
     /// <summary>
     /// Use Factory in tests to get fake Database Entities objects and their lists.
@@ -44,6 +47,8 @@ public sealed class EntityFakesFactory
     /// EntityFakesFactory.Instance.GetTestObject&lt;User&gt;();
     /// </code>
     /// </summary>
+    /// <typeparam name="T">Type of object to create fake for.</typeparam>
+    /// <exception cref="ArgumentException">Faker not implemented.</exception>
     public T GetTestObject<T>() where T : class
     {
         var fullClassName = typeof(T).FullName;
@@ -62,6 +67,8 @@ public sealed class EntityFakesFactory
     /// EntityFakesFactory.Instance.GetTestObjects&lt;User&gt;(minCount, maxCount);
     /// </code>
     /// </summary>
+    /// <typeparam name="T">Type of object to create fake for.</typeparam>
+    /// <exception cref="ArgumentException">Faker not implemented.</exception>
     public List<T> GetTestObjects<T>(int min, int max) where T : class
     {
         var fullClassName = typeof(T).FullName;

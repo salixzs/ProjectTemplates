@@ -73,11 +73,9 @@ public static class DateTimeExtensions
                     // round up
                     return new DateTime(originalDateTime.Ticks + ticksType - fraction);
                 }
-                else
-                {
-                    // round down
-                    return new DateTime(originalDateTime.Ticks - fraction);
-                }
+
+                // round down
+                return new DateTime(originalDateTime.Ticks - fraction);
             }
         }
 
@@ -161,7 +159,7 @@ public static class DateTimeExtensions
     /// </code>
     /// </summary>
     public static DateTime FirstDayOfMonth(this DateTime value) =>
-        new DateTime(value.Year, value.Month, 1);
+        new(value.Year, value.Month, 1);
 
     /// <summary>
     /// Returns the last day of month for given date (time: 0:0:0.0).<br/>

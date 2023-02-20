@@ -20,7 +20,7 @@ public abstract class CoreLogicTestBase : IDisposable
     /// </summary>
     protected XUnitLogger<WebApiTemplateDbContext> DbLogger { get; init; }
 
-    public CoreLogicTestBase(ITestOutputHelper output) => DbLogger = new XUnitLogger<WebApiTemplateDbContext>(output);
+    protected CoreLogicTestBase(ITestOutputHelper output) => DbLogger = new XUnitLogger<WebApiTemplateDbContext>(output);
 
     /// <summary>
     /// Creates a fake SQLite database context.
@@ -57,10 +57,9 @@ public abstract class CoreLogicTestBase : IDisposable
     private WebApiTemplateDbContext CreateDatabaseContext()
     {
         var builder = new DbContextOptionsBuilder<WebApiTemplateDbContext>();
-        builder.UseSqlite("DataSource=:memory:", x => { });
+        builder.UseSqlite("DataSource=:memory:");
         SetUpLogging(builder);
-        var dbContext = new WebApiTemplateDbContext(builder.Options);
-        return dbContext;
+        return new WebApiTemplateDbContext(builder.Options);
     }
 
     private void SetUpLogging<TContext>(DbContextOptionsBuilder<TContext> builder)
@@ -209,15 +208,16 @@ public abstract class CoreLogicTestBase : IDisposable
 
         if (!LogTransactions)
         {
-            ignoreEvents.AddRange(new[]
-            {
-                RelationalEventId.TransactionStarted,
-                RelationalEventId.TransactionUsed,
-                RelationalEventId.TransactionCommitted,
-                RelationalEventId.TransactionRolledBack,
-                RelationalEventId.TransactionError,
-                RelationalEventId.TransactionDisposed
-            });
+            ignoreEvents.AddRange(
+                new[]
+                {
+                    RelationalEventId.TransactionStarted,
+                    RelationalEventId.TransactionUsed,
+                    RelationalEventId.TransactionCommitted,
+                    RelationalEventId.TransactionRolledBack,
+                    RelationalEventId.TransactionError,
+                    RelationalEventId.TransactionDisposed
+                });
         }
 
         return ignoreEvents.ToArray();
@@ -235,15 +235,16 @@ public abstract class CoreLogicTestBase : IDisposable
 
         if (LogTransactions)
         {
-            logEvents.AddRange(new[]
-            {
-                RelationalEventId.TransactionStarted,
-                RelationalEventId.TransactionUsed,
-                RelationalEventId.TransactionCommitted,
-                RelationalEventId.TransactionRolledBack,
-                RelationalEventId.TransactionError,
-                RelationalEventId.TransactionDisposed
-            });
+            logEvents.AddRange(
+                new[]
+                {
+                    RelationalEventId.TransactionStarted,
+                    RelationalEventId.TransactionUsed,
+                    RelationalEventId.TransactionCommitted,
+                    RelationalEventId.TransactionRolledBack,
+                    RelationalEventId.TransactionError,
+                    RelationalEventId.TransactionDisposed
+                });
         }
 
         return logEvents.ToArray();

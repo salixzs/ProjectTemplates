@@ -38,6 +38,14 @@
 		<PackageReference Include="FastEndpoints.Swagger" Version="5.7.2" />
 		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Roslynator.Analyzers" Version="4.2.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Roslynator.Formatting.Analyzers" Version="4.2.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Salix.AspNetCore.FrontPage" Version="1.0.0" />
     <PackageReference Include="Salix.AspNetCore.HealthCheck" Version="1.0.0" />
     <PackageReference Include="Salix.AspNetCore.JsonExceptionHandler" Version="1.0.0" />

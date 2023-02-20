@@ -19,7 +19,8 @@ public static class DependencyInjectionSetup
 
     private static IServiceCollection RegisterConfigurationObjects(this IServiceCollection services, IConfiguration configuration)
     {
-        services.ConfigureValidatableSetting<SecurityConfigurationOptions>(configuration.GetSection(SecurityConfigurationOptions.ConfigurationSectionName));
+        services.ConfigureValidatableSetting<SecurityConfigurationOptions>(
+            configuration.GetSection(SecurityConfigurationOptions.ConfigurationSectionName));
         return services;
     }
 }

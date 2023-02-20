@@ -24,7 +24,9 @@ public class AllSystemNotificationsGet : EndpointWithoutRequest<List<SystemNotif
         {
             swagger.Summary = "Returns all system notifications.";
             swagger.Description = "Returns all system notifications in full contract, including expired together with their messages.";
-            swagger.Response<List<SystemNotification>>((int)HttpStatusCode.OK, "Returns existing notification(s) or empty list if no notifications exist.");
+            swagger.Response<List<SystemNotification>>(
+                (int)HttpStatusCode.OK,
+                "Returns existing notification(s) or empty list if no notifications exist.");
             swagger.Response<ApiError>((int)HttpStatusCode.InternalServerError, "Error occurred in server during data retrieval.");
             swagger.ResponseExamples[(int)HttpStatusCode.InternalServerError] = EndpointHelpers.ExampleApiError();
             var example = DomainFakesFactory.Instance.GetTestObject<SystemNotification>();
@@ -39,4 +41,3 @@ public class AllSystemNotificationsGet : EndpointWithoutRequest<List<SystemNotif
         await SendOkAsync(allNotifications, cancellationToken);
     }
 }
-

@@ -46,4 +46,3 @@ public class SingleSystemNotificationGet : EndpointWithoutRequest<SystemNotifica
         await SendNotFoundAsync(cancellationToken);
     }
 }
-

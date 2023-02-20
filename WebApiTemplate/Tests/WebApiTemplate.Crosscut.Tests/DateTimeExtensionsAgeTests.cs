@@ -2,6 +2,7 @@ using WebApiTemplate.Crosscut.Extensions;
 using WebApiTemplate.Crosscut.Services;
 
 namespace WebApiTemplate.Crosscut.Tests;
+
 public class DateTimeExtensionsAgeTests
 {
     [Theory]
@@ -50,7 +51,10 @@ internal sealed class TestDateTimeProvider : IDateTimeProvider
         DateTimeNow = currentDateTime;
 
     public DateTimeOffset DateTimeOffsetNow { get; }
+
     public DateTimeOffset DateTimeOffsetUtcNow { get; }
+
     public DateTime DateTimeNow { get; }
+
     public DateTime DateTimeUtcNow { get; }
 }

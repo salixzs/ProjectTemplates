@@ -17,7 +17,8 @@ public class DateTimesGet : EndpointWithoutRequest<DateTimeResponse>
         Summary(swagger =>
         {
             swagger.Summary = "Display Data and Time object serialization.";
-            swagger.Description = "Returns object with static and dynamic (current) dates, times, timespans and related .Net types serialized into JSON.";
+            swagger.Description =
+            "Returns object with static and dynamic (current) dates, times, timespans and related .Net types serialized into JSON.";
             swagger.Response<DateTimeResponse>((int)HttpStatusCode.OK, "Returns dates and times values.");
         });
     }

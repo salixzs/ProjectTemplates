@@ -29,6 +29,6 @@ public class HumanizerToHumanNameProperCaseTests
     [InlineData("jose de la acosta", "Jose de la Acosta")]
     [InlineData("VAN DER SLOOT", "van der Sloot")]
     [InlineData("HYACINT De BUCKET", "Hyacint de Bucket")]
-    public void ToProperCase_Values_AreTransformed(string testable, string expected)
-    => testable.ToHumanNameProperCase().Should().Be(expected);
+    public void ToProperCase_Values_AreTransformed(string testable, string expected) =>
+        testable.ToHumanNameProperCase().Should().Be(expected);
 }

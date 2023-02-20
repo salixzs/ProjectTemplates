@@ -4,7 +4,6 @@ namespace WebApiTemplate.Crosscut.Tests;
 
 public class StringExtensionsSubstringBeforeTests
 {
-
     [Theory]
     [InlineData("abcde|fgh", "|", "abcde")]
     [InlineData("abc|de|fgh", "|", "abc")]
@@ -13,6 +12,6 @@ public class StringExtensionsSubstringBeforeTests
     [InlineData("querty", "", "")]
     [InlineData("dvorak", null, "")]
     [InlineData(null, "&", null)]
-    public void SubstringBefore_Theorem_ExpectedResult(string? input, string? separator, string? expected)
-        => input.SubstringBefore(separator).Should().Be(expected);
+    public void SubstringBefore_Theorem_ExpectedResult(string? input, string? separator, string? expected) =>
+        input.SubstringBefore(separator).Should().Be(expected);
 }

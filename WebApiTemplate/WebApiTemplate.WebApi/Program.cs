@@ -3,7 +3,9 @@ using WebApiTemplate.BootSetup;
 
 namespace WebApiTemplate;
 
+#pragma warning disable RCS1102 // Make class static.
 public class Program
+#pragma warning restore RCS1102 // Make class static.
 {
     public static async Task<int> Main(string[] args)
     {
@@ -15,7 +17,10 @@ public class Program
             .CreateBootstrapLogger();
 #else
         Log.Logger = new LoggerConfiguration()
-            .WriteTo.ApplicationInsights(Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration.CreateDefault(), TelemetryConverter.Traces, Serilog.Events.LogEventLevel.Verbose)
+            .WriteTo.ApplicationInsights(
+                Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration.CreateDefault(),
+                TelemetryConverter.Traces,
+                Serilog.Events.LogEventLevel.Verbose)
             .CreateBootstrapLogger();
 #endif
 #pragma warning restore CA1305 // Specify IFormatProvider

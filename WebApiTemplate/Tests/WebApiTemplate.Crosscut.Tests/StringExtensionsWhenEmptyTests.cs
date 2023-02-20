@@ -7,7 +7,7 @@ public class StringExtensionsWhenEmptyTests
     [Fact]
     public void WhenEmpty_NonEmpty_ReturnsSameText()
     {
-        var testable = "value is in";
+        const string testable = "value is in";
         testable.WhenEmpty("not replaced!").Should().Be("value is in");
     }
 
@@ -21,7 +21,7 @@ public class StringExtensionsWhenEmptyTests
     [Fact]
     public void WhenEmpty_Null_ReturnsNewText()
     {
-        var testable = (string?)null;
+        const string? testable = null;
         testable.WhenEmpty("is replaced!").Should().Be("is replaced!");
     }
 }

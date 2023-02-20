@@ -23,7 +23,7 @@ public class StringExtensionsExcelColumnTests
     [Fact]
     public void StringExtTests_ExcelColumnNameNegative_Throws()
     {
-        var columnIndex = -3;
+        const int columnIndex = -3;
         Action act = () => columnIndex.ToExcelColumnName();
         act.Should().Throw<ArgumentOutOfRangeException>();
     }
@@ -31,7 +31,7 @@ public class StringExtensionsExcelColumnTests
     [Fact]
     public void StringExtTests_ExcelColumnNameTooBig_Throws()
     {
-        var columnIndex = 32000;
+        const int columnIndex = 32000;
         Action act = () => columnIndex.ToExcelColumnName();
         act.Should().Throw<ArgumentOutOfRangeException>();
     }
