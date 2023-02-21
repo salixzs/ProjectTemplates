@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Salix.AspNetCore.HealthCheck;
 
-namespace WebApiTemplate.Endpoints.Samples;
+namespace WebApiTemplate.Endpoints.Pages;
 
 public class HealthPageGet : EndpointWithoutRequest<ContentResult>
 {

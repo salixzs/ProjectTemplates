@@ -1,5 +1,5 @@
 global using Bogus;
-using Application.UnitTests.Faker.DynamicsDbFakes;
+using WebApiTemplate.Domain.Fakes.Fakes;
 using WebApiTemplate.Domain.SystemNotifications;
 
 namespace WebApiTemplate.Domain.Fakes;
@@ -48,6 +48,7 @@ public sealed class DomainFakesFactory
     /// DomainFakesFactory.Instance.GetTestObject&lt;User&gt;();
     /// </code>
     /// </summary>
+    /// <exception cref="ArgumentException">Faker definition does not exist.</exception>
     public T GetTestObject<T>() where T : class
     {
         var fullClassName = typeof(T).FullName;
@@ -66,6 +67,7 @@ public sealed class DomainFakesFactory
     /// DomainFakesFactory.Instance.GetTestObjects&lt;User&gt;(minCount, maxCount);
     /// </code>
     /// </summary>
+    /// <exception cref="ArgumentException">Faker definition does not exist.</exception>
     public List<T> GetTestObjects<T>(int min, int max) where T : class
     {
         var fullClassName = typeof(T).FullName;

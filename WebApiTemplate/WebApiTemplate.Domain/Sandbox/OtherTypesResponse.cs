@@ -31,7 +31,7 @@ public class OtherTypesResponse
     /// <summary>
     /// Array of strings.
     /// </summary>
-    public string[] StringArray { get; set; } = new string[3] { "one", "two", "three" };
+    public string[] StringArray { get; set; } = new[] { "one", "two", "three" };
 
     /// <summary>
     /// Array of Integer values.

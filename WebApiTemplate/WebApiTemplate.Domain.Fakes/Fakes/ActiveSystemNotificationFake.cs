@@ -1,7 +1,7 @@
 using WebApiTemplate.Domain.SystemNotifications;
 using WebApiTemplate.Enumerations;
 
-namespace Application.UnitTests.Faker.DynamicsDbFakes;
+namespace WebApiTemplate.Domain.Fakes.Fakes;
 
 public static class ActiveSystemNotificationFake
 {

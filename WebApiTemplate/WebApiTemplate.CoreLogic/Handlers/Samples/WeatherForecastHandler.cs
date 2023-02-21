@@ -11,6 +11,7 @@ public class WeatherForecastHandler : IWeatherForecastHandler
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
     public async Task<IEnumerable<WeatherForecast>> Handle() =>
         Enumerable.Range(1, 5).Select(index =>
             new WeatherForecast
@@ -20,4 +21,5 @@ public class WeatherForecastHandler : IWeatherForecastHandler
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
         .ToList();
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 }

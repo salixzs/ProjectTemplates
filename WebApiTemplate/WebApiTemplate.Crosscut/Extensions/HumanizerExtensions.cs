@@ -178,7 +178,7 @@ public static class HumanizerExtensions
         {
             if (dateTime.Year != compareDate.Year)
             {
-                return $"{dateTime:M}, {dateTime.Year}";
+                return $"{dateTime:M}, {dateTime.Year:D}";
             }
 
             return dateTime.ToString("M");

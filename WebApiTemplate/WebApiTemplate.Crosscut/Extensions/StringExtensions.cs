@@ -27,8 +27,8 @@ public static class StringExtensions
         !string.IsNullOrEmpty(stringToCheck) && stringToCheck.All(c => char.IsLetter(c) || c == ' ');
 
     /// <summary>
-    /// Checks whether string contains only letters, space, dash (-) and apostrophes ('`). 
-    /// Strig containing less than 2 letters are considered not a human name.
+    /// Checks whether string contains only letters, space, dash (-) and apostrophes ('`).<br/>
+    /// String containing less than 2 letters are considered not a human name.<br/>
     /// Empty/null strings are not human name.
     /// </summary>
     /// <param name="stringToCheck">The string to check</param>
@@ -125,6 +125,7 @@ public static class StringExtensions
     /// 0 = "A", 25 = "Z", 701 = "ZZ", 10000 = "NTQ"
     /// </summary>
     /// <param name="number">The number of column in Excel sheet (ZERO-based) Max value = 16383.</param>
+    /// <exception cref="ArgumentOutOfRangeException">Column name should be in range 0-16383.</exception>
     public static string ToExcelColumnName(this in int number)
     {
         if (number is < 0 or > 16383)
@@ -221,6 +222,6 @@ public static class StringExtensions
     /// </summary>
     /// <param name="stringInQuestion">Input string.</param>
     /// <param name="alternativeText">Alternative/Default string.</param>
-    public static string WhenEmpty(this string? stringInQuestion, string alternativeText)
-        => string.IsNullOrEmpty(stringInQuestion) ? alternativeText : stringInQuestion;
+    public static string WhenEmpty(this string? stringInQuestion, string alternativeText) =>
+        string.IsNullOrEmpty(stringInQuestion) ? alternativeText : stringInQuestion;
 }

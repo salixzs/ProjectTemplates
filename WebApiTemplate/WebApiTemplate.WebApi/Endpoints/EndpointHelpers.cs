@@ -1,5 +1,4 @@
 using FluentValidation.Results;
-using Salix.AspNetCore.JsonExceptionHandler;
 
 namespace WebApiTemplate.WebApi.Endpoints;
 
@@ -17,13 +16,15 @@ internal static class EndpointHelpers
     /// <exception cref="ValidationFailureException">Throws this if specified with boolean.</exception>
     public static void ThrowIfRequestValidationFailed(bool validationFailed, List<ValidationFailure> validationFailures, string endpointName)
     {
-        if (validationFailed)
+        if (!validationFailed)
         {
-            var validationException = new ValidationFailureException(validationFailures, "Request validation failed");
-            validationException.Data.Add("EnpointName", endpointName);
-            validationException.Source = endpointName;
-            throw validationException;
+            return;
         }
+
+        var validationException = new ValidationFailureException(validationFailures, "Request validation failed");
+        validationException.Data.Add("EnpointName", endpointName);
+        validationException.Source = endpointName;
+        throw validationException;
     }
 
     public static ApiError ExampleApiError() =>

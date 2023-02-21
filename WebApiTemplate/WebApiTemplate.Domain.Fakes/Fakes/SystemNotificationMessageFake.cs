@@ -1,6 +1,6 @@
 using WebApiTemplate.Domain.SystemNotifications;
 
-namespace Application.UnitTests.Faker.DynamicsDbFakes;
+namespace WebApiTemplate.Domain.Fakes.Fakes;
 
 public static class SystemNotificationMessageFake
 {

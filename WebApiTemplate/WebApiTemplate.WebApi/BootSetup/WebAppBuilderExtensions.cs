@@ -62,7 +62,7 @@ public static class WebAppBuilderExtensions
         if (securityOptions == null)
         {
             throw new BusinessException(
-                $"Missing \"{SecurityConfigurationOptions.ConfigurationSectionName}\" configuration section or its contents are wrong.",
+                $"Missing \"{SecurityConfigurationOptions.ConfigurationSectionName:D}\" configuration section or its contents are wrong.",
                 BusinessExceptionType.ConfigurationError,
                 1);
         }
@@ -71,7 +71,7 @@ public static class WebAppBuilderExtensions
         if (securityOptions.Cors.Origins == null || securityOptions.Cors.Origins.Count == 0)
         {
             throw new BusinessException(
-                $"Missing CORS URLs in \"{SecurityConfigurationOptions.ConfigurationSectionName}\" configuration section.",
+                $"Missing CORS URLs in \"{SecurityConfigurationOptions.ConfigurationSectionName:D}\" configuration section.",
                 BusinessExceptionType.ConfigurationError,
                 2);
         }
@@ -118,17 +118,18 @@ public static class WebAppBuilderExtensions
     {
         if (builder.Environment.IsDevelopment())
         {
-            builder.Services.AddSwaggerDoc(settings =>
-            {
-                settings.Title = "WebApiTemplate";
-                settings.Version = "v1.0";
-                settings.DocumentName = "Version-1.0";
-                settings.Description = "Here goes a longer and detailed description on API purpose and usage.";
-                settings.EndpointFilter(EndpointDocumentationFilter);
-                settings.GenerateEnumMappingDescription = true;
-            },
-            tagIndex: 0,
-            shortSchemaNames: true);
+            builder.Services.AddSwaggerDoc(
+                settings =>
+                {
+                    settings.Title = "WebApiTemplate";
+                    settings.Version = "v1.0";
+                    settings.DocumentName = "Version-1.0";
+                    settings.Description = "Here goes a longer and detailed description on API purpose and usage.";
+                    settings.EndpointFilter(EndpointDocumentationFilter);
+                    settings.GenerateEnumMappingDescription = true;
+                },
+                tagIndex: 0,
+                shortSchemaNames: true);
         }
 
         return builder;

@@ -50,7 +50,7 @@ public sealed class SystemNotificationCommands : ISystemNotificationCommands
                 .Where(notification => notification.Id == notification.Id)
                 .FirstOrDefaultAsync(cancellationToken)
             ?? throw new BusinessException(
-                $"System Notification update did not find existing record with Id: {notification.Id}",
+                $"System Notification update did not find existing record with Id: {notification.Id:D}",
                 BusinessExceptionType.RequestError);
 
         updateableRecord.StartTime = notification.StartTime;

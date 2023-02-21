@@ -90,12 +90,12 @@ public static class DateTimeOffsetExtensions
     /// <returns>Rounded DateTimeOffset value to nearest given ticks value.</returns>
     public static DateTimeOffset? Round(this DateTimeOffset? originalDateTimeOffset, long ticksType = TimeSpan.TicksPerSecond)
     {
-        if (originalDateTimeOffset.HasValue)
+        if (!originalDateTimeOffset.HasValue)
         {
-            return originalDateTimeOffset.Value.Round(ticksType);
+            return null;
         }
 
-        return null;
+        return originalDateTimeOffset.Value.Round(ticksType);
     }
 
     /// <summary>

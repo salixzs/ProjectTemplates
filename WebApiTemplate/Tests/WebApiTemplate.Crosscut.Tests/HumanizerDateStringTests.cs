@@ -15,12 +15,14 @@ public class HumanizerDateStringTests
         Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
         Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
         var compareDate = relativeDate ?? DateTime.Now;
+#pragma warning disable CA1305 // Specify IFormatProvider
         _output.WriteLine("DateTime: " + dateTime.ToString("dd.MM.yyyy HH:mm"));
         _output.WriteLine("Compare2: " + compareDate.ToString("dd.MM.yyyy HH:mm"));
         _output.WriteLine("  Differ: " + (dateTime - compareDate).ToString());
         _output.WriteLine("    Days: " + textDays.ToString());
         _output.WriteLine("Expected: " + expected);
         dateTime.ToStringHuman(textDays, relativeDate).Should().Be(expected);
+#pragma warning restore CA1305 // Specify IFormatProvider
     }
 
     public static IEnumerable<object[]> DateTimeToStringHumanEnglishTestData()
@@ -60,12 +62,14 @@ public class HumanizerDateStringTests
         Thread.CurrentThread.CurrentCulture = new CultureInfo("nb-NO");
         Thread.CurrentThread.CurrentUICulture = new CultureInfo("nb-NO");
         var compareDate = relativeDate ?? DateTime.Now;
+#pragma warning disable CA1305 // Specify IFormatProvider
         _output.WriteLine("DateTime: " + dateTime.ToString("dd.MM.yyyy HH:mm"));
         _output.WriteLine("Compare2: " + compareDate.ToString("dd.MM.yyyy HH:mm"));
         _output.WriteLine("  Differ: " + (dateTime - compareDate).ToString());
         _output.WriteLine("    Days: " + textDays.ToString());
         _output.WriteLine("Expected: " + expected);
         dateTime.ToStringHuman(textDays, relativeDate).Should().Be(expected);
+#pragma warning restore CA1305 // Specify IFormatProvider
     }
 
     public static IEnumerable<object[]> DateTimeToStringHumanNorwegianTestData()

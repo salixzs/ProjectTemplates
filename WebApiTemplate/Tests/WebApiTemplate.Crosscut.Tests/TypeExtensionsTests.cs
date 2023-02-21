@@ -34,8 +34,6 @@ public class TypeExtensionsTests
     }
 
     [Fact]
-    public void IsSimple_Complex_False()
-    {
+    public void IsSimple_Complex_False() =>
         typeof(ArgumentException).IsSimple().Should().BeFalse();
-    }
 }

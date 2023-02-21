@@ -90,12 +90,12 @@ public static class DateTimeExtensions
     /// <returns>Rounded DateTime value to nearest given ticks value.</returns>
     public static DateTime? Round(this DateTime? originalDateTime, long ticksType = TimeSpan.TicksPerSecond)
     {
-        if (originalDateTime.HasValue)
+        if (!originalDateTime.HasValue)
         {
-            return originalDateTime.Value.Round(ticksType);
+            return null;
         }
 
-        return null;
+        return originalDateTime.Value.Round(ticksType);
     }
 
     /// <summary>

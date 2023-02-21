@@ -72,12 +72,13 @@ public sealed class SystemNotificationQueries : ISystemNotificationQueries
             EmphasizeSince = notificationRecord.EmphasizeSince,
             EmphasizeType = notificationRecord.EmphasizeType,
             CountdownSince = notificationRecord.CountdownSince,
-            Messages = notificationRecord.Messages.Select(message => new SystemNotificationMessage
-            {
-                Id = message.Id,
-                Language = message.LanguageCode,
-                Message = message.Message,
-            }).ToList()
+            Messages = notificationRecord.Messages.Select(
+                message => new SystemNotificationMessage
+                {
+                    Id = message.Id,
+                    Language = message.LanguageCode,
+                    Message = message.Message,
+                }).ToList()
         };
     }
 
@@ -89,21 +90,23 @@ public sealed class SystemNotificationQueries : ISystemNotificationQueries
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
-        return notificationRecords.ConvertAll(dbRecord => new SystemNotification
-        {
-            Id = dbRecord.Id,
-            StartTime = dbRecord.StartTime,
-            EndTime = dbRecord.EndTime,
-            Type = dbRecord.Type,
-            EmphasizeSince = dbRecord.EmphasizeSince,
-            EmphasizeType = dbRecord.EmphasizeType,
-            CountdownSince = dbRecord.CountdownSince,
-            Messages = dbRecord.Messages.Select(message => new SystemNotificationMessage
+        return notificationRecords.ConvertAll(
+            dbRecord => new SystemNotification
             {
-                Id = message.Id,
-                Language = message.LanguageCode,
-                Message = message.Message,
-            }).ToList()
-        });
+                Id = dbRecord.Id,
+                StartTime = dbRecord.StartTime,
+                EndTime = dbRecord.EndTime,
+                Type = dbRecord.Type,
+                EmphasizeSince = dbRecord.EmphasizeSince,
+                EmphasizeType = dbRecord.EmphasizeType,
+                CountdownSince = dbRecord.CountdownSince,
+                Messages = dbRecord.Messages.Select(
+                    message => new SystemNotificationMessage
+                    {
+                        Id = message.Id,
+                        Language = message.LanguageCode,
+                        Message = message.Message,
+                    }).ToList()
+            });
     }
 }

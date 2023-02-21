@@ -66,14 +66,15 @@ public sealed class XUnitLogger<T> : ILogger<T>, IDisposable
             return;
         }
 
-        LogStatements.Add(new LoggingStatement
-        {
-            Level = logLevel,
-            EventId = eventId.Id,
-            EventName = eventId.Name,
-            Message = formatter.Invoke(state, exception),
-            Exception = exception
-        });
+        LogStatements.Add(
+            new LoggingStatement
+            {
+                Level = logLevel,
+                EventId = eventId.Id,
+                EventName = eventId.Name,
+                Message = formatter.Invoke(state, exception),
+                Exception = exception
+            });
 
         if (_outputHelper != null)
         {
@@ -151,7 +152,11 @@ public sealed class XUnitLogger : ILogger, IDisposable
         return this;
     }
 
-    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception,
+    public void Log<TState>(
+        LogLevel logLevel,
+        EventId eventId,
+        TState state,
+        Exception? exception,
         Func<TState, Exception?, string> formatter)
     {
         if (LoggingDisabled || state == null)
@@ -159,14 +164,15 @@ public sealed class XUnitLogger : ILogger, IDisposable
             return;
         }
 
-        LogStatements.Add(new LoggingStatement
-        {
-            Level = logLevel,
-            EventId = eventId.Id,
-            EventName = eventId.Name,
-            Message = formatter.Invoke(state, exception),
-            Exception = exception
-        });
+        LogStatements.Add(
+            new LoggingStatement
+            {
+                Level = logLevel,
+                EventId = eventId.Id,
+                EventName = eventId.Name,
+                Message = formatter.Invoke(state, exception),
+                Exception = exception
+            });
 
         if (_outputHelper != null)
         {
@@ -217,11 +223,12 @@ public class LoggingStatement
         var dbgView = new StringBuilder();
         if (Level != LogLevel.None)
         {
-            dbgView.Append(CultureInfo.InvariantCulture,
+            dbgView.Append(
+                CultureInfo.InvariantCulture,
                 $"[{Level.ToString().ToUpper(CultureInfo.InvariantCulture)}] ");
         }
 
-        dbgView.Append(CultureInfo.InvariantCulture, $";ID: {EventId} ");
+        dbgView.Append(CultureInfo.InvariantCulture, $";ID: {EventId:D} ");
 
         dbgView.Append(Message);
         if (Exception != null)

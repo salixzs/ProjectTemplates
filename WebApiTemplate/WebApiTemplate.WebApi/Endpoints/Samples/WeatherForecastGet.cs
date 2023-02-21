@@ -29,5 +29,5 @@ public class WeatherForecastGet : EndpointWithoutRequest<IEnumerable<WeatherFore
     }
 
     public override async Task HandleAsync(CancellationToken cancellationToken) =>
-        SendOkAsync(await _handler.Handle(), cancellationToken);
+        await SendOkAsync(await _handler.Handle(), cancellationToken);
 }
