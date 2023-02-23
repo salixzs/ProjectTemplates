@@ -1,0 +1,74 @@
+@host=https://localhost
+@port=44301
+@resource=system-notifications
+
+# POST Create new notification
+POST {{host}}:{{port}}/{{resource}}
+Content-Type: application/json
+Accept:  application/json
+
+{
+  "id": 0,
+  "startTime": "2023-02-23T13:00:00.0000000+00:00",
+  "endTime": "2023-02-23T14:00:00.0000000+00:00",
+  "type": 2,
+  "emphasizeSince": "2023-02-23T13:45:00.0000000+00:00",
+  "emphasizeType": 3,
+  "countdownSince": "2023-02-23T13:55:00.0000000+00:00",
+  "messages": [
+    {
+      "id": 0,
+      "language": "en",
+      "message": "Maintenance will happen soon."
+    },
+    {
+      "id": 0,
+      "language": "lv",
+      "message": "Drīz sāksies apkopes darbi."
+    }
+  ]
+}
+###
+
+# GET Active notifications
+GET {{host}}:{{port}}/{{resource}}
+###
+
+# GET ALL notifications
+GET {{host}}:{{port}}/{{resource}}/all
+###
+
+# GET ONE notification
+GET {{host}}:{{port}}/{{resource}}/1000
+###
+
+# PATCH update notification
+PATCH {{host}}:{{port}}/{{resource}}
+Content-Type: application/json
+
+{
+  "id": 1000,
+  "startTime": "2023-02-23T14:00:00.0000000+00:00",
+  "endTime": "2023-02-23T15:00:00.0000000+00:00",
+  "type": 2,
+  "emphasizeSince": "2023-02-23T14:45:00.0000000+00:00",
+  "emphasizeType": 3,
+  "countdownSince": "2023-02-23T14:55:00.0000000+00:00",
+  "messages": [
+    {
+      "id": 0,
+      "language": "en",
+      "message": "Maintenance is shifted."
+    },
+    {
+      "id": 0,
+      "language": "lv",
+      "message": "Apkope nobīdīta par stundu."
+    }
+  ]
+}
+###
+
+# DELETE notification
+DELETE {{host}}:{{port}}/{{resource}}/1000
+###

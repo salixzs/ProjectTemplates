@@ -46,8 +46,8 @@ public sealed class SystemNotificationCommands : ISystemNotificationCommands
     public async Task Update(SystemNotification notification, CancellationToken cancellationToken)
     {
         var updateableRecord = await _db.SystemNotifications
-                .Include(notification => notification.Messages)
-                .Where(notification => notification.Id == notification.Id)
+                .Include(db => db.Messages)
+                .Where(db => db.Id == notification.Id)
                 .FirstOrDefaultAsync(cancellationToken)
             ?? throw new BusinessException(
                 $"System Notification update did not find existing record with Id: {notification.Id:D}",

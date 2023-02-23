@@ -24,9 +24,9 @@ public sealed class SystemNotificationQueries : ISystemNotificationQueries
     {
         var currentDateTime = _dateTimeProvider.DateTimeOffsetNow;
         var notificationRecords = await _db.SystemNotifications
-            .Include(notification => notification.Messages)
-            .Where(notification => notification.StartTime <= currentDateTime
-                && notification.EndTime >= currentDateTime)
+            .Include(db => db.Messages)
+            .Where(db => db.StartTime <= currentDateTime
+                && db.EndTime >= currentDateTime)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
@@ -53,8 +53,8 @@ public sealed class SystemNotificationQueries : ISystemNotificationQueries
     public async Task<SystemNotification?> GetById(int notificationId, CancellationToken cancellationToken)
     {
         var notificationRecord = await _db.SystemNotifications
-            .Include(notification => notification.Messages)
-            .Where(notification => notification.Id == notificationId)
+            .Include(db => db.Messages)
+            .Where(db => db.Id == notificationId)
             .AsNoTracking()
             .FirstOrDefaultAsync(cancellationToken);
 
@@ -86,7 +86,7 @@ public sealed class SystemNotificationQueries : ISystemNotificationQueries
     public async Task<List<SystemNotification>> GetAll(CancellationToken cancellationToken)
     {
         var notificationRecords = await _db.SystemNotifications
-            .Include(notification => notification.Messages)
+            .Include(db => db.Messages)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
