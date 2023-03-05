@@ -3,7 +3,7 @@ using WebApiTemplate.Domain.SystemNotifications;
 
 namespace WebApiTemplate.WebApi.Endpoints.SystemNotifications;
 
-public class SystemNotificationPost : Endpoint<SystemNotification>
+public class SystemNotificationPost : Endpoint<SystemNotification, int>
 {
     private readonly ISystemNotificationCommands _commandHandler;
 

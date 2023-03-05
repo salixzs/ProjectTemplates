@@ -1,0 +1,8 @@
+{
+  "ToolSetting": "This comes from settings.json",
+  "first": {
+    "Count": 12,
+    "Injected1": "This comes from settings.json for command.",
+    "Injected2": "as configuration for command."
+  }
+}

@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers> <!-- Enable .Net code analyzers -->
+    <LangVersion>latest</LangVersion> <!-- Use latest C# language available -->
+    <NeutralLanguage>en</NeutralLanguage>
+    <Nullable>enable</Nullable> <!-- Nullability checks for code -->
+    <ImplicitUsings>true</ImplicitUsings> <!-- reduce usings for common namespaces in files -->
+    <NoWarn>1701;1702</NoWarn> <!-- List code analysis warnings, which are OK for you to have -->
+  </PropertyGroup>
+
+  <!-- Assembly properties. Visible when right-click on EXE and view properties -> details. -->
+  <PropertyGroup>
+      <Company>My Company</Company>
+      <Product>ConsoleTool</Product>
+      <Description>My coolest console tool/application to do some work for me.</Description>
+      <!-- Calculating version number x.y.z.m (x and y are harcoded below) -->
+      <VersionMajor Condition="'$(VersionMajor)' == ''">1</VersionMajor>
+      <VersionMinor Condition="'$(VersionMinor)' == ''">0</VersionMinor>
+      <!-- Here note hardcoded project/version start date in inline code -->
+      <VersionPatch Condition="'$(VersionPatch)' == ''">$([System.DateTime]::UtcNow.Subtract($([System.DateTime]::new(2023,03,05,9,0,0))).TotalDays.ToString("0"))</VersionPatch>
+      <VersionRevision Condition="'$(VersionRevision)' == ''">$([System.DateTime]::UtcNow.TimeOfDay.TotalMinutes.ToString("0"))</VersionRevision>
+      <CalculatedVersion>$(VersionMajor).$(VersionMinor).$(VersionPatch).$(VersionRevision)</CalculatedVersion>
+      <AssemblyVersion Condition=" '$(CalculatedVersion)' == '' ">1.0.0.0</AssemblyVersion>
+      <AssemblyVersion Condition=" '$(CalculatedVersion)' != '' ">$(CalculatedVersion)</AssemblyVersion>
+      <Version Condition=" '$(CalculatedVersion)' == '' ">1.0.0.0</Version>
+      <Version Condition=" '$(CalculatedVersion)' != '' ">$(CalculatedVersion)</Version>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Consolix" Version="1.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Roslynator.Analyzers" Version="4.2.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Roslynator.Formatting.Analyzers" Version="4.2.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="5.0.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

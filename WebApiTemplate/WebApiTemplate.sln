@@ -43,6 +43,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "builds", "builds", "{E9BCD6
 		.azuredevops\pipelines\ci.yml = .azuredevops\pipelines\ci.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.Integration.Tests", "Tests\WebApiTemplate.Integration.Tests\WebApiTemplate.Integration.Tests.csproj", "{00A36C05-2A2B-47A4-9535-0FB7466715E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +100,10 @@ Global
 		{06781511-5ADC-4D00-9B50-A619ED6CB35B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06781511-5ADC-4D00-9B50-A619ED6CB35B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06781511-5ADC-4D00-9B50-A619ED6CB35B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00A36C05-2A2B-47A4-9535-0FB7466715E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00A36C05-2A2B-47A4-9535-0FB7466715E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00A36C05-2A2B-47A4-9535-0FB7466715E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00A36C05-2A2B-47A4-9535-0FB7466715E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{15B5A1A5-A1CB-4FA7-A540-A854978804AF} = {9FA73C1A-2A3E-4F33-8565-2460A36190AD}
 		{06781511-5ADC-4D00-9B50-A619ED6CB35B} = {F194B8A0-5540-4943-883C-931E8D26A6BC}
 		{E9BCD65C-70F4-49C9-9BAA-4655626D513B} = {A4A07774-66DD-4077-8BDD-E6F164EFDE8E}
+		{00A36C05-2A2B-47A4-9535-0FB7466715E4} = {F194B8A0-5540-4943-883C-931E8D26A6BC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E405DE01-7FDC-469E-96BD-250AE7920F39}
