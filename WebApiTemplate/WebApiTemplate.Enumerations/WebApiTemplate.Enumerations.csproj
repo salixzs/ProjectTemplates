@@ -19,4 +19,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <!--Remove this project from code coverage-->
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute" />
+  </ItemGroup>
 </Project>

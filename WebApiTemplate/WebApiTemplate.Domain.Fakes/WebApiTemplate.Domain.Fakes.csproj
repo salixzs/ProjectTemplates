@@ -23,8 +23,8 @@
     <ProjectReference Include="..\WebApiTemplate.Domain\WebApiTemplate.Domain.csproj" />
   </ItemGroup>
 
-  <!--Remove test project from code coverage-->
-  <!--<ItemGroup>
+  <!--Remove this project from code coverage-->
+  <ItemGroup>
     <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute" />
-  </ItemGroup>-->
+  </ItemGroup>
 </Project>

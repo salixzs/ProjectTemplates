@@ -42,4 +42,8 @@
     <ProjectReference Include="..\..\WebApiTemplate.WebApi\WebApiTemplate.WebApi.csproj" />
   </ItemGroup>
 
+  <!--Remove test project from code coverage-->
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute" />
+  </ItemGroup>
 </Project>

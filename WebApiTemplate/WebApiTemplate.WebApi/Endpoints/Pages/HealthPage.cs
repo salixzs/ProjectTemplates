@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -5,6 +6,7 @@ using Salix.AspNetCore.HealthCheck;
 
 namespace WebApiTemplate.Endpoints.Pages;
 
+[ExcludeFromCodeCoverage]
 public class HealthPageGet : EndpointWithoutRequest<ContentResult>
 {
     private readonly HealthCheckService _healthChecks;

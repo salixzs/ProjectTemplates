@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
@@ -5,6 +6,7 @@ using Salix.AspNetCore.TitlePage;
 
 namespace WebApiTemplate.Endpoints.Samples;
 
+[ExcludeFromCodeCoverage]
 public class FrontpageGet : EndpointWithoutRequest<ContentResult>
 {
     private readonly IConfigurationValuesLoader _configLoader;

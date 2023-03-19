@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.IdentityModel.Tokens;
 using WebApiTemplate.Crosscut.Exceptions;
 
@@ -6,6 +7,7 @@ namespace WebApiTemplate.WebApi.Middleware;
 /// <summary>
 /// Handle unhandled server exceptions as JSON <see cref="ApiError"/> object, describing it.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class ApiJsonErrorMiddleware : ApiJsonExceptionMiddleware
 {
     /// <summary>
