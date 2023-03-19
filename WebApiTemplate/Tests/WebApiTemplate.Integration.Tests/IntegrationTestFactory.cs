@@ -1,14 +1,11 @@
 using System.Data;
-using System.Data.Common;
-using DotNet.Testcontainers.Builders;
-using DotNet.Testcontainers.Configurations;
-using DotNet.Testcontainers.Containers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Testcontainers.MsSql;
 
 namespace WebApiTemplate.Integration.Tests;
 
@@ -16,22 +13,18 @@ public class IntegrationTestFactory<TProgram, TDbContext> : WebApplicationFactor
     where TProgram : class
     where TDbContext : DbContext
 {
-    private readonly TestcontainerDatabase _container;
+    private readonly MsSqlContainer _sqlContainer;
 
     public IntegrationTestFactory() =>
-        _container = new TestcontainersBuilder<MsSqlTestcontainer>()
-            .WithDatabase(
-                new MsSqlTestcontainerConfiguration
-                {
-                    Password = "localdev#123"
-                })
+        _sqlContainer = new MsSqlBuilder()
+            .WithPassword("localdev#123")
             .WithImage("mcr.microsoft.com/mssql/server:2022-latest")
             .WithCleanUp(true)
             .Build();
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        var connectionBuilder = new SqlConnectionStringBuilder(_container.ConnectionString)
+        var connectionBuilder = new SqlConnectionStringBuilder(_sqlContainer.GetConnectionString())
         {
             TrustServerCertificate = true
         };
@@ -67,10 +60,25 @@ public class IntegrationTestFactory<TProgram, TDbContext> : WebApplicationFactor
         });
     }
 
-    public async Task InitializeAsync() => await _container.StartAsync();
+    /// <summary>
+    /// Use this instead of <c>factory.CreateClient()</c> or <c>factory.CreateDefaultClient()</c> to get configured client instance in tests.
+    /// </summary>
+    public HttpClient GetHttpClient()
+    {
+        var client = CreateClient(
+            new WebApplicationFactoryClientOptions
+            {
+                AllowAutoRedirect = false,
+                BaseAddress = new Uri("https://localhost:44301")
+            });
+        ;
+        return client;
+    }
+
+    public async Task InitializeAsync() => await _sqlContainer.StartAsync();
 
 #pragma warning disable RCS1019 // Order modifiers.
-    public new async Task DisposeAsync() => await _container.DisposeAsync();
+    public new async Task DisposeAsync() => await _sqlContainer.DisposeAsync();
 #pragma warning restore RCS1019
 }
 

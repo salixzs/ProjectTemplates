@@ -1,6 +1,5 @@
 using ConfigurationValidation.AspNetCore;
 using Salix.AspNetCore.HealthCheck;
-using Salix.AspNetCore.JsonExceptionHandler;
 using WebApiTemplate.WebApi.Middleware;
 
 namespace WebApiTemplate.BootSetup;

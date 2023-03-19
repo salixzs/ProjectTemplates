@@ -41,6 +41,7 @@ public class SingleSystemNotificationGet : EndpointWithoutRequest<SystemNotifica
         if (notification != null)
         {
             await SendOkAsync(notification, cancellationToken);
+            return;
         }
 
         await SendNotFoundAsync(cancellationToken);

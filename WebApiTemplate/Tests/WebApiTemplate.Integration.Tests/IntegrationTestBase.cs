@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WebApiTemplate.Database.Orm;
 
 namespace WebApiTemplate.Integration.Tests;
+
 public class IntegrationTestBase : IClassFixture<IntegrationTestFactory<Program, WebApiTemplateDbContext>>
 {
     public IntegrationTestFactory<Program, WebApiTemplateDbContext> Factory { get; }

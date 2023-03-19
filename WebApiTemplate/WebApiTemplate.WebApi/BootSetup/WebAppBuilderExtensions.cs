@@ -21,7 +21,7 @@ public static class WebAppBuilderExtensions
             })
             .CaptureStartupErrors(true);
         builder.Host.UseConsoleLifetime(options => options.SuppressStatusMessages = true);
-        builder.Services.AddFastEndpoints(options => options.SourceGeneratorDiscoveredTypes = DiscoveredTypes.All);
+        builder.Services.AddFastEndpoints();
         return builder;
     }
 
