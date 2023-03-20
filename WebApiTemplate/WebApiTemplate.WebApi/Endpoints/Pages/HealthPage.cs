@@ -3,6 +3,7 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Salix.AspNetCore.HealthCheck;
+using WebApiTemplate.CoreLogic.Handlers.SystemNotifications;
 
 namespace WebApiTemplate.Endpoints.Pages;
 
@@ -11,8 +12,13 @@ public class HealthPageGet : EndpointWithoutRequest<ContentResult>
 {
     private readonly HealthCheckService _healthChecks;
 
-    public HealthPageGet(HealthCheckService healthChecks) =>
+    private readonly ISystemNotificationForHealthCheck _saveLogic;
+
+    public HealthPageGet(HealthCheckService healthChecks, ISystemNotificationForHealthCheck saveLogic)
+    {
         _healthChecks = healthChecks;
+        _saveLogic = saveLogic;
+    }
 
     public override void Configure()
     {
@@ -24,7 +30,9 @@ public class HealthPageGet : EndpointWithoutRequest<ContentResult>
 
     public override async Task HandleAsync(CancellationToken ct)
     {
+        var url = string.Concat(BaseURL[..^1], Urls.Pages.HealthPage);
         var healthResult = await _healthChecks.CheckHealthAsync(ct);
+        await _saveLogic.HandleHealthCheckSystemNotification(healthResult, url, ct);
 #pragma warning disable RCS0056 // A line is too long.
         var healthPageContents = HealthTestPage.GetContents(
             healthReport: healthResult,

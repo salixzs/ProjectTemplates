@@ -27,7 +27,7 @@ public class SystemNotificationRecord
     /// See also <see cref="EndTime">EndTime</see>.<br/>
     /// It is UTC time!
     /// <code>
-    /// [StartTime] DATETIME NOT NULL
+    /// [StartTime] DATETIMEOFFSET(0) NOT NULL
     /// </code>
     /// </summary>
     public DateTimeOffset StartTime { get; set; }
@@ -37,7 +37,7 @@ public class SystemNotificationRecord
     /// See also <see cref="StartTime">StartTime</see>.<br/>
     /// It is UTC time!
     /// <code>
-    /// [EndTime] DATETIME NOT NULL
+    /// [EndTime] DATETIMEOFFSET(0) NOT NULL
     /// </code>
     /// </summary>
     public DateTimeOffset EndTime { get; set; }
@@ -57,7 +57,7 @@ public class SystemNotificationRecord
     /// When equal to <see cref="EndTime">EndTime</see> will not be emphasized.<br/>
     /// It is UTC time!
     /// <code>
-    /// [EmphasizeSince] DATETIME NOT NULL
+    /// [EmphasizeSince] DATETIMEOFFSET(0) NOT NULL
     /// </code>
     /// </summary>
     public DateTimeOffset EmphasizeSince { get; set; }
@@ -78,10 +78,27 @@ public class SystemNotificationRecord
     /// When equal to <see cref="EndTime">EndTime</see> will not show countdown timer.<br/>
     /// It is UTC time!
     /// <code>
-    /// [CountdownSince] DATETIME NOT NULL
+    /// [CountdownSince] DATETIMEOFFSET(0) NOT NULL
     /// </code>
     /// </summary>
     public DateTimeOffset CountdownSince { get; set; }
+
+    /// <summary>
+    /// Can hold a link to some page where end-user can find more information on this system notification.
+    /// <code>
+    /// [MoreInfoUrl] VARCHAR(1000) NULL
+    /// </code>
+    /// </summary>
+    public string? MoreInfoUrl { get; set; }
+
+    /// <summary>
+    /// A flag, indicating system notification comes from degraded or unhealthy Health Checking.<br/>
+    /// When health check (degraded. unhealthy) is run this is added and on successful health check - removed automatically.
+    /// <code>
+    /// [IsHealthCheck] BIT NOT NULL DEFAULT 0
+    /// </code>
+    /// </summary>
+    public bool IsHealthCheck { get; set; }
 
     /// <summary>
     /// Messages themselves with language codes they are written into.

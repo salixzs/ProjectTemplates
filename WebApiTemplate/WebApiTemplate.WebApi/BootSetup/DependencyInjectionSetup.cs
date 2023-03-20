@@ -2,6 +2,7 @@ using ConfigurationValidation.AspNetCore;
 using Salix.AspNetCore.TitlePage;
 using WebApiTemplate.CoreLogic.Security;
 using WebApiTemplate.Crosscut.Services;
+using WebApiTemplate.WebApi.BootSetup;
 
 namespace WebApiTemplate.BootSetup;
 
@@ -14,6 +15,7 @@ public static class DependencyInjectionSetup
 
         services.AddTransient<IConfigurationValuesLoader, ConfigurationValuesLoader>();
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+        services.AddScoped<IHealthCheckResultHandler, HealthCheckResultHandler>();
         return services;
     }
 

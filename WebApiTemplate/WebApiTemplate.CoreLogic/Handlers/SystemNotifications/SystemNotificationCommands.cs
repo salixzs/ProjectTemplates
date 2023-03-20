@@ -25,6 +25,7 @@ public sealed class SystemNotificationCommands : ISystemNotificationCommands
             EmphasizeSince = notification.EmphasizeSince ?? notification.EndTime,
             EmphasizeType = notification.EmphasizeType ?? notification.Type,
             CountdownSince = notification.CountdownSince ?? notification.EndTime,
+            MoreInfoUrl = notification.MoreInfoUrl,
         };
 
         foreach (var message in notification.Messages)
@@ -59,6 +60,7 @@ public sealed class SystemNotificationCommands : ISystemNotificationCommands
         updateableRecord.EmphasizeSince = notification.EmphasizeSince ?? notification.EndTime;
         updateableRecord.EmphasizeType = notification.EmphasizeType ?? notification.Type;
         updateableRecord.CountdownSince = notification.CountdownSince ?? notification.EndTime;
+        updateableRecord.MoreInfoUrl = notification.MoreInfoUrl;
 
         updateableRecord.Messages.Clear();
         foreach (var message in notification.Messages)

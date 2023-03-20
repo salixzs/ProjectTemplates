@@ -1,5 +1,9 @@
+using System.IO;
 using ConfigurationValidation.AspNetCore;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Salix.AspNetCore.HealthCheck;
+using WebApiTemplate.WebApi.BootSetup;
 using WebApiTemplate.WebApi.Middleware;
 
 namespace WebApiTemplate.BootSetup;
@@ -69,8 +73,19 @@ public static class WebAppExtensions
     public static WebApplication UseHealthChecking(this WebApplication app)
     {
         app.UseConfigurationValidationErrorPage();
-        app.UseJsonHealthChecks("/health", app.Environment.IsDevelopment());
-        app.UseHealthChecks("/health");
+        var healthCheckOptions = new HealthCheckOptions
+        {
+            ResponseWriter = (HttpContext context, HealthReport report) => HealthCheckResultHandler(context, report, app),
+        };
+        app.UseHealthChecks("/health", healthCheckOptions);
+
         return app;
+    }
+
+    private static async Task HealthCheckResultHandler(HttpContext context, HealthReport report, WebApplication app)
+    {
+        using var scope = app.Services.CreateScope();
+        var handler = scope.Resolve<IHealthCheckResultHandler>();
+        await handler.Handle(context, report);
     }
 }

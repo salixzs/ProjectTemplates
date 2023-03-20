@@ -64,6 +64,19 @@ public class SystemNotification
     public DateTimeOffset? CountdownSince { get; set; }
 
     /// <summary>
+    /// Can hold a link to some page where end-user can find more information on this system notification.<br/>
+    /// Can use to add link or button-link to system notification.
+    /// </summary>
+    public string? MoreInfoUrl { get; set; }
+
+    /// <summary>
+    /// A flag, TRUE indicating system notification is created by health check with degraded or unhealthy status.<br/>
+    /// Health check with success status will remove this flagged system notification automatically.<br/>
+    /// Saving notification will ignore this flag, if set to True. Only Health check can create these.
+    /// </summary>
+    public bool IsHealthCheck { get; set; }
+
+    /// <summary>
     /// Messages themselves with language codes they are written into.
     /// </summary>
     public virtual List<SystemNotificationMessage> Messages { get; set; } = new List<SystemNotificationMessage>();

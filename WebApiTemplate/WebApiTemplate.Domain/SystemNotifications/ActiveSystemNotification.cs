@@ -39,6 +39,11 @@ public sealed class ActiveSystemNotification
     public SystemNotificationType MessageType { get; set; }
 
     /// <summary>
+    /// Can hold a link to some page where end-user can find more information on this system notification.
+    /// </summary>
+    public string? MoreInfoUrl { get; set; }
+
+    /// <summary>
     /// Actual notification message(s) in one or more languages.
     /// </summary>
     public List<SystemNotificationMessage> Messages { get; set; } = new List<SystemNotificationMessage>();

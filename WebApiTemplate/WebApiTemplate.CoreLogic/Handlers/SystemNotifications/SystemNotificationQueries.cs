@@ -38,6 +38,7 @@ public sealed class SystemNotificationQueries : ISystemNotificationQueries
                 EndTime = dbRecord.EndTime,
                 IsEmphasized = dbRecord.EmphasizeSince <= currentDateTime,
                 ShowCountdown = dbRecord.CountdownSince <= currentDateTime,
+                MoreInfoUrl = dbRecord.MoreInfoUrl,
                 Messages = dbRecord.Messages.Select(
                     message => new SystemNotificationMessage
                     {
@@ -72,6 +73,8 @@ public sealed class SystemNotificationQueries : ISystemNotificationQueries
             EmphasizeSince = notificationRecord.EmphasizeSince,
             EmphasizeType = notificationRecord.EmphasizeType,
             CountdownSince = notificationRecord.CountdownSince,
+            MoreInfoUrl = notificationRecord.MoreInfoUrl,
+            IsHealthCheck = notificationRecord.IsHealthCheck,
             Messages = notificationRecord.Messages.Select(
                 message => new SystemNotificationMessage
                 {
@@ -100,6 +103,8 @@ public sealed class SystemNotificationQueries : ISystemNotificationQueries
                 EmphasizeSince = dbRecord.EmphasizeSince,
                 EmphasizeType = dbRecord.EmphasizeType,
                 CountdownSince = dbRecord.CountdownSince,
+                MoreInfoUrl = dbRecord.MoreInfoUrl,
+                IsHealthCheck = dbRecord.IsHealthCheck,
                 Messages = dbRecord.Messages.Select(
                     message => new SystemNotificationMessage
                     {

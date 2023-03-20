@@ -16,6 +16,8 @@ public static class SystemNotificationRecordFake
             .RuleFor(fake => fake.EmphasizeSince, faker => DateTimeOffset.Now.AddMinutes(faker.Random.Int(15, 25)))
             .RuleFor(fake => fake.CountdownSince, faker => DateTimeOffset.Now.AddMinutes(faker.Random.Int(20, 27)))
             .RuleFor(fake => fake.Type, faker => faker.Random.Enum<SystemNotificationType>())
-            .RuleFor(fake => fake.EmphasizeType, faker => faker.Random.Enum<SystemNotificationType>());
+            .RuleFor(fake => fake.EmphasizeType, faker => faker.Random.Enum<SystemNotificationType>())
+            .RuleFor(fake => fake.IsHealthCheck, false)
+            .RuleFor(fake => fake.MoreInfoUrl, faker => faker.Internet.Url());
     }
 }
