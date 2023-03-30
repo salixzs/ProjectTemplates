@@ -62,6 +62,8 @@
   <ItemGroup>
     <Build Include="Tables\SystemNotifications.sql" />
     <Build Include="Tables\SystemNotificationMessages.sql" />
+    <Build Include="Tables\SystemFeedbacks.sql" />
+    <Build Include="Tables\SystemFeedbackComments.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publishing\Localhost.Publish.xml" />

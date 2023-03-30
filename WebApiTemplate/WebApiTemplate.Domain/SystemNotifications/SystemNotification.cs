@@ -43,7 +43,7 @@ public class SystemNotification
     /// before (or equal to) <see cref="EndTime">EndTime</see>.<br/>
     /// When equal to <see cref="EndTime">EndTime</see> will not be emphasized.<br/>
     /// It is UTC time!<br/>
-    /// Leave empty (NULL) to disallow emphasizing of the system meessage.
+    /// Leave empty (NULL) to disallow emphasizing of the system message.
     /// </summary>
     public DateTimeOffset? EmphasizeSince { get; set; }
 

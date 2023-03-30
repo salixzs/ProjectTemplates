@@ -63,8 +63,8 @@ public class SystemNotificationRecord
     public DateTimeOffset EmphasizeSince { get; set; }
 
     /// <summary>
-    /// Type (usually - coloring) of notification when it is in emphasized mode.<br/>
-    /// May be different to <see cref="Type">Tyoe</see> to make it more critical.
+    /// Type (usually - colouring) of notification when it is in emphasized mode.<br/>
+    /// May be different to <see cref="Type">Type</see> to make it more critical.
     /// <code>
     /// [EmphasizeType] TINYINT NOT NULL DEFAULT 0
     /// </code>

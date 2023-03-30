@@ -36,6 +36,24 @@ public class WebApiTemplateDbContext : DbContext
     /// </summary>
     public virtual DbSet<SystemNotificationMessageRecord> SystemNotificationMessages { get; set; } = null!;
 
+    /// <summary>
+    /// End user feedback to support and development teams.<br/>
+    /// Holds simplistic cheers, bugs, change requests, support requests.
+    /// <code>
+    /// TABLE: dbo.SystemFeedbacks
+    /// </code>
+    /// </summary>
+    public virtual DbSet<SystemFeedbackRecord> SystemFeedbacks { get; set; } = null!;
+
+    /// <summary>
+    /// Child objects - comments of <see cref="SystemFeedbacks">End-user feedbacks</see> holding communication on feedback.<br/>
+    /// Cascade deleted if parent system feedback is deleted.
+    /// <code>
+    /// TABLE: dbo.SystemFeedbackComments
+    /// </code>
+    /// </summary>
+    public virtual DbSet<SystemFeedbackCommentRecord> SystemFeedbackComments { get; set; } = null!;
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
     }

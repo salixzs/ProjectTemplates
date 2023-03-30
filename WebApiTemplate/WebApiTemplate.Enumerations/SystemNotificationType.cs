@@ -6,7 +6,7 @@ namespace WebApiTemplate.Enumerations;
 public enum SystemNotificationType
 {
     /// <summary>
-    /// Normal notofocation (blak/white/gray).
+    /// Normal notification (black/white/grey).
     /// </summary>
     Normal = 0,
 

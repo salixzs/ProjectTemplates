@@ -22,6 +22,7 @@ internal sealed class SystemNotificationMessageRecordConfiguration : IEntityType
         builder.Property<int>("SystemNotificationId");
         builder.HasOne(d => d.SystemNotification)
             .WithMany(p => p.Messages)
-            .HasForeignKey("SystemNotificationId");
+            .HasForeignKey("SystemNotificationId")
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
