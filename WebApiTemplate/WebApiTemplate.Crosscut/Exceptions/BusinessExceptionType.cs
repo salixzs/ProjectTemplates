@@ -59,7 +59,7 @@ public enum BusinessExceptionType
 
     /// <summary>
     /// Exception [types] returned by some components,<br/>
-    /// usually in async approaches vith CancellationToken usage<br/>
+    /// usually in async approaches with CancellationToken usage<br/>
     /// where operation can be cancelled.
     /// </summary>
     CancelledOperation = 30,

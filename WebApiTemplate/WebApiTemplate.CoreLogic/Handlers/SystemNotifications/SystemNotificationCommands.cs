@@ -6,7 +6,7 @@ using WebApiTemplate.Domain.SystemNotifications;
 
 namespace WebApiTemplate.CoreLogic.Handlers.SystemNotifications;
 
-/// <inheritdoc/>
+/// <inheritdoc cref="ISystemNotificationCommands"/>
 public sealed class SystemNotificationCommands : ISystemNotificationCommands
 {
     private readonly WebApiTemplateDbContext _db;

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using WebApiTemplate.Database.Orm;
+using WebApiTemplate.Translations;
 
 namespace WebApiTemplate.CoreLogic;
 
@@ -12,6 +13,8 @@ public static class DependencyInjection
     public static void SetupDependencies(this IServiceCollection services, IConfiguration configuration)
     {
         ContextRegistration.AddDatabaseContext(services, configuration);
+        services.AddLocalization();
+        services.AddSingleton(typeof(ITranslate<>), typeof(Translate<>));
         services.RegisterHandlers();
     }
 

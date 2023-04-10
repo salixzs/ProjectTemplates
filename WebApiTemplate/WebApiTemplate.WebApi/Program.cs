@@ -16,6 +16,7 @@ public class Program
             .AddHttpsSsl()
             .AddCorsUrls()
             .AddDependencies()
+            .AddRequestLocalization()
             .AddSwaggerServices()
             .AddHealthChecks();
 
@@ -24,6 +25,7 @@ public class Program
             .UseWebApiFeatures()
             .UseCORS()
             .UseAuth()
+            .UseRequestLocalization()
             .UseHealthChecking()
             .UseSwaggerPage();
 

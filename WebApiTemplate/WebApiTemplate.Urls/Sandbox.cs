@@ -10,4 +10,5 @@ public static class Sandbox
     public const string Strings = BaseUri + "/strings";
     public const string OtherTypes = BaseUri + "/othertypes";
     public const string Exception = BaseUri + "/exception";
+    public const string Localization = BaseUri + "/localization";
 }

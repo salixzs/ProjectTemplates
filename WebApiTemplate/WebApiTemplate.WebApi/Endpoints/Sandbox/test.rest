@@ -1,0 +1,54 @@
+@host=https://localhost
+@port=44301
+@resource=sandbox
+
+# Get Localization without Accept-Language header
+GET {{host}}:{{port}}/{{resource}}/localization
+###
+
+
+# Get Localization with LV Accept-Language header
+GET {{host}}:{{port}}/{{resource}}/localization
+Accept-Language:lv
+###
+
+
+# Get Localization with nb-NO Accept-Language header
+GET {{host}}:{{port}}/{{resource}}/localization
+Accept-Language:nb-NO,lv
+###
+
+# Get Localization with RU as last available Accept-Language header
+GET {{host}}:{{port}}/{{resource}}/localization
+Accept-Language:es-MX,de-DE,ru
+###
+
+
+# Get strings
+GET {{host}}:{{port}}/{{resource}}/strings
+Accept-Language:lv
+###
+
+
+# Get numbers
+GET {{host}}:{{port}}/{{resource}}/numbers
+Accept-Language:lv
+###
+
+
+# Get date/times
+GET {{host}}:{{port}}/{{resource}}/datetimes
+Accept-Language:lv
+###
+
+
+# Get other types
+GET {{host}}:{{port}}/{{resource}}/othertypes
+Accept-Language:lv
+###
+
+
+# See EXCEPTION
+GET {{host}}:{{port}}/{{resource}}/exception
+Accept-Language:lv
+###

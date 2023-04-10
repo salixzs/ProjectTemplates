@@ -94,7 +94,7 @@ public class SystemFeedbackRecord
     /// [CompletedAt] DATETIMEOFFSET(0) NULL
     /// </code>
     /// </summary>
-    public DateTimeOffset CompletedAt { get; set; }
+    public DateTimeOffset? CompletedAt { get; set; }
 
     /// <summary>
     /// Messages themselves with language codes they are written into.

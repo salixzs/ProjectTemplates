@@ -11,7 +11,7 @@ public class BusinessException : Exception
     public BusinessExceptionType ExceptionType { get; set; } = BusinessExceptionType.GeneralError;
 
     /// <summary>
-    /// Error code to be used mainly for distinguish exceptions if they need handling in regard to message translations and customizations. 
+    /// Error code to be used mainly for distinguish exceptions if they need handling in regard to message translations and customizations.
     /// </summary>
     public int ErrorCode { get; set; }
 

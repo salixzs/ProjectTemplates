@@ -69,7 +69,7 @@ public sealed class SystemNotificationForHealthCheck : ISystemNotificationForHea
         await _db.SaveChangesAsync(cancellationToken);
     }
 
-    private string CompileMessage(HealthReport healthReport) =>
+    private static string CompileMessage(HealthReport healthReport) =>
         @$"Health check reports {healthReport.Status.ToString()} status.
 Application may be broken or limited in its functionality. Last check: {DateTime.UtcNow:dd. MMM HH:mm}";
 }

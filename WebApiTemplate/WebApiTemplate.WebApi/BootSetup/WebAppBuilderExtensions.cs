@@ -1,5 +1,7 @@
+using System.Globalization;
 using ConfigurationValidation.AspNetCore;
 using FastEndpoints.Swagger;
+using Microsoft.AspNetCore.Localization;
 using Serilog;
 using WebApiTemplate.CoreLogic.Security;
 using WebApiTemplate.Crosscut.Exceptions;
@@ -22,6 +24,7 @@ public static class WebAppBuilderExtensions
             .CaptureStartupErrors(true);
         builder.Host.UseConsoleLifetime(options => options.SuppressStatusMessages = true);
         builder.Services.AddFastEndpoints();
+
         return builder;
     }
 
@@ -89,6 +92,29 @@ public static class WebAppBuilderExtensions
     public static WebApplicationBuilder AddDependencies(this WebApplicationBuilder builder)
     {
         builder.Services.AddApiDependencies(builder.Configuration);
+        return builder;
+    }
+
+    public static WebApplicationBuilder AddRequestLocalization(this WebApplicationBuilder builder)
+    {
+        builder.Services.Configure<RequestLocalizationOptions>(options =>
+        {
+            var supportedCultures = new List<CultureInfo>
+            {
+                new CultureInfo("en"),
+                new CultureInfo("lv"),
+                new CultureInfo("nb-NO"),
+                new CultureInfo("ru"),
+            };
+
+            options.DefaultRequestCulture = new RequestCulture(culture: "en", uiCulture: "en");
+            options.SupportedCultures = supportedCultures;
+            options.SupportedUICultures = supportedCultures;
+
+            options.RequestCultureProviders.Clear();
+            options.RequestCultureProviders.Add(new AcceptLanguageHeaderRequestCultureProvider());
+        });
+
         return builder;
     }
 

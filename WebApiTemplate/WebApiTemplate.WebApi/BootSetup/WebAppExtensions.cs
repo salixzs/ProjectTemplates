@@ -1,8 +1,8 @@
-using System.IO;
 using ConfigurationValidation.AspNetCore;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Salix.AspNetCore.HealthCheck;
+using Microsoft.Extensions.Options;
+using WebApiTemplate.Crosscut.Exceptions;
 using WebApiTemplate.WebApi.BootSetup;
 using WebApiTemplate.WebApi.Middleware;
 
@@ -41,6 +41,20 @@ public static class WebAppExtensions
         app.UseAuthentication();
         app.UseAuthorization();
 
+        return app;
+    }
+
+    public static WebApplication UseRequestLocalization(this WebApplication app)
+    {
+        var options = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
+        if (options == null)
+        {
+            throw new BusinessException(
+                "UseRequestLocalization was not able to get RequestLocalizationOptions. Did you forget to use AddRequestLocalization() to services?",
+                BusinessExceptionType.ConfigurationError);
+        }
+
+        app.UseRequestLocalization(options.Value);
         return app;
     }
 

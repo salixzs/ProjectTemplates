@@ -76,13 +76,13 @@ public static class HumanizerExtensions
             if (separateWords[wordIndex].StartsWith("Mc", StringComparison.OrdinalIgnoreCase))
             {
                 separateWords[wordIndex] =
-                    string.Concat("Mc", separateWords[wordIndex].Substring(2, 1).ToUpper(), separateWords[wordIndex].AsSpan(3));
+                    string.Concat("Mc", separateWords[wordIndex].Substring(2, 1).ToUpperInvariant(), separateWords[wordIndex].AsSpan(3));
             }
 
-            if (separateWords[wordIndex].StartsWith("Mac"))
+            if (separateWords[wordIndex].StartsWith("Mac", StringComparison.InvariantCulture))
             {
                 separateWords[wordIndex] =
-                    string.Concat("Mac", separateWords[wordIndex].Substring(3, 1).ToUpper(), separateWords[wordIndex].AsSpan(4));
+                    string.Concat("Mac", separateWords[wordIndex].Substring(3, 1).ToUpperInvariant(), separateWords[wordIndex].AsSpan(4));
             }
         }
 
