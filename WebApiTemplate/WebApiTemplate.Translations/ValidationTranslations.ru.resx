@@ -144,4 +144,13 @@
   <data name="SystemNotification_EmphasizeType" xml:space="preserve">
     <value>Тип акцентирования должен быть указан, когда указано его время!</value>
   </data>
+  <data name="SystemFeedback_Priority" xml:space="preserve">
+    <value>Должен быть установлен приоритет!</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>Это тест.</value>
+  </data>
+  <data name="TestPlaceholder" xml:space="preserve">
+    <value>Заполнитель: {0} тест.</value>
+  </data>
 </root>

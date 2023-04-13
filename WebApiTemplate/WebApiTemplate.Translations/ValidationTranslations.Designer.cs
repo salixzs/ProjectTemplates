@@ -88,6 +88,15 @@ namespace WebApiTemplate.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Priority must be set!.
+        /// </summary>
+        public static string SystemFeedback_Priority {
+            get {
+                return ResourceManager.GetString("SystemFeedback_Priority", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Countdown datetime should be within start and end times!.
         /// </summary>
         public static string SystemNotification_CountdownTime {
@@ -138,6 +147,24 @@ namespace WebApiTemplate.Translations {
         public static string SystemNotification_StartDateLessThanEndDate {
             get {
                 return ResourceManager.GetString("SystemNotification_StartDateLessThanEndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is a test..
+        /// </summary>
+        public static string Test {
+            get {
+                return ResourceManager.GetString("Test", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Placeholder: {0} test..
+        /// </summary>
+        public static string TestPlaceholder {
+            get {
+                return ResourceManager.GetString("TestPlaceholder", resourceCulture);
             }
         }
     }

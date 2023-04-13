@@ -144,4 +144,13 @@
   <data name="SystemNotification_EmphasizeType" xml:space="preserve">
     <value>Izcelšanas tipam jābūt norādītam, ja izcelšanas laiks ir norādīts!</value>
   </data>
+  <data name="SystemFeedback_Priority" xml:space="preserve">
+    <value>Prioritātei jābūt norādītai!</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>Šis ir tests.</value>
+  </data>
+  <data name="TestPlaceholder" xml:space="preserve">
+    <value>Aizvietots: {0} tests.</value>
+  </data>
 </root>

@@ -3,10 +3,12 @@ using Microsoft.Extensions.Localization;
 
 namespace WebApiTemplate.Translations;
 
+/// <inheritdoc cref="ITranslate{T}"/>
 public class Translate<T> : ITranslate<T> where T : class
 {
     private readonly IStringLocalizer<T> _localizer;
 
+    /// <inheritdoc cref="ITranslate{T}"/>
     public Translate(IStringLocalizer<T> localizer) =>
         _localizer = localizer;
 
@@ -42,7 +44,7 @@ public class Translate<T> : ITranslate<T> where T : class
             var cultureFromParameter = CultureInfo.CurrentUICulture;
             try
             {
-                cultureFromParameter = CultureInfo.GetCultureInfo(locale);
+                cultureFromParameter = CultureInfo.GetCultureInfo(locale is "no" or "nb" ? "nb-NO" : locale);
             }
             catch
             {
@@ -86,7 +88,7 @@ public class Translate<T> : ITranslate<T> where T : class
             var cultureFromParameter = CultureInfo.CurrentUICulture;
             try
             {
-                cultureFromParameter = CultureInfo.GetCultureInfo(locale);
+                cultureFromParameter = CultureInfo.GetCultureInfo(locale is "no" or "nb" ? "nb-NO" : locale);
             }
             catch
             {

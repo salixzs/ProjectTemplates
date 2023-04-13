@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApiTemplate.Crosscut.Services;
 using WebApiTemplate.Database.Orm;
+using WebApiTemplate.Database.Orm.Entities;
 using WebApiTemplate.Domain.SystemNotifications;
 
 namespace WebApiTemplate.CoreLogic.Handlers.SystemNotifications;
@@ -11,6 +12,14 @@ public sealed class SystemNotificationQueries : ISystemNotificationQueries
     private readonly WebApiTemplateDbContext _db;
 
     private readonly IDateTimeProvider _dateTimeProvider;
+
+    private static readonly Func<WebApiTemplateDbContext, DateTimeOffset, IAsyncEnumerable<SystemNotificationRecord>>
+        GetActiveNotificationsCompiledQueryAsync = EF.CompileAsyncQuery((WebApiTemplateDbContext dbc, DateTimeOffset currentDateTime) =>
+            dbc.SystemNotifications
+                .Include(db => db.Messages)
+                .Where(db => db.StartTime <= currentDateTime
+                    && db.EndTime >= currentDateTime)
+                .AsNoTracking());
 
     /// <inheritdoc cref="ISystemNotificationQueries"/>
     public SystemNotificationQueries(WebApiTemplateDbContext databaseContext, IDateTimeProvider dateTimeProvider)
@@ -23,31 +32,30 @@ public sealed class SystemNotificationQueries : ISystemNotificationQueries
     public async Task<List<ActiveSystemNotification>> GetActive(CancellationToken cancellationToken)
     {
         var currentDateTime = _dateTimeProvider.DateTimeOffsetNow;
-        var notificationRecords = await _db.SystemNotifications
-            .Include(db => db.Messages)
-            .Where(db => db.StartTime <= currentDateTime
-                && db.EndTime >= currentDateTime)
-            .AsNoTracking()
-            .ToListAsync(cancellationToken);
+        var activeNotifications = new List<ActiveSystemNotification>();
+        await foreach (var dbRecord in GetActiveNotificationsCompiledQueryAsync(_db, currentDateTime))
+        {
+            activeNotifications.Add(
+                new ActiveSystemNotification
+                {
+                    Id = dbRecord.Id,
+                    MessageType = dbRecord.EmphasizeSince <= currentDateTime ? dbRecord.EmphasizeType : dbRecord.Type,
+                    EndTime = dbRecord.EndTime,
+                    IsEmphasized = dbRecord.EmphasizeSince <= currentDateTime,
+                    ShowCountdown = dbRecord.CountdownSince <= currentDateTime,
+                    MoreInfoUrl = dbRecord.MoreInfoUrl,
+                    Messages = dbRecord.Messages.Select(
+                        message => new SystemNotificationMessage
+                        {
+                            Id = message.Id,
+                            Language = message.LanguageCode,
+                            Message = message.Message,
+                        })
+                    .ToList()
+                });
+        }
 
-        return notificationRecords.ConvertAll(
-            dbRecord => new ActiveSystemNotification
-            {
-                Id = dbRecord.Id,
-                MessageType = dbRecord.EmphasizeSince <= currentDateTime ? dbRecord.EmphasizeType : dbRecord.Type,
-                EndTime = dbRecord.EndTime,
-                IsEmphasized = dbRecord.EmphasizeSince <= currentDateTime,
-                ShowCountdown = dbRecord.CountdownSince <= currentDateTime,
-                MoreInfoUrl = dbRecord.MoreInfoUrl,
-                Messages = dbRecord.Messages.Select(
-                    message => new SystemNotificationMessage
-                    {
-                        Id = message.Id,
-                        Language = message.LanguageCode,
-                        Message = message.Message,
-                    })
-                .ToList()
-            });
+        return activeNotifications;
     }
 
     /// <inheritdoc/>

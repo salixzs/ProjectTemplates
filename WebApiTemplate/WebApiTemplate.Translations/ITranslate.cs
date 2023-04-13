@@ -1,5 +1,15 @@
 namespace WebApiTemplate.Translations;
 
+/// <summary>
+/// Resource-based translation functionality for string translations in supported languages.<br/>
+/// Use as property getter with key of resource to get its translation into CurrentLocale or given locale.
+/// <code>
+/// constructor(ITranslate&lt;ResxName&gt; l10n)
+///
+/// var translation = l10n["Key"];
+/// </code>
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public interface ITranslate<T> where T : class
 {
     /// <summary>
@@ -14,7 +24,7 @@ public interface ITranslate<T> where T : class
     string this[string name] { get; }
 
     /// <summary>
-    /// Gets the string resource (translation) with the given name (key) and in specified locale (or default).<br />
+    /// Gets the string resource (translation) with the given name (key) and in specified locale (if it is supported).<br />
     /// Name (key) is case sensitive!<br/>
     /// <code>
     /// var translation = Translate["GivenKey", "lv"]
@@ -23,7 +33,7 @@ public interface ITranslate<T> where T : class
     /// <param name="name">The name of the string resource.</param>
     /// <param name="locale">Optional parameter to specify different locale (language to translate).</param>
     /// <exception cref="ArgumentNullException">Name is null or empty.</exception>
-    string this[string name, string locale = "no"] { get; }
+    string this[string name, string locale] { get; }
 
     /// <summary>
     /// Gets the string resource (translation) with the given name (key) and replacing placeholder with given argument value(s).<br />

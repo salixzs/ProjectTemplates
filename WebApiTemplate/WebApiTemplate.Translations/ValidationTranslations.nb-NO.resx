@@ -144,4 +144,13 @@
   <data name="SystemNotification_EmphasizeType" xml:space="preserve">
     <value>Uthevingstype skal angis når vektleggingstid er gitt!</value>
   </data>
+  <data name="SystemFeedback_Priority" xml:space="preserve">
+    <value>Prioritet må settes!</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>Dette er en test.</value>
+  </data>
+  <data name="TestPlaceholder" xml:space="preserve">
+    <value>Plassholder: {0} test.</value>
+  </data>
 </root>

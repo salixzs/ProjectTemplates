@@ -124,4 +124,15 @@
   <data name="SystemNotification_EmphasizeType" xml:space="preserve">
     <value>Emphasize type must be specified when emphasize time is given!</value>
   </data>
+  <data name="SystemFeedback_Priority" xml:space="preserve">
+    <value>Priority must be set!</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>This is a test.</value>
+    <comment>Do not delete. Used in Unit-tests!</comment>
+  </data>
+  <data name="TestPlaceholder" xml:space="preserve">
+    <value>Placeholder: {0} test.</value>
+    <comment>DO not delete. Used in Unit-tests!</comment>
+  </data>
 </root>
