@@ -3,6 +3,7 @@ using WebApiTemplate.Crosscut.Exceptions;
 using WebApiTemplate.Database.Orm;
 using WebApiTemplate.Database.Orm.Entities;
 using WebApiTemplate.Domain.SystemNotifications;
+using WebApiTemplate.Translations;
 
 namespace WebApiTemplate.CoreLogic.Handlers.SystemNotifications;
 
@@ -11,8 +12,14 @@ public sealed class SystemNotificationCommands : ISystemNotificationCommands
 {
     private readonly WebApiTemplateDbContext _db;
 
+    private readonly ITranslate<ErrorMessageTranslations> _l10n;
+
     /// <inheritdoc cref="ISystemNotificationCommands"/>
-    public SystemNotificationCommands(WebApiTemplateDbContext databaseContext) => _db = databaseContext;
+    public SystemNotificationCommands(WebApiTemplateDbContext databaseContext, ITranslate<ErrorMessageTranslations> l10n)
+    {
+        _db = databaseContext;
+        _l10n = l10n;
+    }
 
     /// <inheritdoc/>
     public async Task<int> Create(SystemNotification notification, CancellationToken cancellationToken)
@@ -51,7 +58,10 @@ public sealed class SystemNotificationCommands : ISystemNotificationCommands
                 .Where(db => db.Id == notification.Id)
                 .FirstOrDefaultAsync(cancellationToken)
             ?? throw new BusinessException(
-                $"System Notification update did not find existing record with Id: {notification.Id:D}",
+                _l10n[
+                    nameof(ErrorMessageTranslations.Record_NotFoundById),
+                    "System notification",
+                    notification.Id],
                 BusinessExceptionType.RequestError);
 
         updateableRecord.StartTime = notification.StartTime;

@@ -50,7 +50,7 @@ public class SystemFeedbackPost : Endpoint<SystemFeedback>
     public override async Task HandleAsync(SystemFeedback feedback, CancellationToken cancellationToken)
     {
         EndpointHelpers.ThrowIfRequestValidationFailed(ValidationFailed, ValidationFailures, GetType().Name);
-        var newId = await _commandHandler.CreateFeedback(feedback, cancellationToken);
+        var newId = await _commandHandler.Create(feedback, cancellationToken);
         await SendCreatedAtAsync<SingleSystemNotificationGet>(routeValues: new { id = newId }, responseBody: newId, cancellation: cancellationToken);
     }
 }

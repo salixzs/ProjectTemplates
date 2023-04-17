@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.IdentityModel.Tokens;
 using WebApiTemplate.Crosscut.Exceptions;
+using WebApiTemplate.Translations;
 
 namespace WebApiTemplate.WebApi.Middleware;
 
@@ -10,13 +11,17 @@ namespace WebApiTemplate.WebApi.Middleware;
 [ExcludeFromCodeCoverage]
 public class ApiJsonErrorMiddleware : ApiJsonExceptionMiddleware
 {
+    private readonly ITranslate<ErrorMessageTranslations> _l10n;
+
     /// <summary>
     /// Handle unhandled server exceptions as JSON <see cref="ApiError"/> object, describing it.
     /// </summary>
-    public ApiJsonErrorMiddleware(RequestDelegate next, ILogger<ApiJsonExceptionMiddleware> logger, ApiJsonExceptionOptions options)
-        : base(next, logger, options)
-    {
-    }
+    public ApiJsonErrorMiddleware(
+        RequestDelegate next,
+        ILogger<ApiJsonExceptionMiddleware> logger,
+        ApiJsonExceptionOptions options,
+        ITranslate<ErrorMessageTranslations> l10n)
+        : base(next, logger, options) => _l10n = l10n;
 
     /// <summary>
     /// Override necessary <see cref="ApiError"/> properties based on thrown exception types.
@@ -30,45 +35,56 @@ public class ApiJsonErrorMiddleware : ApiJsonExceptionMiddleware
             switch (apiException.ExceptionType)
             {
                 case BusinessExceptionType.SecurityError:
+                    apiError.Title = _l10n[nameof(ErrorMessageTranslations.SecurityError)];
                     apiError.Status = 401;
                     apiError.ErrorType = ApiErrorType.SecurityError;
                     break;
                 case BusinessExceptionType.AccessRestrictedError:
+                    apiError.Title = _l10n[nameof(ErrorMessageTranslations.SecurityError)];
                     apiError.Status = 403;
                     apiError.ErrorType = ApiErrorType.AccessRestrictedError;
                     break;
                 case BusinessExceptionType.ServerError:
+                    apiError.Title = _l10n[nameof(ErrorMessageTranslations.ServerError)];
                     apiError.ErrorType = ApiErrorType.ServerError;
                     apiError.Status = 500;
                     break;
                 case BusinessExceptionType.RequestError:
+                    apiError.Title = _l10n[nameof(ErrorMessageTranslations.RequestError)];
                     apiError.ErrorType = ApiErrorType.RequestError;
                     apiError.Status = 400;
                     break;
                 case BusinessExceptionType.DataValidationError:
+                    apiError.Title = _l10n[nameof(ErrorMessageTranslations.RequestValidationError)];
                     apiError.ErrorType = ApiErrorType.DataValidationError;
                     apiError.Status = 422;
                     break;
                 case BusinessExceptionType.ConfigurationError:
+                    apiError.Title = _l10n[nameof(ErrorMessageTranslations.ConfigurationError)];
                     apiError.ErrorType = ApiErrorType.ConfigurationError;
                     apiError.Status = 500;
                     break;
                 case BusinessExceptionType.ExternalError:
+                    apiError.Title = _l10n[nameof(ErrorMessageTranslations.ExternalError)];
                     apiError.ErrorType = ApiErrorType.ExternalError;
                     apiError.Status = 500;
                     break;
                 case BusinessExceptionType.StorageError:
+                    apiError.Title = _l10n[nameof(ErrorMessageTranslations.StorageError)];
                     apiError.ErrorType = ApiErrorType.StorageError;
                     apiError.Status = 500;
                     break;
                 case BusinessExceptionType.StorageConcurrencyError:
+                    apiError.Title = _l10n[nameof(ErrorMessageTranslations.ConcurrencyError)];
                     apiError.ErrorType = ApiErrorType.StorageConcurrencyError;
                     apiError.Status = 500;
                     break;
                 case BusinessExceptionType.CancelledOperation:
+                    apiError.Title = _l10n[nameof(ErrorMessageTranslations.CancelledOperation)];
                     apiError.ErrorBehavior = ApiErrorBehavior.Ignore;
                     break;
                 default:
+                    apiError.Title = _l10n[nameof(ErrorMessageTranslations.GeneralError)];
                     apiError.Status = 500;
                     apiError.ErrorType = ApiErrorType.Undetermined;
                     break;
@@ -79,7 +95,7 @@ public class ApiJsonErrorMiddleware : ApiJsonExceptionMiddleware
         {
             apiError.ErrorType = ApiErrorType.DataValidationError;
             apiError.Status = 422;
-            apiError.Title = $"Request data is not valid for {validation.Source ?? string.Empty} endpoint";
+            apiError.Title = _l10n[nameof(ErrorMessageTranslations.ValidationError), arguments: validation.Source ?? string.Empty];
             if (validation.Failures != null)
             {
                 foreach (var validationError in validation.Failures)
@@ -97,6 +113,7 @@ public class ApiJsonErrorMiddleware : ApiJsonExceptionMiddleware
 
         if (exception is AccessViolationException)
         {
+            apiError.Title = _l10n[nameof(ErrorMessageTranslations.SecurityError)];
             apiError.Status = 401; // or 403
             apiError.ErrorType = ApiErrorType.AccessRestrictedError;
         }
@@ -116,13 +133,14 @@ public class ApiJsonErrorMiddleware : ApiJsonExceptionMiddleware
 
         if (exception is NotImplementedException)
         {
+            apiError.Title = _l10n[nameof(ErrorMessageTranslations.NotImplementedError)];
             apiError.Status = 501;
-            apiError.Title = "Functionality is not yet implemented.";
         }
 
         // Also true/works for TaskCanceledException (derived class)
         if (exception is OperationCanceledException)
         {
+            apiError.Title = _l10n[nameof(ErrorMessageTranslations.CancelledOperation)];
             apiError.ErrorBehavior = ApiErrorBehavior.Ignore;
         }
 

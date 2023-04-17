@@ -107,7 +107,7 @@ public static class WebAppBuilderExtensions
                 new CultureInfo("ru"),
             };
 
-            options.DefaultRequestCulture = new RequestCulture(culture: "ru", uiCulture: "ru");
+            options.DefaultRequestCulture = new RequestCulture(culture: "lv", uiCulture: "lv");
             options.SupportedCultures = supportedCultures;
             options.SupportedUICultures = supportedCultures;
 

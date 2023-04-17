@@ -20,6 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="ErrorMessageTranslations.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ErrorMessageTranslations.resx</DependentUpon>
+    </Compile>
     <Compile Update="ValidationTranslations.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -41,6 +46,21 @@
     <EmbeddedResource Update="ValidationTranslations.nb-NO.resx">
       <DependentUpon>ValidationTranslations.resx</DependentUpon>
     </EmbeddedResource>
+
+    <EmbeddedResource Update="ErrorMessageTranslations.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorMessageTranslations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ErrorMessageTranslations.lv.resx">
+      <DependentUpon>ErrorMessageTranslations.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ErrorMessageTranslations.ru.resx">
+      <DependentUpon>ErrorMessageTranslations.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ErrorMessageTranslations.nb-NO.resx">
+      <DependentUpon>ErrorMessageTranslations.resx</DependentUpon>
+    </EmbeddedResource>
+
   </ItemGroup>
 
 </Project>

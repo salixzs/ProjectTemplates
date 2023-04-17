@@ -23,9 +23,8 @@ public class SystemNotificationDelete : EndpointWithoutRequest
             swagger.Summary = "Deletes the system notification.";
             swagger.Description = "Deletes the system notification together with its messages.";
             swagger.Response<int>((int)HttpStatusCode.NoContent, "System notification is successfully deleted.");
-            swagger.Response<ApiError>((int)HttpStatusCode.InternalServerError, "Error occurred in server during notification update.");
+            swagger.Response<ApiError>((int)HttpStatusCode.InternalServerError, "Error occurred in server during notification delete.");
             swagger.Response<ApiError>((int)HttpStatusCode.UnprocessableEntity, "Id is not provided.");
-            swagger.ResponseExamples[(int)HttpStatusCode.OK] = 1025;
             swagger.ResponseExamples[(int)HttpStatusCode.UnprocessableEntity] = EndpointHelpers.ExampleApiValidationError();
             swagger.ResponseExamples[(int)HttpStatusCode.InternalServerError] = EndpointHelpers.ExampleApiError();
         });

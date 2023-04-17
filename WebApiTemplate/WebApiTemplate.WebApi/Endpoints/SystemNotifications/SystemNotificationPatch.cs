@@ -31,7 +31,6 @@ including its messages. Missing messages gets deleted. Should have at least one 
             swagger.Response<int>((int)HttpStatusCode.Created, "System notification is successfully updated.");
             swagger.Response<ApiError>((int)HttpStatusCode.InternalServerError, "Error occurred in server during notification update.");
             swagger.Response<ApiError>((int)HttpStatusCode.UnprocessableEntity, "Request (submitted notification data) has validation errors.");
-            swagger.ResponseExamples[(int)HttpStatusCode.OK] = 1025;
             swagger.ResponseExamples[(int)HttpStatusCode.UnprocessableEntity] = EndpointHelpers.ExampleApiValidationError();
             swagger.ResponseExamples[(int)HttpStatusCode.InternalServerError] = EndpointHelpers.ExampleApiError();
             swagger.ExampleRequest = new SystemNotification

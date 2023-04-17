@@ -19,7 +19,7 @@ public class CommandsTests : CoreLogicTestBase
     {
         _db = GetDatabaseContext();
         DbLogger.LoggingDisabled = true;
-        _sut = new SystemNotificationCommands(_db);
+        _sut = new SystemNotificationCommands(_db, DefaultMocks.GetErrorTranslationMock().Object);
     }
 
     [Fact]

@@ -22,6 +22,9 @@ Solution template for REST WebApi.
   - Bogus Faker (real object instance generation)
 
 
+[![Build Status](https://dev.azure.com/SmartDance/GitHubProjects/_apis/build/status%2FCI%20WebApiTemplate?branchName=main)](https://dev.azure.com/SmartDance/GitHubProjects/_build/latest?definitionId=7&branchName=main)
+
+
 # Solution projects
 
 Solution is split into multiple projects, 

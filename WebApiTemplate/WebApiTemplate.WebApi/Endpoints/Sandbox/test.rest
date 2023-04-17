@@ -1,4 +1,4 @@
-Loclaization@host=https://localhost
+@host=https://localhost
 @port=44301
 @resource=sandbox
 

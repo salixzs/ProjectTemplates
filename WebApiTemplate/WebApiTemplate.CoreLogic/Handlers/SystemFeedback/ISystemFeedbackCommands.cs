@@ -8,5 +8,15 @@ public interface ISystemFeedbackCommands
     /// <summary>
     /// Creates a new end-user feedback item to triage by support/development team.
     /// </summary>
-    Task<int> CreateFeedback(Domain.SystemFeedback.SystemFeedback feedback, CancellationToken cancellationToken);
+    Task<int> Create(Domain.SystemFeedback.SystemFeedback feedback, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Updates an existing end-user feedback with new information.
+    /// </summary>
+    Task Update(Domain.SystemFeedback.SystemFeedback feedback, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Deletes a system feedback together with all comments and data referencing it.
+    /// </summary>
+    Task Delete(int feedbackId, CancellationToken cancellationToken);
 }
