@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics;
 using WebApiTemplate.Enumerations;
 
-namespace WebApiTemplate.Domain.SystemFeedback;
+namespace WebApiTemplate.Domain.SystemFeedbacks;
 
 /// <summary>
 /// End user feedback to support/development team (also bug, change request, support request).

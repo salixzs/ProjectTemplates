@@ -1,5 +1,5 @@
-using WebApiTemplate.CoreLogic.Handlers.SystemFeedback;
-using WebApiTemplate.Domain.SystemFeedback;
+using WebApiTemplate.CoreLogic.Handlers.SystemFeedbacks;
+using WebApiTemplate.Domain.SystemFeedbacks;
 using WebApiTemplate.WebApi.Endpoints.SystemNotifications;
 
 namespace WebApiTemplate.WebApi.Endpoints.SystemFeedbacks;

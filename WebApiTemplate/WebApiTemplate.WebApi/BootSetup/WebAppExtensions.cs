@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using WebApiTemplate.Crosscut.Exceptions;
+using WebApiTemplate.Enumerations;
 using WebApiTemplate.WebApi.BootSetup;
 using WebApiTemplate.WebApi.Middleware;
 
@@ -15,7 +16,16 @@ public static class WebAppExtensions
 {
     public static WebApplication UseWebApiFeatures(this WebApplication app)
     {
-        app.UseFastEndpoints(config => config.Endpoints.ShortNames = true);
+        app.UseFastEndpoints(config =>
+        {
+            config.Endpoints.ShortNames = true;
+
+            // There are required to deserialize List<Enum> passed in SystemFeedback functionality GET
+            config.Serializer.Options.Converters.Add(new JsonEnumListConverter<SystemFeedbackCategory>());
+            config.Serializer.Options.Converters.Add(new JsonEnumListConverter<SystemFeedbackStatus>());
+            config.Serializer.Options.Converters.Add(new JsonEnumListConverter<SystemFeedbackPriority>());
+        });
+
         return app;
     }
 

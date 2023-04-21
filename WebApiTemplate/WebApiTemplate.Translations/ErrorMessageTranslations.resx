@@ -98,7 +98,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Record_NotFoundById" xml:space="preserve">
-    <value>{0} update did not find existing record with ID: {1}</value>
+    <value>{0} did not find existing record with ID: {1}</value>
   </data>
   <data name="ValidationError" xml:space="preserve">
     <value>The request data is not valid for {0} endpoint.</value>

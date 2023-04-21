@@ -1,4 +1,4 @@
-using WebApiTemplate.CoreLogic.Handlers.SystemFeedback;
+using WebApiTemplate.CoreLogic.Handlers.SystemFeedbacks;
 
 namespace WebApiTemplate.WebApi.Endpoints.SystemFeedbacks;
 

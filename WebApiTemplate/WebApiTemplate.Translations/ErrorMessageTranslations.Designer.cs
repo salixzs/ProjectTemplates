@@ -115,7 +115,7 @@ namespace WebApiTemplate.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} update did not find existing record with ID: {1}.
+        ///   Looks up a localized string similar to {0} did not find existing record with ID: {1}.
         /// </summary>
         public static string Record_NotFoundById {
             get {

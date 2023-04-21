@@ -4,7 +4,7 @@ using WebApiTemplate.Crosscut.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using WebApiTemplate.Translations;
 
-namespace WebApiTemplate.CoreLogic.Handlers.SystemFeedback;
+namespace WebApiTemplate.CoreLogic.Handlers.SystemFeedbacks;
 
 /// <inheritdoc cref="ISystemFeedbackCommands"/>
 public sealed class SystemFeedbackCommands : ISystemFeedbackCommands
@@ -21,7 +21,7 @@ public sealed class SystemFeedbackCommands : ISystemFeedbackCommands
     }
 
     /// <inheritdoc/>
-    public async Task<int> Create(Domain.SystemFeedback.SystemFeedback feedback, CancellationToken cancellationToken)
+    public async Task<int> Create(Domain.SystemFeedbacks.SystemFeedback feedback, CancellationToken cancellationToken)
     {
         // TODO: Add user/auth
         var newFeedbackRecord = new SystemFeedbackRecord
@@ -42,7 +42,7 @@ public sealed class SystemFeedbackCommands : ISystemFeedbackCommands
     }
 
     /// <inheritdoc/>
-    public async Task Update(Domain.SystemFeedback.SystemFeedback feedback, CancellationToken cancellationToken)
+    public async Task Update(Domain.SystemFeedbacks.SystemFeedback feedback, CancellationToken cancellationToken)
     {
         // TODO: Add user/auth
         var feedbackRecord = _db.SystemFeedbacks.FirstOrDefault(f => f.Id == feedback.Id)

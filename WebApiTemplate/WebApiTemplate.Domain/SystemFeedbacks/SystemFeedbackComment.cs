@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics;
 
-namespace WebApiTemplate.Domain.SystemFeedback;
+namespace WebApiTemplate.Domain.SystemFeedbacks;
 
 /// <summary>
 /// A one of comments to end user feedback item.
@@ -24,6 +24,11 @@ public class SystemFeedbackComment
     /// Date/Time when Feedback comment was created.
     /// </summary>
     public DateTimeOffset CreatedAt { get; set; }
+
+    /// <summary>
+    /// Primary key for parent System Feedback record (relevant for Create command).
+    /// </summary>
+    public int? SystemFeedbackId { get; set; }
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     [ExcludeFromCodeCoverage]

@@ -1,6 +1,5 @@
 global using Bogus;
 using WebApiTemplate.Domain.Fakes.Fakes;
-using WebApiTemplate.Domain.SystemNotifications;
 
 namespace WebApiTemplate.Domain.Fakes;
 
@@ -22,9 +21,10 @@ public sealed class DomainFakesFactory
     /// </summary>
     private DomainFakesFactory()
     {
-        _instantiators.Add(typeof(SystemNotification).FullName!, SystemNotificationFake.GetBogus);
-        _instantiators.Add(typeof(ActiveSystemNotification).FullName!, ActiveSystemNotificationFake.GetBogus);
-        _instantiators.Add(typeof(SystemNotificationMessage).FullName!, SystemNotificationMessageFake.GetBogus);
+        _instantiators.Add(typeof(SystemNotifications.SystemNotification).FullName!, SystemNotificationFake.GetBogus);
+        _instantiators.Add(typeof(SystemNotifications.ActiveSystemNotification).FullName!, ActiveSystemNotificationFake.GetBogus);
+        _instantiators.Add(typeof(SystemNotifications.SystemNotificationMessage).FullName!, SystemNotificationMessageFake.GetBogus);
+        _instantiators.Add(typeof(SystemFeedbacks.SystemFeedback).FullName!, SystemFeedbackFake.GetBogus);
     }
 
     static DomainFakesFactory()

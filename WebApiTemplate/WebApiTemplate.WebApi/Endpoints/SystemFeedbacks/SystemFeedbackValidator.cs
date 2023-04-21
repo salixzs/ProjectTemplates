@@ -1,8 +1,8 @@
 using FluentValidation;
-using WebApiTemplate.Domain.SystemFeedback;
+using WebApiTemplate.Domain.SystemFeedbacks;
 using WebApiTemplate.Translations;
 
-namespace WebApiTemplate.WebApi.Endpoints.SystemNotifications;
+namespace WebApiTemplate.WebApi.Endpoints.SystemFeedbacks;
 
 public class SystemFeedbackValidator : Validator<SystemFeedback>
 {

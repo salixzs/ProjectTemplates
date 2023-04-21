@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Record_NotFoundById" xml:space="preserve">
-    <value>{0}-oppdateringen fant ikke eksisterende oppføring med ID: {1}</value>
+    <value>{0} fant ikke eksisterende oppføring med ID: {1}</value>
   </data>
   <data name="ValidationError" xml:space="preserve">
     <value>Forespørselsdataene er ikke gyldige for {0} endepunkt.</value>
