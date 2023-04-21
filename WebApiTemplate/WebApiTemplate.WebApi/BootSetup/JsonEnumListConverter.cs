@@ -12,7 +12,7 @@ public class JsonEnumListConverter<T> : JsonConverter<List<T>> where T : struct
         {
             while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
             {
-                if (reader.TokenType == JsonTokenType.String && Enum.TryParse(reader.GetString(), out T enumItem))
+                if (reader.TokenType == JsonTokenType.String && Enum.TryParse<T>(reader.GetString(), out var enumItem))
                 {
                     enumList.Add(enumItem);
                 }
@@ -24,6 +24,6 @@ public class JsonEnumListConverter<T> : JsonConverter<List<T>> where T : struct
 
     public override void Write(Utf8JsonWriter writer, List<T> value, JsonSerializerOptions options)
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException("Not used. At least, yet.");
     }
 }
