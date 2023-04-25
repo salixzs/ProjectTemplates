@@ -22,8 +22,8 @@ public class JsonEnumListConverter<T> : JsonConverter<List<T>> where T : struct
         return enumList;
     }
 
-    public override void Write(Utf8JsonWriter writer, List<T> value, JsonSerializerOptions options)
-    {
+#pragma warning disable RCS1079 // Throwing of new NotImplementedException.
+    public override void Write(Utf8JsonWriter writer, List<T> value, JsonSerializerOptions options) =>
         throw new NotImplementedException("Not used. At least, yet.");
-    }
+#pragma warning restore RCS1079 // Throwing of new NotImplementedException.
 }

@@ -56,13 +56,10 @@ public static class WebAppExtensions
 
     public static WebApplication UseRequestLocalization(this WebApplication app)
     {
-        var options = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
-        if (options == null)
-        {
-            throw new BusinessException(
+        var options = app.Services.GetService<IOptions<RequestLocalizationOptions>>()
+            ?? throw new BusinessException(
                 "UseRequestLocalization was not able to get RequestLocalizationOptions. Did you forget to use AddRequestLocalization() to services?",
                 BusinessExceptionType.ConfigurationError);
-        }
 
         app.UseRequestLocalization(options.Value);
         return app;

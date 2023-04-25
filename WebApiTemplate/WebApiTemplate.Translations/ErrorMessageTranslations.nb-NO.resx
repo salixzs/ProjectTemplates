@@ -156,4 +156,7 @@
   <data name="NotImplementedError" xml:space="preserve">
     <value>Funksjonalitet er ennå ikke implementert.</value>
   </data>
+  <data name="Id_MustBeSupplied" xml:space="preserve">
+    <value>En ID-verdi må angis.</value>
+  </data>
 </root>

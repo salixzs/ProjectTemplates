@@ -5,6 +5,14 @@ namespace WebApiTemplate.CoreLogic.Handlers.SystemFeedbacks;
 
 public static class SystemFeedbackQueryExtensions
 {
+    public static IQueryable<SystemFeedbackRecord> FilterByUsers(
+        this IQueryable<SystemFeedbackRecord> query,
+        SystemFeedbackFilter filter)
+    {
+        // TODO: Fill with user filtering logic.
+        return query;
+    }
+
     public static IQueryable<SystemFeedbackRecord> FilterByTitle(
         this IQueryable<SystemFeedbackRecord> query,
         SystemFeedbackFilter filter)

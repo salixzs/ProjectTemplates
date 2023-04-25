@@ -136,4 +136,7 @@
   <data name="NotImplementedError" xml:space="preserve">
     <value>Functionality is not yet implemented.</value>
   </data>
+  <data name="Id_MustBeSupplied" xml:space="preserve">
+    <value>ID value must be specified.</value>
+  </data>
 </root>

@@ -1,7 +1,5 @@
 using System.Globalization;
 using System.Net.Http.Json;
-using Microsoft.Extensions.Options;
-using System.Threading;
 using Salix.AspNetCore.JsonExceptionHandler;
 using WebApiTemplate.Database.Orm;
 using WebApiTemplate.Domain.Fakes;
@@ -64,7 +62,7 @@ public class SystemNotificationsTests : IntegrationTestBase
         activeNotifications![0].Id.Should().Be(activeNotificationId);
 
         // Specific notification GET
-        var url = Urls.SystemNotifications.WithId.Replace("{id}", oldNotificationId.ToString("D"));
+        var url = Urls.SystemNotifications.WithId.Replace("{id}", oldNotificationId.ToString("D", CultureInfo.InvariantCulture));
         var specificNotification = await apiClient.GetFromJsonAsync<SystemNotification>(url);
         specificNotification.Should().NotBeNull();
         specificNotification!.Id.Should().Be(oldNotificationId);
@@ -89,7 +87,8 @@ public class SystemNotificationsTests : IntegrationTestBase
         updatedNotificationResult.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
 
         // Delete old notification
-        var deleteNotificationResult = await apiClient.DeleteAsync(Urls.SystemNotifications.WithId.Replace("{id}", oldNotificationId.ToString()));
+        var deleteNotificationResult = await apiClient.DeleteAsync(
+            Urls.SystemNotifications.WithId.Replace("{id}", oldNotificationId.ToString(CultureInfo.InvariantCulture)));
         deleteNotificationResult.Should().NotBeNull();
         deleteNotificationResult.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
 

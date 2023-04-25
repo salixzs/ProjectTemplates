@@ -156,4 +156,7 @@
   <data name="NotImplementedError" xml:space="preserve">
     <value>Функционал пока не реализован.</value>
   </data>
+  <data name="Id_MustBeSupplied" xml:space="preserve">
+    <value>Значение идентификатора должно быть указано.</value>
+  </data>
 </root>

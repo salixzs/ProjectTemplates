@@ -135,4 +135,7 @@
     <value>Placeholder: {0} test.</value>
     <comment>DO not delete. Used in Unit-tests!</comment>
   </data>
+  <data name="Id_MustBeSupplied" xml:space="preserve">
+    <value>ID value must be provided.</value>
+  </data>
 </root>

@@ -153,4 +153,7 @@
   <data name="TestPlaceholder" xml:space="preserve">
     <value>Aizvietots: {0} tests.</value>
   </data>
+  <data name="Id_MustBeSupplied" xml:space="preserve">
+    <value>ID vērtība ir jānorāda.</value>
+  </data>
 </root>

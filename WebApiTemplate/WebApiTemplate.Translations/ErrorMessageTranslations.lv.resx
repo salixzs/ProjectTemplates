@@ -156,4 +156,7 @@
   <data name="NotImplementedError" xml:space="preserve">
     <value>Funkcionalitāte vēl nav izstrādāta un ieviesta.</value>
   </data>
+  <data name="Id_MustBeSupplied" xml:space="preserve">
+    <value>ID vērtība ir jānorāda.</value>
+  </data>
 </root>

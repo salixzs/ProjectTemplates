@@ -153,4 +153,7 @@
   <data name="TestPlaceholder" xml:space="preserve">
     <value>Plassholder: {0} test.</value>
   </data>
+  <data name="Id_MustBeSupplied" xml:space="preserve">
+    <value>En ID-verdi må angis.</value>
+  </data>
 </root>

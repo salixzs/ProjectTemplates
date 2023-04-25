@@ -70,6 +70,15 @@ namespace WebApiTemplate.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ID value must be provided..
+        /// </summary>
+        public static string Id_MustBeSupplied {
+            get {
+                return ResourceManager.GetString("Id_MustBeSupplied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The textual value cannot be empty..
         /// </summary>
         public static string StringCannotBeNullOrEmpty {

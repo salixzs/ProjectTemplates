@@ -50,14 +50,10 @@ public sealed class SystemFeedbackQueries : ISystemFeedbackQueries
                             })
                         .ToList()
                 })
-            .FirstOrDefaultAsync(cancellationToken);
-
-        if (feedback == null)
-        {
-            throw new BusinessException(
+            .FirstOrDefaultAsync(cancellationToken)
+            ?? throw new BusinessException(
                 _l10n[nameof(ErrorMessageTranslations.Record_NotFoundById), "FeedbackById", feedbackId],
                 BusinessExceptionType.RequestError);
-        }
 
         return feedback;
     }
@@ -67,6 +63,7 @@ public sealed class SystemFeedbackQueries : ISystemFeedbackQueries
         SystemFeedbackFilter filter,
         CancellationToken cancellationToken) =>
         await _db.SystemFeedbacks
+            .FilterByUsers(filter)
             .FilterByTitle(filter)
             .FilterByContents(filter)
             .FilterByCategories(filter)

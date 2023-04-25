@@ -106,6 +106,15 @@ namespace WebApiTemplate.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ID value must be specified..
+        /// </summary>
+        public static string Id_MustBeSupplied {
+            get {
+                return ResourceManager.GetString("Id_MustBeSupplied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Functionality is not yet implemented..
         /// </summary>
         public static string NotImplementedError {

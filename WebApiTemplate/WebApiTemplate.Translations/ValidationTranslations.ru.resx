@@ -153,4 +153,7 @@
   <data name="TestPlaceholder" xml:space="preserve">
     <value>Заполнитель: {0} тест.</value>
   </data>
+  <data name="Id_MustBeSupplied" xml:space="preserve">
+    <value>Значение идентификатора должно быть указано.</value>
+  </data>
 </root>

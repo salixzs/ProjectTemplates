@@ -35,7 +35,9 @@ public static class HumanizerExtensions
             // First two letters are to be special-handled
             if (letterInWord < 2)
             {
-                properName.Append(nextIsUppercase ? char.ToUpper(humanName[letterInWord]) : char.ToLower(humanName[letterInWord]));
+                properName.Append(nextIsUppercase
+                    ? char.ToUpper(humanName[letterInWord], System.Globalization.CultureInfo.CurrentUICulture)
+                    : char.ToLower(humanName[letterInWord], System.Globalization.CultureInfo.CurrentUICulture));
                 nextIsUppercase = false;
                 continue;
             }
@@ -43,11 +45,16 @@ public static class HumanizerExtensions
             // starting from 3rd letter - do transform only when all UPPERCASE, otherwise - leave as is.
             if (totalTransform && letterInWord > 1)
             {
-                properName.Append(nextIsUppercase ? char.ToUpper(humanName[letterInWord]) : char.ToLower(humanName[letterInWord]));
+                properName.Append(
+                    nextIsUppercase
+                        ? char.ToUpper(humanName[letterInWord], System.Globalization.CultureInfo.CurrentUICulture)
+                        : char.ToLower(humanName[letterInWord], System.Globalization.CultureInfo.CurrentUICulture));
             }
             else
             {
-                properName.Append(nextIsUppercase ? char.ToUpper(humanName[letterInWord]) : humanName[letterInWord]);
+                properName.Append(nextIsUppercase
+                    ? char.ToUpper(humanName[letterInWord], System.Globalization.CultureInfo.CurrentUICulture)
+                    : humanName[letterInWord]);
             }
 
             nextIsUppercase = false;
@@ -109,7 +116,7 @@ public static class HumanizerExtensions
         };
 
         // split integer string into array and reverse array
-        var inputNumberDigits = number.ToString().Reverse().ToArray();
+        var inputNumberDigits = number.ToString(System.Globalization.CultureInfo.CurrentCulture).Reverse().ToArray();
         var inputNumberLength = inputNumberDigits.Length;
         var romanNumeral = new StringBuilder();
         var i = inputNumberLength;
@@ -119,12 +126,12 @@ public static class HumanizerExtensions
         // and add it to the final roman numeral string
         while (i-- > 0)
         {
-            if (romanNumerals[i].Length < int.Parse(inputNumberDigits[i].ToString()))
+            if (romanNumerals[i].Length < int.Parse(inputNumberDigits[i].ToString(), System.Globalization.CultureInfo.CurrentCulture))
             {
                 throw new ArgumentOutOfRangeException(errorMsg);
             }
 
-            romanNumeral.Append(romanNumerals[i][int.Parse(inputNumberDigits[i].ToString())]);
+            romanNumeral.Append(romanNumerals[i][int.Parse(inputNumberDigits[i].ToString(), System.Globalization.CultureInfo.CurrentCulture)]);
         }
 
         return romanNumeral.ToString();
@@ -181,7 +188,7 @@ public static class HumanizerExtensions
                 return $"{dateTime:M}, {dateTime.Year:D}";
             }
 
-            return dateTime.ToString("M");
+            return dateTime.ToString("M", System.Globalization.CultureInfo.CurrentCulture);
         }
 
         if (dateTime.Date == compareDate.Date)
@@ -195,7 +202,10 @@ public static class HumanizerExtensions
                     return compareDate > dateTime ? Translations.HourAgo : Translations.In1Hour;
                 }
 
-                return string.Format(compareDate > dateTime ? Translations.HoursAgo : Translations.InHours, hourCount);
+                return string.Format(
+                    System.Globalization.CultureInfo.CurrentCulture,
+                    compareDate > dateTime ? Translations.HoursAgo : Translations.InHours,
+                    hourCount);
             }
 
             if (differenceTimespan > TimeSpan.FromMinutes(1))
@@ -206,7 +216,10 @@ public static class HumanizerExtensions
                     return compareDate > dateTime ? Translations.MinuteAgo : Translations.In1Minute;
                 }
 
-                return string.Format(compareDate > dateTime ? Translations.MinutesAgo : Translations.InMinutes, minuteCount);
+                return string.Format(
+                    System.Globalization.CultureInfo.CurrentCulture,
+                    compareDate > dateTime ? Translations.MinutesAgo : Translations.InMinutes,
+                    minuteCount);
             }
 
             return Translations.JustNow;
@@ -255,15 +268,15 @@ public static class HumanizerExtensions
         {
             if (dateTime.Date == compareDate.Date.AddDays(daysFromNow))
             {
-                return string.Format(Translations.DaysFromNow, daysFromNow);
+                return string.Format(System.Globalization.CultureInfo.CurrentCulture, Translations.DaysFromNow, daysFromNow);
             }
 
             if (dateTime.Date == compareDate.Date.AddDays(0 - daysFromNow))
             {
-                return string.Format(Translations.DaysAgo, daysFromNow);
+                return string.Format(System.Globalization.CultureInfo.CurrentCulture, Translations.DaysAgo, daysFromNow);
             }
         }
 
-        return dateTime.ToString("dd MMMM");
+        return dateTime.ToString("dd MMMM", System.Globalization.CultureInfo.CurrentCulture);
     }
 }
