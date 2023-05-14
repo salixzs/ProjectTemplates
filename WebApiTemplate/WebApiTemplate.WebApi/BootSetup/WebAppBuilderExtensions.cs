@@ -144,18 +144,21 @@ public static class WebAppBuilderExtensions
     {
         if (builder.Environment.IsDevelopment())
         {
-            builder.Services.AddSwaggerDoc(
+            builder.Services.SwaggerDocument(
                 settings =>
                 {
-                    settings.Title = "WebApiTemplate";
-                    settings.Version = "v1.0";
-                    settings.DocumentName = "Version-1.0";
-                    settings.Description = "Here goes a longer and detailed description on API purpose and usage.";
-                    settings.EndpointFilter(EndpointDocumentationFilter);
-                    settings.GenerateEnumMappingDescription = true;
-                },
-                tagIndex: 0,
-                shortSchemaNames: true);
+                    settings.DocumentSettings = docCfg =>
+                    {
+                        docCfg.Title = "WebApiTemplate";
+                        docCfg.Version = "v1.0";
+                        docCfg.DocumentName = "Version-1.0";
+                        docCfg.Description = "Here goes a longer and detailed description on API purpose and usage.";
+                        docCfg.GenerateEnumMappingDescription = true;
+                    };
+                    settings.EndpointFilter = EndpointDocumentationFilter;
+                    settings.AutoTagPathSegmentIndex = 0;
+                    settings.ShortSchemaNames = true;
+                });
         }
 
         return builder;

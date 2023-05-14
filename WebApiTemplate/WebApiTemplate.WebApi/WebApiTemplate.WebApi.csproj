@@ -29,9 +29,9 @@
 	<!-- NuGet package references -->
 	<ItemGroup>
 		<PackageReference Include="ConfigurationValidation.AspNetCore" Version="1.0.0" />
-		<PackageReference Include="FastEndpoints" Version="5.9.0" />
-		<PackageReference Include="FastEndpoints.Security" Version="5.9.0" />
-		<PackageReference Include="FastEndpoints.Swagger" Version="5.9.0" />
+		<PackageReference Include="FastEndpoints" Version="5.10.0" />
+		<PackageReference Include="FastEndpoints.Security" Version="5.10.0" />
+		<PackageReference Include="FastEndpoints.Swagger" Version="5.10.0" />
 		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     <PackageReference Include="Roslynator.Analyzers" Version="4.3.0">
@@ -45,7 +45,7 @@
     <PackageReference Include="Salix.AspNetCore.FrontPage" Version="1.0.0" />
     <PackageReference Include="Salix.AspNetCore.HealthCheck" Version="1.0.0" />
     <PackageReference Include="Salix.AspNetCore.JsonExceptionHandler" Version="1.0.0" />
-		<PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
 		<PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
 	</ItemGroup>
 
