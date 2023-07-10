@@ -31,7 +31,7 @@ public class SystemFeedbacksGet : Endpoint<SystemFeedbackFilter, List<SystemFeed
                 "Returns existing - all or filtered feedbacks(s) or empty list if no feedbacks exist.");
             swagger.Response<ApiError>((int)HttpStatusCode.InternalServerError, "Error occurred in server during data retrieval.");
             swagger.ResponseExamples[(int)HttpStatusCode.InternalServerError] = EndpointHelpers.ExampleApiError();
-            var example = DomainFakesFactory.Instance.GetTestObject<SystemFeedback>();
+            var example = new DomainFakesFactory().GetTestObject<SystemFeedback>();
             swagger.ResponseExamples[(int)HttpStatusCode.OK] = example;
         });
     }

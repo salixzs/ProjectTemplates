@@ -2,7 +2,6 @@ using WebApiTemplate.CoreLogic.Handlers.SystemNotifications;
 using WebApiTemplate.Crosscut.Services;
 using WebApiTemplate.Database.Orm;
 using WebApiTemplate.Database.Orm.Entities;
-using WebApiTemplate.Database.Orm.Fakes;
 
 namespace WebApiTemplate.CoreLogic.Tests.Handlers.SystemNotifications;
 
@@ -110,19 +109,19 @@ public class QueriesTests : CoreLogicTestBase
     private void PrepareDatabase()
     {
         // Active
-        var sn1 = EntityFakesFactory.Instance.GetTestObject<SystemNotificationRecord>();
-        var sn1m = EntityFakesFactory.Instance.GetTestObject<SystemNotificationMessageRecord>();
+        var sn1 = DatabaseDataFaker.GetTestObject<SystemNotificationRecord>();
+        var sn1m = DatabaseDataFaker.GetTestObject<SystemNotificationMessageRecord>();
         sn1.Id = 1010;
         sn1.Messages.Add(sn1m);
 
         // Inactive
-        var sn2 = EntityFakesFactory.Instance.GetTestObject<SystemNotificationRecord>();
+        var sn2 = DatabaseDataFaker.GetTestObject<SystemNotificationRecord>();
         sn2.Id = 1011;
         sn2.StartTime = DateTimeOffset.Now.AddDays(-1);
         sn2.EndTime = DateTimeOffset.Now.AddDays(-1).AddMinutes(Random.Shared.Next(5, 30));
         sn2.EmphasizeSince = DateTimeOffset.Now.AddDays(-1).AddMinutes(Random.Shared.Next(15, 25));
         sn2.CountdownSince = DateTimeOffset.Now.AddDays(-1).AddMinutes(Random.Shared.Next(20, 27));
-        var sn2m = EntityFakesFactory.Instance.GetTestObject<SystemNotificationMessageRecord>();
+        var sn2m = DatabaseDataFaker.GetTestObject<SystemNotificationMessageRecord>();
         sn2.Messages.Add(sn2m);
 
         // Testable

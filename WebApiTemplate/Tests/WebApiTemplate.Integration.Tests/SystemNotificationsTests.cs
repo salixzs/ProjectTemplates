@@ -2,7 +2,6 @@ using System.Globalization;
 using System.Net.Http.Json;
 using Salix.AspNetCore.JsonExceptionHandler;
 using WebApiTemplate.Database.Orm;
-using WebApiTemplate.Domain.Fakes;
 using WebApiTemplate.Domain.SystemNotifications;
 using System.Text.Json;
 
@@ -26,14 +25,14 @@ public class SystemNotificationsTests : IntegrationTestBase
         notifications.Should().BeEmpty();
 
         // Create 1 active notification
-        var activeNotification = DomainFakesFactory.Instance.GetTestObject<SystemNotification>();
+        var activeNotification = DomainDataFaker.GetTestObject<SystemNotification>();
         activeNotification.StartTime = DateTimeOffset.Now.AddDays(-1);
         activeNotification.EndTime = DateTimeOffset.Now.AddDays(1);
         activeNotification.EmphasizeSince = null;
         activeNotification.CountdownSince = null;
         activeNotification.Type = Enumerations.SystemNotificationType.Normal;
         activeNotification.EmphasizeType = null;
-        activeNotification.Messages.Add(DomainFakesFactory.Instance.GetTestObject<SystemNotificationMessage>());
+        activeNotification.Messages.Add(DomainDataFaker.GetTestObject<SystemNotificationMessage>());
         var activeNotificationResult = await apiClient.PostAsJsonAsync(Urls.SystemNotifications.BaseUri, activeNotification);
         activeNotificationResult.Should().NotBeNull();
         activeNotificationResult.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
@@ -42,14 +41,14 @@ public class SystemNotificationsTests : IntegrationTestBase
         activeNotificationId.Should().BeGreaterThanOrEqualTo(1000);
 
         // Create 1 expired notification
-        var oldNotification = DomainFakesFactory.Instance.GetTestObject<SystemNotification>();
+        var oldNotification = DomainDataFaker.GetTestObject<SystemNotification>();
         oldNotification.StartTime = DateTimeOffset.Now.AddDays(-5);
         oldNotification.EndTime = DateTimeOffset.Now.AddDays(-4);
         oldNotification.EmphasizeSince = DateTimeOffset.Now.AddDays(-4).AddHours(-1);
         oldNotification.CountdownSince = DateTimeOffset.Now.AddDays(-4).AddMinutes(-10);
         oldNotification.Type = Enumerations.SystemNotificationType.Warning;
         oldNotification.EmphasizeType = Enumerations.SystemNotificationType.Critical;
-        oldNotification.Messages.Add(DomainFakesFactory.Instance.GetTestObject<SystemNotificationMessage>());
+        oldNotification.Messages.Add(DomainDataFaker.GetTestObject<SystemNotificationMessage>());
         var oldNotificationResult = await apiClient.PostAsJsonAsync(Urls.SystemNotifications.BaseUri, oldNotification);
         var oldNotificationId = Convert.ToInt32(await oldNotificationResult.Content.ReadAsStringAsync(), CultureInfo.InvariantCulture);
         oldNotificationId.Should().BeGreaterThanOrEqualTo(1000);
@@ -73,7 +72,7 @@ public class SystemNotificationsTests : IntegrationTestBase
         notifications.Should().HaveCount(2);
 
         // Update active
-        var updatedNotification = DomainFakesFactory.Instance.GetTestObject<SystemNotification>();
+        var updatedNotification = DomainDataFaker.GetTestObject<SystemNotification>();
         updatedNotification.Id = activeNotificationId;
         updatedNotification.StartTime = DateTimeOffset.Now.AddHours(-2);
         updatedNotification.EndTime = DateTimeOffset.Now.AddDays(2);
@@ -81,7 +80,7 @@ public class SystemNotificationsTests : IntegrationTestBase
         updatedNotification.CountdownSince = DateTimeOffset.Now.AddDays(1).AddHours(12);
         updatedNotification.Type = Enumerations.SystemNotificationType.Warning;
         updatedNotification.EmphasizeType = Enumerations.SystemNotificationType.Critical;
-        updatedNotification.Messages.Add(DomainFakesFactory.Instance.GetTestObject<SystemNotificationMessage>());
+        updatedNotification.Messages.Add(DomainDataFaker.GetTestObject<SystemNotificationMessage>());
         var updatedNotificationResult = await apiClient.PatchAsJsonAsync(Urls.SystemNotifications.BaseUri, updatedNotification);
         updatedNotificationResult.Should().NotBeNull();
         updatedNotificationResult.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
@@ -143,11 +142,11 @@ public class SystemNotificationsTests : IntegrationTestBase
     public async Task PatchValidationError_MissingId()
     {
         var apiClient = Factory.GetHttpClient();
-        var updated = DomainFakesFactory.Instance.GetTestObject<SystemNotification>();
+        var updated = DomainDataFaker.GetTestObject<SystemNotification>();
         updated.Id = 0;
         updated.StartTime = DateTimeOffset.Now.AddDays(-1);
         updated.EndTime = DateTimeOffset.Now.AddDays(1);
-        updated.Messages.Add(DomainFakesFactory.Instance.GetTestObject<SystemNotificationMessage>());
+        updated.Messages.Add(DomainDataFaker.GetTestObject<SystemNotificationMessage>());
         var failedCreateResult = await apiClient.PatchAsJsonAsync(Urls.SystemNotifications.BaseUri, updated);
         failedCreateResult.Should().NotBeNull();
         failedCreateResult.StatusCode.Should().Be(System.Net.HttpStatusCode.UnprocessableEntity);

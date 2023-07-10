@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Logging;
 using WebApiTemplate.Database.Orm;
+using WebApiTemplate.Database.Orm.Fakes;
+using WebApiTemplate.Domain.Fakes;
 
 namespace WebApiTemplate.CoreLogic.Tests;
 
@@ -10,6 +12,30 @@ namespace WebApiTemplate.CoreLogic.Tests;
 /// </summary>
 public abstract class CoreLogicTestBase : IDisposable
 {
+    private EntityFakesFactory? _databaseObjectsFakesFactory;
+
+    /// <summary>
+    /// Use Factory in tests to get fakes of database objects and their lists.
+    /// <code>
+    /// GetTestObject&lt;User&gt;();
+    /// GetTestObjects&lt;Account&gt;(10, 30);
+    /// </code>
+    /// </summary>
+    protected EntityFakesFactory DatabaseDataFaker =>
+        _databaseObjectsFakesFactory ??= new EntityFakesFactory();
+
+    private DomainFakesFactory? _domainObjectsFakesFactory;
+
+    /// <summary>
+    /// Use Factory in tests to get fakes of Domain objects and their lists.
+    /// <code>
+    /// GetTestObject&lt;User&gt;();
+    /// GetTestObjects&lt;Account&gt;(10, 30);
+    /// </code>
+    /// </summary>
+    protected DomainFakesFactory DomainDataFaker =>
+        _domainObjectsFakesFactory ??= new DomainFakesFactory();
+
     /// <summary>
     /// Set to TRUE to output transaction events to logger.
     /// </summary>

@@ -128,7 +128,7 @@ public static class HumanizerExtensions
         {
             if (romanNumerals[i].Length < int.Parse(inputNumberDigits[i].ToString(), System.Globalization.CultureInfo.CurrentCulture))
             {
-                throw new ArgumentOutOfRangeException(errorMsg);
+                throw new ArgumentOutOfRangeException(nameof(number), errorMsg);
             }
 
             romanNumeral.Append(romanNumerals[i][int.Parse(inputNumberDigits[i].ToString(), System.Globalization.CultureInfo.CurrentCulture)]);

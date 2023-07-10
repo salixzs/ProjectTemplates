@@ -3,8 +3,6 @@ using WebApiTemplate.CoreLogic.Handlers.SystemNotifications;
 using WebApiTemplate.Crosscut.Services;
 using WebApiTemplate.Database.Orm;
 using WebApiTemplate.Database.Orm.Entities;
-using WebApiTemplate.Database.Orm.Fakes;
-using WebApiTemplate.Domain.Fakes;
 using WebApiTemplate.Domain.SystemNotifications;
 
 namespace WebApiTemplate.CoreLogic.Tests.Handlers.SystemNotifications;
@@ -25,8 +23,8 @@ public class CommandsTests : CoreLogicTestBase
     [Fact]
     public async Task Create_Succeeds()
     {
-        var testNotification = DomainFakesFactory.Instance.GetTestObject<SystemNotification>();
-        testNotification.Messages.Add(DomainFakesFactory.Instance.GetTestObject<SystemNotificationMessage>());
+        var testNotification = DomainDataFaker.GetTestObject<SystemNotification>();
+        testNotification.Messages.Add(DomainDataFaker.GetTestObject<SystemNotificationMessage>());
         var result = await _sut.Create(testNotification, default);
         result.Should().Be(1);
 
@@ -59,7 +57,7 @@ public class CommandsTests : CoreLogicTestBase
             EmphasizeType = Enumerations.SystemNotificationType.Success,
             CountdownSince = new DateTimeOffset(2022, 3, 1, 14, 4, 4, TimeSpan.Zero),
         };
-        initialNotification.Messages.Add(EntityFakesFactory.Instance.GetTestObject<SystemNotificationMessageRecord>());
+        initialNotification.Messages.Add(DatabaseDataFaker.GetTestObject<SystemNotificationMessageRecord>());
         _db.SystemNotifications.Add(initialNotification);
         _db.SaveChanges();
 
@@ -110,7 +108,7 @@ public class CommandsTests : CoreLogicTestBase
             EmphasizeType = Enumerations.SystemNotificationType.Success,
             CountdownSince = new DateTimeOffset(2022, 3, 1, 14, 4, 4, TimeSpan.Zero),
         };
-        initialNotification.Messages.Add(EntityFakesFactory.Instance.GetTestObject<SystemNotificationMessageRecord>());
+        initialNotification.Messages.Add(DatabaseDataFaker.GetTestObject<SystemNotificationMessageRecord>());
         _db.SystemNotifications.Add(initialNotification);
         _db.SaveChanges();
 
@@ -152,7 +150,7 @@ public class CommandsTests : CoreLogicTestBase
             EmphasizeType = Enumerations.SystemNotificationType.Success,
             CountdownSince = new DateTimeOffset(2022, 3, 1, 14, 4, 4, TimeSpan.Zero),
         };
-        initialNotification.Messages.Add(EntityFakesFactory.Instance.GetTestObject<SystemNotificationMessageRecord>());
+        initialNotification.Messages.Add(DatabaseDataFaker.GetTestObject<SystemNotificationMessageRecord>());
         _db.SystemNotifications.Add(initialNotification);
         _db.SaveChanges();
 

@@ -28,8 +28,9 @@ public class SingleSystemNotificationGet : EndpointWithoutRequest<SystemNotifica
             swagger.Response((int)HttpStatusCode.NotFound, "System notification record by given ID was not found.");
             swagger.Response<ApiError>((int)HttpStatusCode.InternalServerError, "Error occurred in server during data retrieval.");
             swagger.ResponseExamples[(int)HttpStatusCode.InternalServerError] = EndpointHelpers.ExampleApiError();
-            var example = DomainFakesFactory.Instance.GetTestObject<SystemNotification>();
-            example.Messages.Add(DomainFakesFactory.Instance.GetTestObject<SystemNotificationMessage>());
+            var domainFakes = new DomainFakesFactory();
+            var example = domainFakes.GetTestObject<SystemNotification>();
+            example.Messages.Add(domainFakes.GetTestObject<SystemNotificationMessage>());
             swagger.ResponseExamples[(int)HttpStatusCode.OK] = example;
         });
     }
