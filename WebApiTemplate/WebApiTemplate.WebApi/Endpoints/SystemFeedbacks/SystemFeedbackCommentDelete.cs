@@ -2,12 +2,8 @@ using WebApiTemplate.CoreLogic.Handlers.SystemFeedbacks;
 
 namespace WebApiTemplate.WebApi.Endpoints.SystemNotifications;
 
-public class SystemFeedbackCommentDelete : EndpointWithoutRequest
+public class SystemFeedbackCommentDelete(ISystemFeedbackCommentCommands commandHandler) : EndpointWithoutRequest
 {
-    private readonly ISystemFeedbackCommentCommands _commandHandler;
-
-    public SystemFeedbackCommentDelete(ISystemFeedbackCommentCommands commandHandler) => _commandHandler = commandHandler;
-
     public override void Configure()
     {
         Delete(Urls.SystemFeedbacks.CommentWithId);
@@ -33,7 +29,7 @@ public class SystemFeedbackCommentDelete : EndpointWithoutRequest
     public override async Task HandleAsync(CancellationToken cancellationToken)
     {
         var commentId = Route<int>("commentId");
-        await _commandHandler.Delete(commentId, cancellationToken);
+        await commandHandler.Delete(commentId, cancellationToken);
         await SendNoContentAsync(cancellationToken);
     }
 }

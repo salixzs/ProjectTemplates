@@ -109,10 +109,10 @@ public static class HumanizerExtensions
 
         var romanNumerals = new string[][]
         {
-            new string[] { string.Empty, "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" }, // ones
-            new string[] { string.Empty, "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" }, // tens
-            new string[] { string.Empty, "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" }, // hundreds
-            new string[] { string.Empty, "M", "MM", "MMM" }, // thousands
+            [string.Empty, "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"], // ones
+            [string.Empty, "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"], // tens
+            [string.Empty, "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"], // hundreds
+            [string.Empty, "M", "MM", "MMM"], // thousands
         };
 
         // split integer string into array and reverse array

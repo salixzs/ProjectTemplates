@@ -5,18 +5,13 @@ using WebApiTemplate.Database.Orm.Entities;
 
 namespace WebApiTemplate.CoreLogic.Handlers.SystemNotifications;
 
-/// <inheritdoc/>
-public sealed class SystemNotificationForHealthCheck : ISystemNotificationForHealthCheck
+/// <inheritdoc cref="ISystemNotificationForHealthCheck"/>
+public sealed class SystemNotificationForHealthCheck(WebApiTemplateDbContext databaseContext) : ISystemNotificationForHealthCheck
 {
-    private readonly WebApiTemplateDbContext _db;
-
-    /// <inheritdoc cref="ISystemNotificationForHealthCheck"/>
-    public SystemNotificationForHealthCheck(WebApiTemplateDbContext databaseContext) => _db = databaseContext;
-
     /// <inheritdoc/>
     public async Task HandleHealthCheckSystemNotification(HealthReport healthReport, string? moreInfoUrl, CancellationToken cancellationToken)
     {
-        var healthCheckSystemNotification = await _db.SystemNotifications
+        var healthCheckSystemNotification = await databaseContext.SystemNotifications
             .Include(db => db.Messages)
             .Where(db => db.IsHealthCheck)
             .FirstOrDefaultAsync(cancellationToken);
@@ -25,8 +20,8 @@ public sealed class SystemNotificationForHealthCheck : ISystemNotificationForHea
         {
             if (healthCheckSystemNotification != null)
             {
-                _db.SystemNotifications.Remove(healthCheckSystemNotification);
-                await _db.SaveChangesAsync(cancellationToken);
+                databaseContext.SystemNotifications.Remove(healthCheckSystemNotification);
+                await databaseContext.SaveChangesAsync(cancellationToken);
             }
 
             return;
@@ -35,7 +30,7 @@ public sealed class SystemNotificationForHealthCheck : ISystemNotificationForHea
         var currentTime = DateTimeOffset.UtcNow;
         if (healthCheckSystemNotification == null)
         {
-            _db.SystemNotifications.Add(
+            databaseContext.SystemNotifications.Add(
                 new SystemNotificationRecord
                 {
                     StartTime = currentTime,
@@ -66,10 +61,12 @@ public sealed class SystemNotificationForHealthCheck : ISystemNotificationForHea
             healthCheckSystemNotification.MoreInfoUrl = moreInfoUrl;
         }
 
-        await _db.SaveChangesAsync(cancellationToken);
+        await databaseContext.SaveChangesAsync(cancellationToken);
     }
 
+#pragma warning disable IDE0071 // Simplify interpolation
     private static string CompileMessage(HealthReport healthReport) =>
         @$"Health check reports {healthReport.Status.ToString()} status.
 Application may be broken or limited in its functionality. Last check: {DateTime.UtcNow:dd. MMM HH:mm}";
+#pragma warning restore IDE0071 // Simplify interpolation
 }

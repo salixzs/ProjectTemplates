@@ -7,19 +7,9 @@ using WebApiTemplate.Translations;
 namespace WebApiTemplate.CoreLogic.Handlers.SystemFeedbacks;
 
 /// <inheritdoc cref="ISystemFeedbackCommands"/>
-public sealed class SystemFeedbackCommands : ISystemFeedbackCommands
+public sealed class SystemFeedbackCommands(WebApiTemplateDbContext databaseContext, ITranslate<ErrorMessageTranslations> l10n)
+    : ISystemFeedbackCommands
 {
-    private readonly WebApiTemplateDbContext _db;
-
-    private readonly ITranslate<ErrorMessageTranslations> _l10n;
-
-    /// <inheritdoc cref="ISystemFeedbackCommands"/>
-    public SystemFeedbackCommands(WebApiTemplateDbContext databaseContext, ITranslate<ErrorMessageTranslations> l10n)
-    {
-        _db = databaseContext;
-        _l10n = l10n;
-    }
-
     /// <inheritdoc/>
     public async Task<int> Create(Domain.SystemFeedbacks.SystemFeedback feedback, CancellationToken cancellationToken)
     {
@@ -36,8 +26,8 @@ public sealed class SystemFeedbackCommands : ISystemFeedbackCommands
             ModifiedAt = DateTimeOffset.Now
         };
 
-        _db.SystemFeedbacks.Add(newFeedbackRecord);
-        await _db.SaveChangesAsync(cancellationToken);
+        databaseContext.SystemFeedbacks.Add(newFeedbackRecord);
+        await databaseContext.SaveChangesAsync(cancellationToken);
         return newFeedbackRecord.Id;
     }
 
@@ -45,9 +35,9 @@ public sealed class SystemFeedbackCommands : ISystemFeedbackCommands
     public async Task Update(Domain.SystemFeedbacks.SystemFeedback feedback, CancellationToken cancellationToken)
     {
         // TODO: Add user/auth
-        var feedbackRecord = _db.SystemFeedbacks.FirstOrDefault(f => f.Id == feedback.Id)
+        var feedbackRecord = databaseContext.SystemFeedbacks.FirstOrDefault(f => f.Id == feedback.Id)
             ?? throw new BusinessException(
-                _l10n[
+                l10n[
                     nameof(ErrorMessageTranslations.Record_NotFoundById),
                     "System feedback",
                     feedback.Id],
@@ -61,13 +51,13 @@ public sealed class SystemFeedbackCommands : ISystemFeedbackCommands
         feedback.Status = feedback.Status;
         feedbackRecord.ModifiedAt = DateTimeOffset.Now;
 
-        await _db.SaveChangesAsync(cancellationToken);
+        await databaseContext.SaveChangesAsync(cancellationToken);
     }
 
     /// <inheritdoc/>
     public async Task Delete(int feedbackId, CancellationToken cancellationToken)
     {
-        var feedbackRecord = await _db.SystemFeedbacks
+        var feedbackRecord = await databaseContext.SystemFeedbacks
             .Where(feedback => feedback.Id == feedbackId)
             .FirstOrDefaultAsync(cancellationToken);
 
@@ -76,7 +66,7 @@ public sealed class SystemFeedbackCommands : ISystemFeedbackCommands
             return;
         }
 
-        _db.SystemFeedbacks.Remove(feedbackRecord);
-        await _db.SaveChangesAsync(cancellationToken);
+        databaseContext.SystemFeedbacks.Remove(feedbackRecord);
+        await databaseContext.SaveChangesAsync(cancellationToken);
     }
 }

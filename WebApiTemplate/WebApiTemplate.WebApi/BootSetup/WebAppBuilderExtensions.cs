@@ -81,7 +81,7 @@ public static class WebAppBuilderExtensions
 
         builder.Services.AddCors(options => options.AddDefaultPolicy(
             builder => builder
-                .WithOrigins(securityOptions.Cors.Origins.ToArray())
+                .WithOrigins([.. securityOptions.Cors.Origins])
                 .WithExposedHeaders("Content-Disposition")
                 .AllowAnyHeader()
                 .AllowAnyMethod()));

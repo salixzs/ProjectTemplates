@@ -4,12 +4,8 @@ using WebApiTemplate.WebApi.Endpoints.SystemNotifications;
 
 namespace WebApiTemplate.WebApi.Endpoints.SystemFeedbacks;
 
-public class SystemFeedbackCommentPost : Endpoint<SystemFeedbackComment>
+public class SystemFeedbackCommentPost(ISystemFeedbackCommentCommands commandHandler) : Endpoint<SystemFeedbackComment>
 {
-    private readonly ISystemFeedbackCommentCommands _commandHandler;
-
-    public SystemFeedbackCommentPost(ISystemFeedbackCommentCommands commandHandler) => _commandHandler = commandHandler;
-
     public override void Configure()
     {
         Post(Urls.SystemFeedbacks.Comment);
@@ -46,7 +42,7 @@ public class SystemFeedbackCommentPost : Endpoint<SystemFeedbackComment>
     public override async Task HandleAsync(SystemFeedbackComment feedbackComment, CancellationToken cancellationToken)
     {
         EndpointHelpers.ThrowIfRequestValidationFailed(ValidationFailed, ValidationFailures, GetType().Name);
-        var newId = await _commandHandler.Create(feedbackComment, cancellationToken);
+        var newId = await commandHandler.Create(feedbackComment, cancellationToken);
         await SendCreatedAtAsync<SingleSystemNotificationGet>(
             routeValues: new { id = feedbackComment.SystemFeedbackId },
             responseBody: newId,

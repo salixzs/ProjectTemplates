@@ -21,5 +21,5 @@ public class StringExtensionsIsAlphaOnlyTests
     [InlineData("Väinöstø Åstæveinåland", true)]
     [InlineData("Pądękįrkų Žargōnė", true)]
     [InlineData("Юрий Преснъяков", true)]
-    public void StringExtTests_IsAlphaOnly_AsExpected(string testable, bool expected) => testable.IsAlphaOnly().Should().Be(expected);
+    public void StringExtTests_IsAlphaOnly_AsExpected(string? testable, bool expected) => testable.IsAlphaOnly().Should().Be(expected);
 }

@@ -5,12 +5,8 @@ using WebApiTemplate.Domain.SystemFeedbacks;
 
 namespace WebApiTemplate.WebApi.Endpoints.SystemFeedbacks;
 
-public class SystemFeedbacksGet : Endpoint<SystemFeedbackFilter, List<SystemFeedback>>
+public class SystemFeedbacksGet(ISystemFeedbackQueries queryHandler) : Endpoint<SystemFeedbackFilter, List<SystemFeedback>>
 {
-    private readonly ISystemFeedbackQueries _queryHandler;
-
-    public SystemFeedbacksGet(ISystemFeedbackQueries queryHandler) => _queryHandler = queryHandler;
-
     public override void Configure()
     {
         Get(Urls.SystemFeedbacks.BaseUri);
@@ -38,7 +34,7 @@ public class SystemFeedbacksGet : Endpoint<SystemFeedbackFilter, List<SystemFeed
 
     public override async Task HandleAsync([FromQuery] SystemFeedbackFilter filter, CancellationToken cancellationToken)
     {
-        var allNotifications = await _queryHandler.GetFeedbacks(filter, cancellationToken);
+        var allNotifications = await queryHandler.GetFeedbacks(filter, cancellationToken);
         await SendOkAsync(allNotifications, cancellationToken);
     }
 }

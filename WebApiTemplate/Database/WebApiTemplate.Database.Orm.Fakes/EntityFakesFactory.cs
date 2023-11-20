@@ -13,9 +13,9 @@ namespace WebApiTemplate.Database.Orm.Fakes;
 /// </summary>
 public sealed class EntityFakesFactory
 {
-    private readonly Dictionary<string, Func<object>> _instantiators = new();
+    private readonly Dictionary<string, Func<object>> _instantiators = [];
 
-    private readonly Dictionary<string, object> _instantiatedFakes = new();
+    private readonly Dictionary<string, object> _instantiatedFakes = [];
 
     /// <summary>
     /// Use Factory in Tests/Docs to get fake Database Entities and their lists.

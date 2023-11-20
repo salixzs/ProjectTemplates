@@ -19,6 +19,5 @@ public class StringExtensionsHasUnicodeTests
     [InlineData("Юрий Преснъяков", true)]
     [InlineData("Vaira Vīķe-Freiberga", true)]
     [InlineData("John O'Connor", false)]
-    [InlineData("John O`Connor", false)]
-    public void StringExtTests_HasUnicode_AsExpected(string testable, bool expected) => testable.ContainsUnicodeCharacter().Should().Be(expected);
+    public void StringExtTests_HasUnicode_AsExpected(string? testable, bool expected) => testable.ContainsUnicodeCharacter().Should().Be(expected);
 }

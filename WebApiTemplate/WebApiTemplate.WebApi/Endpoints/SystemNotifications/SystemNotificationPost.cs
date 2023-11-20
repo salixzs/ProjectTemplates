@@ -3,12 +3,8 @@ using WebApiTemplate.Domain.SystemNotifications;
 
 namespace WebApiTemplate.WebApi.Endpoints.SystemNotifications;
 
-public class SystemNotificationPost : Endpoint<SystemNotification, int>
+public class SystemNotificationPost(ISystemNotificationCommands commandHandler) : Endpoint<SystemNotification, int>
 {
-    private readonly ISystemNotificationCommands _commandHandler;
-
-    public SystemNotificationPost(ISystemNotificationCommands commandHandler) => _commandHandler = commandHandler;
-
     public override void Configure()
     {
         Post(Urls.SystemNotifications.BaseUri);
@@ -42,8 +38,8 @@ public class SystemNotificationPost : Endpoint<SystemNotification, int>
                 CountdownSince = DateTime.UtcNow.AddMinutes(9),
                 EmphasizeType = Enumerations.SystemNotificationType.Critical,
                 Type = Enumerations.SystemNotificationType.Warning,
-                Messages = new List<SystemNotificationMessage>
-                {
+                Messages =
+                [
                     new SystemNotificationMessage
                     {
                         Id = 0,
@@ -56,7 +52,7 @@ public class SystemNotificationPost : Endpoint<SystemNotification, int>
                         Language = "lv",
                         Message = "Drīz sāksies apkopes darbi."
                     }
-                }
+                ]
             };
         });
     }
@@ -64,7 +60,7 @@ public class SystemNotificationPost : Endpoint<SystemNotification, int>
     public override async Task HandleAsync(SystemNotification notification, CancellationToken cancellationToken)
     {
         EndpointHelpers.ThrowIfRequestValidationFailed(ValidationFailed, ValidationFailures, GetType().Name);
-        var newId = await _commandHandler.Create(notification, cancellationToken);
+        var newId = await commandHandler.Create(notification, cancellationToken);
         await SendCreatedAtAsync<SingleSystemNotificationGet>(routeValues: new { id = newId }, responseBody: newId, cancellation: cancellationToken);
     }
 }

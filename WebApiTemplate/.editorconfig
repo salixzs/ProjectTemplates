@@ -1075,4 +1075,3 @@ dotnet_diagnostic.CA1001.severity = error
 # Logging should be specific format
 dotnet_diagnostic.CA2254.severity = suggestion
 
-

@@ -7,12 +7,9 @@ using System.Text.Json;
 
 namespace WebApiTemplate.Integration.Tests;
 
-public class SystemNotificationsTests : IntegrationTestBase
+public class SystemNotificationsTests(IntegrationTestFactory<Program, WebApiTemplateDbContext> factory)
+        : IntegrationTestBase(factory)
 {
-    public SystemNotificationsTests(IntegrationTestFactory<Program, WebApiTemplateDbContext> factory) : base(factory)
-    {
-    }
-
     [Fact]
     [Trait("Category", "Integration")]
     public async Task FullLifecycle()

@@ -71,7 +71,7 @@ public class SystemFeedback
     /// <summary>
     /// Comments to user feedback. Ignored in feedback update operations.
     /// </summary>
-    public List<SystemFeedbackComment> Comments { get; set; } = new List<SystemFeedbackComment>();
+    public List<SystemFeedbackComment> Comments { get; set; } = [];
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     [ExcludeFromCodeCoverage]

@@ -2,12 +2,8 @@ using WebApiTemplate.CoreLogic.Handlers.SystemNotifications;
 
 namespace WebApiTemplate.WebApi.Endpoints.SystemNotifications;
 
-public class SystemNotificationDelete : EndpointWithoutRequest
+public class SystemNotificationDelete(ISystemNotificationCommands commandHandler) : EndpointWithoutRequest
 {
-    private readonly ISystemNotificationCommands _commandHandler;
-
-    public SystemNotificationDelete(ISystemNotificationCommands commandHandler) => _commandHandler = commandHandler;
-
     public override void Configure()
     {
         Delete(Urls.SystemNotifications.WithId);
@@ -33,7 +29,7 @@ public class SystemNotificationDelete : EndpointWithoutRequest
     public override async Task HandleAsync(CancellationToken cancellationToken)
     {
         var notificationId = Route<int>("id");
-        await _commandHandler.Delete(notificationId, cancellationToken);
+        await commandHandler.Delete(notificationId, cancellationToken);
         await SendNoContentAsync(cancellationToken);
     }
 }

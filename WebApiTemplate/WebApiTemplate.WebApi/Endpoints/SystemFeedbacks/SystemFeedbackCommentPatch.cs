@@ -3,12 +3,8 @@ using WebApiTemplate.Domain.SystemFeedbacks;
 
 namespace WebApiTemplate.WebApi.Endpoints.SystemFeedbacks;
 
-public class SystemFeedbackCommentPatch : Endpoint<SystemFeedbackComment>
+public class SystemFeedbackCommentPatch(ISystemFeedbackCommentCommands commandHandler) : Endpoint<SystemFeedbackComment>
 {
-    private readonly ISystemFeedbackCommentCommands _commandHandler;
-
-    public SystemFeedbackCommentPatch(ISystemFeedbackCommentCommands commandHandler) => _commandHandler = commandHandler;
-
     public override void Configure()
     {
         Patch(Urls.SystemFeedbacks.Comment);
@@ -43,7 +39,7 @@ public class SystemFeedbackCommentPatch : Endpoint<SystemFeedbackComment>
     public override async Task HandleAsync(SystemFeedbackComment feedbackComment, CancellationToken cancellationToken)
     {
         EndpointHelpers.ThrowIfRequestValidationFailed(ValidationFailed, ValidationFailures, GetType().Name);
-        await _commandHandler.Update(feedbackComment, cancellationToken);
+        await commandHandler.Update(feedbackComment, cancellationToken);
         await SendOkAsync(cancellation: cancellationToken);
     }
 }

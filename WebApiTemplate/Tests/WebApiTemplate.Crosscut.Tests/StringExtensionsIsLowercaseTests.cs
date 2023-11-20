@@ -24,7 +24,7 @@ public class StringExtensionsIsLowercaseTests
     [InlineData("This is Sentence.", false)]
     [InlineData("SCREAMING SENTENCE.", false)]
     [InlineData("shift key is not working.", true)]
-    public void StringExtTests_IsUppercase_AsExpected(string testable, bool expected) =>
+    public void StringExtTests_IsLowercase_AsExpected(string? testable, bool expected) =>
         testable.IsLowercase().Should().Be(expected);
 
     [Theory]
@@ -44,6 +44,6 @@ public class StringExtensionsIsLowercaseTests
     [InlineData("This is Sentence.", 2, true)]
     [InlineData("SCREAMING SENTENCE.", 5, false)]
     [InlineData("shift key is not working.", 3, true)]
-    public void StringExtTests_IsUppercaseAllowed_AsExpected(string testable, int allowed, bool expected) =>
+    public void StringExtTests_IsLowercaseAllowed_AsExpected(string? testable, int allowed, bool expected) =>
         testable.IsLowercase(allowed).Should().Be(expected);
 }

@@ -79,7 +79,7 @@ public class SystemNotification
     /// <summary>
     /// Messages themselves with language codes they are written into.
     /// </summary>
-    public virtual List<SystemNotificationMessage> Messages { get; set; } = new List<SystemNotificationMessage>();
+    public virtual List<SystemNotificationMessage> Messages { get; set; } = [];
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     [ExcludeFromCodeCoverage]

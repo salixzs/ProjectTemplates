@@ -3,12 +3,8 @@ using WebApiTemplate.Crosscut.Extensions;
 
 namespace WebApiTemplate.Crosscut.Tests;
 
-public class HumanizerDateStringTests
+public class HumanizerDateStringTests(ITestOutputHelper output)
 {
-    private readonly ITestOutputHelper _output;
-
-    public HumanizerDateStringTests(ITestOutputHelper output) => _output = output;
-
     [Theory, MemberData(nameof(DateTimeToStringHumanEnglishTestData))]
     public void ToStringHuman_Value_ExpectedEnglish(DateTime dateTime, int textDays, DateTime? relativeDate, string expected)
     {
@@ -16,11 +12,11 @@ public class HumanizerDateStringTests
         Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
         var compareDate = relativeDate ?? DateTime.Now;
 #pragma warning disable CA1305 // Specify IFormatProvider
-        _output.WriteLine("DateTime: " + dateTime.ToString("dd.MM.yyyy HH:mm"));
-        _output.WriteLine("Compare2: " + compareDate.ToString("dd.MM.yyyy HH:mm"));
-        _output.WriteLine("  Differ: " + (dateTime - compareDate).ToString());
-        _output.WriteLine("    Days: " + textDays.ToString());
-        _output.WriteLine("Expected: " + expected);
+        output.WriteLine("DateTime: " + dateTime.ToString("dd.MM.yyyy HH:mm"));
+        output.WriteLine("Compare2: " + compareDate.ToString("dd.MM.yyyy HH:mm"));
+        output.WriteLine("  Differ: " + (dateTime - compareDate).ToString());
+        output.WriteLine("    Days: " + textDays.ToString());
+        output.WriteLine("Expected: " + expected);
         dateTime.ToStringHuman(textDays, relativeDate).Should().Be(expected);
 #pragma warning restore CA1305 // Specify IFormatProvider
     }
@@ -63,11 +59,11 @@ public class HumanizerDateStringTests
         Thread.CurrentThread.CurrentUICulture = new CultureInfo("nb-NO");
         var compareDate = relativeDate ?? DateTime.Now;
 #pragma warning disable CA1305 // Specify IFormatProvider
-        _output.WriteLine("DateTime: " + dateTime.ToString("dd.MM.yyyy HH:mm"));
-        _output.WriteLine("Compare2: " + compareDate.ToString("dd.MM.yyyy HH:mm"));
-        _output.WriteLine("  Differ: " + (dateTime - compareDate).ToString());
-        _output.WriteLine("    Days: " + textDays.ToString());
-        _output.WriteLine("Expected: " + expected);
+        output.WriteLine("DateTime: " + dateTime.ToString("dd.MM.yyyy HH:mm"));
+        output.WriteLine("Compare2: " + compareDate.ToString("dd.MM.yyyy HH:mm"));
+        output.WriteLine("  Differ: " + (dateTime - compareDate).ToString());
+        output.WriteLine("    Days: " + textDays.ToString());
+        output.WriteLine("Expected: " + expected);
         dateTime.ToStringHuman(textDays, relativeDate).Should().Be(expected);
 #pragma warning restore CA1305 // Specify IFormatProvider
     }

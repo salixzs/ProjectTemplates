@@ -35,11 +35,11 @@ internal static class EndpointHelpers
             RequestedUrl = "/api/MyEndpoint",
             Status = 500,
             Title = "This is example error message",
-            StackTrace = new List<string>
-                {
+            StackTrace =
+                [
                     "/Solution/Project/MyClass.cs, MyMethod, Line 19 (Col:8)",
                     "/Solution/Project/MyOtherClass.cs, MyOtherMethod, Line 32 (Col:15)"
-                }
+                ]
         };
 
     public static ApiError ExampleApiValidationError() =>
@@ -50,9 +50,9 @@ internal static class EndpointHelpers
             RequestedUrl = "/api/MyEndpoint",
             Status = 422,
             Title = "There are problems with request data.",
-            StackTrace = new List<string>(),
-            ValidationErrors = new List<ApiDataValidationError>
-            {
+            StackTrace = [],
+            ValidationErrors =
+            [
                 new ApiDataValidationError
                 {
                     PropertyName = "FirstName",
@@ -65,6 +65,6 @@ internal static class EndpointHelpers
                     AttemptedValue = DateTime.Now.AddYears(1),
                     Message = "Birth date cannot be in future."
                 }
-            }
+            ]
         };
 }

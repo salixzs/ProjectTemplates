@@ -71,7 +71,6 @@ public class IntegrationTestFactory<TProgram, TDbContext> : WebApplicationFactor
                 AllowAutoRedirect = false,
                 BaseAddress = new Uri("https://localhost:44301")
             });
-        ;
         return client;
     }
 

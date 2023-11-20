@@ -3,15 +3,11 @@ using WebApiTemplate.Domain.Samples;
 
 namespace WebApiTemplate.Endpoints.Samples;
 
-public class WeatherForecastGet : EndpointWithoutRequest<IEnumerable<WeatherForecast>>
+public class WeatherForecastGet(IWeatherForecastHandler handler) : EndpointWithoutRequest<IEnumerable<WeatherForecast>>
 {
-    private readonly IWeatherForecastHandler _handler;
-
-    public WeatherForecastGet(IWeatherForecastHandler handler) => _handler = handler;
-
     public override void Configure()
     {
-        // Endpoint setup (behavior)
+        // Endpoint setup (behaviour)
         Get(Urls.Samples.WeatherForecast);
         Tags(Urls.Samples.SwaggerTag);
         AllowAnonymous();
@@ -29,5 +25,5 @@ public class WeatherForecastGet : EndpointWithoutRequest<IEnumerable<WeatherFore
     }
 
     public override async Task HandleAsync(CancellationToken cancellationToken) =>
-        await SendOkAsync(await _handler.Handle(), cancellationToken);
+        await SendOkAsync(await handler.Handle(), cancellationToken);
 }

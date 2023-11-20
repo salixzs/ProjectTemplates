@@ -8,18 +8,9 @@ using WebApiTemplate.CoreLogic.Handlers.SystemNotifications;
 namespace WebApiTemplate.Endpoints.Pages;
 
 [ExcludeFromCodeCoverage]
-public class HealthPageGet : EndpointWithoutRequest<ContentResult>
+public class HealthPageGet(HealthCheckService healthChecks, ISystemNotificationForHealthCheck saveLogic)
+    : EndpointWithoutRequest<ContentResult>
 {
-    private readonly HealthCheckService _healthChecks;
-
-    private readonly ISystemNotificationForHealthCheck _saveLogic;
-
-    public HealthPageGet(HealthCheckService healthChecks, ISystemNotificationForHealthCheck saveLogic)
-    {
-        _healthChecks = healthChecks;
-        _saveLogic = saveLogic;
-    }
-
     public override void Configure()
     {
         Get(Urls.Pages.HealthPage);
@@ -31,20 +22,20 @@ public class HealthPageGet : EndpointWithoutRequest<ContentResult>
     public override async Task HandleAsync(CancellationToken ct)
     {
         var url = string.Concat(BaseURL[..^1], Urls.Pages.HealthPage);
-        var healthResult = await _healthChecks.CheckHealthAsync(ct);
-        await _saveLogic.HandleHealthCheckSystemNotification(healthResult, url, ct);
+        var healthResult = await healthChecks.CheckHealthAsync(ct);
+        await saveLogic.HandleHealthCheckSystemNotification(healthResult, url, ct);
 #pragma warning disable RCS0056 // A line is too long.
         var healthPageContents = HealthTestPage.GetContents(
             healthReport: healthResult,
             originalHealthTestEndpoint: "/health",
-            testingLinks: new List<HealthTestPageLink>
-            {
+            testingLinks:
+            [
                 new HealthTestPageLink { TestEndpoint = Urls.Sandbox.Strings, Name = "Strings", Description = "Different string type values serialization." },
                 new HealthTestPageLink { TestEndpoint = Urls.Sandbox.Numbers, Name = "Numbers", Description = "Different number type values serialization." },
                 new HealthTestPageLink { TestEndpoint = Urls.Sandbox.DateTimes, Name = "Dates & Times", Description = "Different Date and Time type values serialization." },
                 new HealthTestPageLink { TestEndpoint = Urls.Sandbox.OtherTypes, Name = "Other types", Description = "Bool, Array, Enum serialization." },
                 new HealthTestPageLink { TestEndpoint = Urls.Sandbox.Exception, Name = "Error", Description = "Throws error on purpose to see how API responds with it." },
-            });
+            ]);
 #pragma warning restore RCS0056 // A line is too long.
         await SendBytesAsync(Encoding.UTF8.GetBytes(healthPageContents), contentType: "text/html", cancellation: ct);
     }

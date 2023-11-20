@@ -4,14 +4,8 @@ using Microsoft.Extensions.Localization;
 namespace WebApiTemplate.Translations;
 
 /// <inheritdoc cref="ITranslate{T}"/>
-public class Translate<T> : ITranslate<T> where T : class
+public class Translate<T>(IStringLocalizer<T> localizer) : ITranslate<T> where T : class
 {
-    private readonly IStringLocalizer<T> _localizer;
-
-    /// <inheritdoc cref="ITranslate{T}"/>
-    public Translate(IStringLocalizer<T> localizer) =>
-        _localizer = localizer;
-
     /// <inheritdoc/>
     public virtual string this[string name]
     {
@@ -22,7 +16,7 @@ public class Translate<T> : ITranslate<T> where T : class
                 throw new ArgumentNullException(nameof(name));
             }
 
-            return _localizer[name].Value;
+            return localizer[name].Value;
         }
     }
 
@@ -48,13 +42,13 @@ public class Translate<T> : ITranslate<T> where T : class
             }
             catch
             {
-                return _localizer[name].Value;
+                return localizer[name].Value;
             }
 
             var initialUiCulture = CultureInfo.CurrentUICulture;
             CultureInfo.CurrentUICulture = cultureFromParameter;
 
-            var translatedString = _localizer[name].Value;
+            var translatedString = localizer[name].Value;
 
             CultureInfo.CurrentUICulture = initialUiCulture;
             return translatedString;
@@ -71,7 +65,7 @@ public class Translate<T> : ITranslate<T> where T : class
                 throw new ArgumentNullException(nameof(name));
             }
 
-            return _localizer[name, arguments].Value;
+            return localizer[name, arguments].Value;
         }
     }
 
@@ -92,13 +86,13 @@ public class Translate<T> : ITranslate<T> where T : class
             }
             catch
             {
-                return _localizer[name].Value;
+                return localizer[name].Value;
             }
 
             var initialUiCulture = CultureInfo.CurrentUICulture;
             CultureInfo.CurrentUICulture = cultureFromParameter;
 
-            var translatedString = _localizer[name, arguments].Value;
+            var translatedString = localizer[name, arguments].Value;
 
             CultureInfo.CurrentUICulture = initialUiCulture;
 

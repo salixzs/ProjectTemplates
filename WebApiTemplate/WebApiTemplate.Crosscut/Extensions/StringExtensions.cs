@@ -15,7 +15,7 @@ public static class StringExtensions
     /// <returns>
     /// <c>true</c> if the specified string to check is integer; otherwise (incl. empty/null), <c>false</c>.
     /// </returns>
-    public static bool IsInteger(this string stringToCheck) =>
+    public static bool IsInteger(this string? stringToCheck) =>
         !string.IsNullOrWhiteSpace(stringToCheck) && stringToCheck.Trim().All(char.IsNumber);
 
     /// <summary>
@@ -23,7 +23,7 @@ public static class StringExtensions
     /// </summary>
     /// <param name="stringToCheck">The string to check</param>
     /// <returns>True, is string does not contains anything else beside normal text</returns>
-    public static bool IsAlphaOnly(this string stringToCheck) =>
+    public static bool IsAlphaOnly(this string? stringToCheck) =>
         !string.IsNullOrEmpty(stringToCheck) && stringToCheck.All(c => char.IsLetter(c) || c == ' ');
 
     /// <summary>
@@ -33,7 +33,7 @@ public static class StringExtensions
     /// </summary>
     /// <param name="stringToCheck">The string to check</param>
     /// <returns>True, is string does not contains anything else beside normal text</returns>
-    public static bool IsHumanName(this string stringToCheck) =>
+    public static bool IsHumanName(this string? stringToCheck) =>
         !string.IsNullOrWhiteSpace(stringToCheck)
             && stringToCheck.All(c => char.IsLetter(c) || c == ' ' || c == '-' || c == '`' || c == '\'')
             && stringToCheck.Count(char.IsLetter) > 1;
@@ -108,7 +108,7 @@ public static class StringExtensions
     /// </summary>
     /// <param name="stringToCheck">The string to check</param>
     /// <returns>True, if string contains any non-Ascii character</returns>
-    public static bool ContainsUnicodeCharacter(this string stringToCheck) =>
+    public static bool ContainsUnicodeCharacter(this string? stringToCheck) =>
         !string.IsNullOrWhiteSpace(stringToCheck) && stringToCheck.ToCharArray().Any(c => c > 126);
 
     /// <summary>
@@ -116,7 +116,7 @@ public static class StringExtensions
     /// Also handles empty/null strings accordingly.
     /// </summary>
     /// <param name="stringToCheck">The string to check.</param>
-    public static bool IsWesternLanguage(this string stringToCheck) =>
+    public static bool IsWesternLanguage(this string? stringToCheck) =>
         string.IsNullOrWhiteSpace(stringToCheck) || stringToCheck.ToCharArray().All(c => c <= 0x017F);
 
     /// <summary>

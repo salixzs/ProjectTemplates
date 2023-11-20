@@ -12,9 +12,9 @@ namespace WebApiTemplate.Domain.Fakes;
 /// </summary>
 public sealed class DomainFakesFactory
 {
-    private readonly Dictionary<string, Func<object>> _instantiators = new();
+    private readonly Dictionary<string, Func<object>> _instantiators = [];
 
-    private readonly Dictionary<string, object> _instantiatedFakes = new();
+    private readonly Dictionary<string, object> _instantiatedFakes = [];
 
     /// <summary>
     /// Use Factory in Tests/Docs to get fake Domain objects and their lists.

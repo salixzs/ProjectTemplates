@@ -3,12 +3,8 @@ using WebApiTemplate.Domain.SystemNotifications;
 
 namespace WebApiTemplate.WebApi.Endpoints.SystemNotifications;
 
-public class SystemNotificationPatch : Endpoint<SystemNotification>
+public class SystemNotificationPatch(ISystemNotificationCommands commandHandler) : Endpoint<SystemNotification>
 {
-    private readonly ISystemNotificationCommands _commandHandler;
-
-    public SystemNotificationPatch(ISystemNotificationCommands commandHandler) => _commandHandler = commandHandler;
-
     public override void Configure()
     {
         Patch(Urls.SystemNotifications.BaseUri);
@@ -42,8 +38,8 @@ including its messages. Missing messages gets deleted. Should have at least one 
                 CountdownSince = DateTime.UtcNow.AddMinutes(9),
                 EmphasizeType = Enumerations.SystemNotificationType.Critical,
                 Type = Enumerations.SystemNotificationType.Warning,
-                Messages = new List<SystemNotificationMessage>
-                {
+                Messages =
+                [
                     new SystemNotificationMessage
                     {
                         Id = 0,
@@ -56,7 +52,7 @@ including its messages. Missing messages gets deleted. Should have at least one 
                         Language = "lv",
                         Message = "Drīz sāksies apkopes darbi."
                     }
-                }
+                ]
             };
         });
     }
@@ -69,7 +65,7 @@ including its messages. Missing messages gets deleted. Should have at least one 
         }
 
         EndpointHelpers.ThrowIfRequestValidationFailed(ValidationFailed, ValidationFailures, GetType().Name);
-        await _commandHandler.Update(notification, cancellationToken);
+        await commandHandler.Update(notification, cancellationToken);
         await SendOkAsync(cancellation: cancellationToken);
     }
 }

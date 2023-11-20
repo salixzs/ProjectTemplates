@@ -28,7 +28,7 @@ public sealed class XUnitLogger<T> : ILogger<T>, IDisposable
     /// <summary>
     /// Logged message store.
     /// </summary>
-    public List<LoggingStatement> LogStatements { get; } = new();
+    public List<LoggingStatement> LogStatements { get; } = [];
 
     /// <summary>
     /// Microsoft ILogger implementation, which can be used in XUnit tests as stub for real logger.
@@ -122,7 +122,7 @@ public sealed class XUnitLogger : ILogger, IDisposable
     /// <summary>
     /// Logged message store.
     /// </summary>
-    public List<LoggingStatement> LogStatements { get; } = new();
+    public List<LoggingStatement> LogStatements { get; } = [];
 
     /// <summary>
     /// Microsoft ILogger implementation, which can be used in XUnit tests as stub for real logger.

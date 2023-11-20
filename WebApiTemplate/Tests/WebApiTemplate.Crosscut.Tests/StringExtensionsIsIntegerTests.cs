@@ -17,5 +17,5 @@ public class StringExtensionsIsIntegerTests
     [InlineData("1 000 000", false)]
     [InlineData("1_000_000", false)]
     [InlineData("1939308443", true)]
-    public void StringExtTests_IsInteger_AsExpected(string testable, bool expected) => testable.IsInteger().Should().Be(expected);
+    public void StringExtTests_IsInteger_AsExpected(string? testable, bool expected) => testable.IsInteger().Should().Be(expected);
 }

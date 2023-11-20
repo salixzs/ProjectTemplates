@@ -46,7 +46,7 @@ public sealed class ActiveSystemNotification
     /// <summary>
     /// Actual notification message(s) in one or more languages.
     /// </summary>
-    public List<SystemNotificationMessage> Messages { get; set; } = new List<SystemNotificationMessage>();
+    public List<SystemNotificationMessage> Messages { get; set; } = [];
 
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     [ExcludeFromCodeCoverage]

@@ -31,5 +31,5 @@ public class StringExtensionsIsHumanNameTests
     [InlineData("John O'Connor", true)]
     [InlineData("John O`Connor", true)]
     [InlineData("John Brown IV", true)]
-    public void StringExtTests_IsHumanName_AsExpected(string testable, bool expected) => testable.IsHumanName().Should().Be(expected);
+    public void StringExtTests_IsHumanName_AsExpected(string? testable, bool expected) => testable.IsHumanName().Should().Be(expected);
 }

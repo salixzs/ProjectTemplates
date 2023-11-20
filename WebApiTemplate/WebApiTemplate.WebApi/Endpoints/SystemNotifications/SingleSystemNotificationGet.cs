@@ -4,12 +4,8 @@ using WebApiTemplate.Domain.SystemNotifications;
 
 namespace WebApiTemplate.WebApi.Endpoints.SystemNotifications;
 
-public class SingleSystemNotificationGet : EndpointWithoutRequest<SystemNotification>
+public class SingleSystemNotificationGet(ISystemNotificationQueries queryHandler) : EndpointWithoutRequest<SystemNotification>
 {
-    private readonly ISystemNotificationQueries _queryHandler;
-
-    public SingleSystemNotificationGet(ISystemNotificationQueries queryHandler) => _queryHandler = queryHandler;
-
     public override void Configure()
     {
         Get(Urls.SystemNotifications.WithId);
@@ -38,7 +34,7 @@ public class SingleSystemNotificationGet : EndpointWithoutRequest<SystemNotifica
     public override async Task HandleAsync(CancellationToken cancellationToken)
     {
         var notificationId = Route<int>("id");
-        var notification = await _queryHandler.GetById(notificationId, cancellationToken);
+        var notification = await queryHandler.GetById(notificationId, cancellationToken);
         if (notification != null)
         {
             await SendOkAsync(notification, cancellationToken);

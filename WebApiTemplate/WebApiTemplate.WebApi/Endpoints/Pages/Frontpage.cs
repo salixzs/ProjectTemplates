@@ -7,12 +7,8 @@ using Salix.AspNetCore.TitlePage;
 namespace WebApiTemplate.Endpoints.Samples;
 
 [ExcludeFromCodeCoverage]
-public class FrontpageGet : EndpointWithoutRequest<ContentResult>
+public class FrontpageGet(IConfigurationValuesLoader configLoader) : EndpointWithoutRequest<ContentResult>
 {
-    private readonly IConfigurationValuesLoader _configLoader;
-
-    public FrontpageGet(IConfigurationValuesLoader configLoader) => _configLoader = configLoader;
-
     public override void Configure()
     {
         Get(Urls.Pages.FrontPage);
@@ -38,7 +34,7 @@ public class FrontpageGet : EndpointWithoutRequest<ContentResult>
         whitelistedConfigurationValues.Add("Security");
         whitelistedConfigurationValues.Add("ConnectionStrings");
 #endif
-        var configurationItems = _configLoader.GetConfigurationValues(whitelistedConfigurationValues);
+        var configurationItems = configLoader.GetConfigurationValues(whitelistedConfigurationValues);
         var obfuscatedConfig = ObfuscateConfigurationValues(configurationItems!);
         obfuscatedConfig.Add("Local Server Timezone", TimeZoneInfo.Local.DisplayName);
         obfuscatedConfig.Add("Current Culture", System.Globalization.CultureInfo.CurrentCulture.DisplayName);

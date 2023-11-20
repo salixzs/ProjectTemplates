@@ -45,16 +45,13 @@ public class DateTimeExtensionsAgeTests
         };
 }
 
-internal sealed class TestDateTimeProvider : IDateTimeProvider
+internal sealed class TestDateTimeProvider(DateTime currentDateTime) : IDateTimeProvider
 {
-    public TestDateTimeProvider(DateTime currentDateTime) =>
-        DateTimeNow = currentDateTime;
-
     public DateTimeOffset DateTimeOffsetNow { get; }
 
     public DateTimeOffset DateTimeOffsetUtcNow { get; }
 
-    public DateTime DateTimeNow { get; }
+    public DateTime DateTimeNow { get; } = currentDateTime;
 
     public DateTime DateTimeUtcNow { get; }
 }

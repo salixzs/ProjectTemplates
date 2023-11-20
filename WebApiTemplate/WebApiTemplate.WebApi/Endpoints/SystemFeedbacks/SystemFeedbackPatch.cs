@@ -3,12 +3,8 @@ using WebApiTemplate.Domain.SystemFeedbacks;
 
 namespace WebApiTemplate.WebApi.Endpoints.SystemFeedbacks;
 
-public class SystemFeedbackPatch : Endpoint<SystemFeedback>
+public class SystemFeedbackPatch(ISystemFeedbackCommands commandHandler) : Endpoint<SystemFeedback>
 {
-    private readonly ISystemFeedbackCommands _commandHandler;
-
-    public SystemFeedbackPatch(ISystemFeedbackCommands commandHandler) => _commandHandler = commandHandler;
-
     public override void Configure()
     {
         Patch(Urls.SystemFeedbacks.BaseUri);
@@ -54,7 +50,7 @@ Comments and data relating it is left unchanged.";
         }
 
         EndpointHelpers.ThrowIfRequestValidationFailed(ValidationFailed, ValidationFailures, GetType().Name);
-        await _commandHandler.Update(feedback, cancellationToken);
+        await commandHandler.Update(feedback, cancellationToken);
         await SendOkAsync(cancellation: cancellationToken);
     }
 }

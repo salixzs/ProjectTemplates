@@ -34,7 +34,7 @@ public static class WebAppExtensions
         app.AddJsonExceptionHandler<ApiJsonErrorMiddleware>(
             new ApiJsonExceptionOptions
             {
-                OmitSources = new HashSet<string> { "Middleware", "ThrowIfRequestValidationFailed" },
+                OmitSources = ["Middleware", "ThrowIfRequestValidationFailed"],
                 ShowStackTrace = true
             });
         return app;

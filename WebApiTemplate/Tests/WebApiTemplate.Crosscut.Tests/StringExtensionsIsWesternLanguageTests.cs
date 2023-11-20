@@ -20,5 +20,5 @@ public class StringExtensionsIsWesternLanguageTests
     [InlineData("Κυρηναῖοι Ῥαιτικῆς", false)]
     [InlineData("ყველა ადამიანი", false)]
     [InlineData("王孙董", false)]
-    public void StringExtTests_IsWesternLanguage_AsExpected(string testable, bool expected) => testable.IsWesternLanguage().Should().Be(expected);
+    public void StringExtTests_IsWesternLanguage_AsExpected(string? testable, bool expected) => testable.IsWesternLanguage().Should().Be(expected);
 }
