@@ -9,6 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		nuget.config = nuget.config
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -47,7 +50,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Integration.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Translations", "WebApiTemplate.Translations\WebApiTemplate.Translations.csproj", "{812B42B3-E1DD-4A63-8B25-ED2078909A95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTemplate.Translations.Tests", "Tests\WebApiTemplate.Translations.Tests\WebApiTemplate.Translations.Tests.csproj", "{476428BB-6D82-4A14-835F-5002B95FBE81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiTemplate.Translations.Tests", "Tests\WebApiTemplate.Translations.Tests\WebApiTemplate.Translations.Tests.csproj", "{476428BB-6D82-4A14-835F-5002B95FBE81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

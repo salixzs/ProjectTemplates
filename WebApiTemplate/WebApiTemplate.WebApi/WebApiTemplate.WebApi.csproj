@@ -1,11 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<!-- Main project properties -->
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
-		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<LangVersion>latest</LangVersion>
 		<UserSecretsId>WebApiTemplate</UserSecretsId>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -29,25 +26,17 @@
 
 	<!-- NuGet package references -->
 	<ItemGroup>
-		<PackageReference Include="ConfigurationValidation.AspNetCore" Version="1.0.0" />
-		<PackageReference Include="FastEndpoints" Version="5.18.0" />
-		<PackageReference Include="FastEndpoints.Security" Version="5.18.0" />
-		<PackageReference Include="FastEndpoints.Swagger" Version="5.18.0" />
-		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
-    <PackageReference Include="Roslynator.Analyzers" Version="4.6.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Roslynator.Formatting.Analyzers" Version="4.6.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Salix.AspNetCore.FrontPage" Version="1.0.0" />
-    <PackageReference Include="Salix.AspNetCore.HealthCheck" Version="1.0.0" />
-    <PackageReference Include="Salix.AspNetCore.JsonExceptionHandler" Version="1.0.0" />
-		<PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
-		<PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
+		<PackageReference Include="ConfigurationValidation.AspNetCore" />
+		<PackageReference Include="FastEndpoints" />
+		<PackageReference Include="FastEndpoints.Security" />
+		<PackageReference Include="FastEndpoints.Swagger" />
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <PackageReference Include="Salix.AspNetCore.FrontPage" />
+    <PackageReference Include="Salix.AspNetCore.HealthCheck" />
+    <PackageReference Include="Salix.AspNetCore.JsonExceptionHandler" />
+		<PackageReference Include="Serilog.AspNetCore" />
+		<PackageReference Include="Serilog.Sinks.ApplicationInsights" />
 	</ItemGroup>
 
 	<!-- Project references -->
