@@ -3,7 +3,7 @@
 Provides boilerplate initial code for Dependency Injection-able, Logger and Configuration enabled console tool.
 
 ## Used Technologies and packages
-- Net 7.0, Hosted approach.
+- Net 8.0, Hosted approach.
 - Consolix (beautifying, parameter wiring)
 - Serilog (logging to file)
 
