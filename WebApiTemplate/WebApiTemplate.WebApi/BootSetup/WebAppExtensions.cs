@@ -70,7 +70,7 @@ public static class WebAppExtensions
         if (app.Environment.IsDevelopment())
         {
             app.UseOpenApi();
-            app.UseSwaggerUi3(settings =>
+            app.UseSwaggerUi(settings =>
             {
                 settings.AdditionalSettings["filter"] = true;
                 settings.AdditionalSettings["persistAuthorization"] = true;

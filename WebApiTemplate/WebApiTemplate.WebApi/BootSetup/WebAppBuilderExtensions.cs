@@ -153,7 +153,7 @@ public static class WebAppBuilderExtensions
                         docCfg.Version = "v1.0";
                         docCfg.DocumentName = "Version-1.0";
                         docCfg.Description = "Here goes a longer and detailed description on API purpose and usage.";
-                        docCfg.GenerateEnumMappingDescription = true;
+                        docCfg.SchemaSettings.GenerateEnumMappingDescription = true;
                     };
                     settings.EndpointFilter = EndpointDocumentationFilter;
                     settings.AutoTagPathSegmentIndex = 0;

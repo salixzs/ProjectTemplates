@@ -2,7 +2,7 @@
 
 	<!-- Main project properties -->
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<UserSecretsId>WebApiTemplate</UserSecretsId>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -46,6 +46,16 @@
 	  <ProjectReference Include="..\WebApiTemplate.Domain.Fakes\WebApiTemplate.Domain.Fakes.csproj" />
 	  <ProjectReference Include="..\WebApiTemplate.Domain\WebApiTemplate.Domain.csproj" />
 	  <ProjectReference Include="..\WebApiTemplate.Urls\WebApiTemplate.Urls.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Update="Roslynator.Analyzers">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	  <PackageReference Update="Roslynator.Formatting.Analyzers">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
 	</ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 Solution template for REST WebApi.
 
-- Net 7.0
-- Asp.Net 7.0
+- Net 8.0
+- Asp.Net 8.0
     - [FastEndpoints](https://fast-endpoints.com/) (instead of Controllers)
       - FluentValidation as part of FastEndpoints
 - MsSQL database
