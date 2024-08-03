@@ -1,6 +1,6 @@
 using WebApiTemplate.CoreLogic.Handlers.SystemFeedbacks;
 
-namespace WebApiTemplate.WebApi.Endpoints.SystemNotifications;
+namespace WebApiTemplate.WebApi.Endpoints.SystemFeedbacks;
 
 public class SystemFeedbackCommentDelete(ISystemFeedbackCommentCommands commandHandler) : EndpointWithoutRequest
 {

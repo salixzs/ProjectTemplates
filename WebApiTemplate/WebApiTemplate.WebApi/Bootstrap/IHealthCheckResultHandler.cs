@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace WebApiTemplate.WebApi.BootSetup;
+namespace WebApiTemplate.WebApi.Bootstrap;
 
 public interface IHealthCheckResultHandler
 {

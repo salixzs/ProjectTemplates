@@ -8,6 +8,7 @@ CREATE TABLE [dbo].[SystemNotifications]
     [EmphasizeType] TINYINT NOT NULL DEFAULT 0, 
     [CountdownSince] DATETIMEOFFSET(0) NOT NULL,
     [MoreInfoUrl] VARCHAR(1000) NULL,
+    [UserDismissType] INT DEFAULT 0,
     [IsHealthCheck] BIT NOT NULL DEFAULT 0,
     CONSTRAINT [PK_SystemNotifications] PRIMARY KEY CLUSTERED ([Id] ASC),
 )

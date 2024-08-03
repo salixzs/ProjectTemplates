@@ -33,6 +33,7 @@ public sealed class SystemNotificationCommands : ISystemNotificationCommands
             EmphasizeType = notification.EmphasizeType ?? notification.Type,
             CountdownSince = notification.CountdownSince ?? notification.EndTime,
             MoreInfoUrl = notification.MoreInfoUrl,
+            UserDismissType = notification.UserDismissType,
         };
 
         foreach (var message in notification.Messages)
@@ -71,6 +72,7 @@ public sealed class SystemNotificationCommands : ISystemNotificationCommands
         updateableRecord.EmphasizeType = notification.EmphasizeType ?? notification.Type;
         updateableRecord.CountdownSince = notification.CountdownSince ?? notification.EndTime;
         updateableRecord.MoreInfoUrl = notification.MoreInfoUrl;
+        updateableRecord.UserDismissType = notification.UserDismissType;
 
         updateableRecord.Messages.Clear();
         foreach (var message in notification.Messages)

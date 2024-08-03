@@ -1,6 +1,6 @@
-using WebApiTemplate.BootSetup;
+using WebApiTemplate.WebApi.Bootstrap;
 
-namespace WebApiTemplate;
+namespace WebApiTemplate.WebApi;
 
 #pragma warning disable RCS1102 // Make class static.
 public class Program

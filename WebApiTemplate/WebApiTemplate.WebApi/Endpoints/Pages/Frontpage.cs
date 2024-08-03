@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Salix.AspNetCore.TitlePage;
 
-namespace WebApiTemplate.Endpoints.Samples;
+namespace WebApiTemplate.WebApi.Endpoints.Pages;
 
 [ExcludeFromCodeCoverage]
 public class FrontpageGet(IConfigurationValuesLoader configLoader) : EndpointWithoutRequest<ContentResult>

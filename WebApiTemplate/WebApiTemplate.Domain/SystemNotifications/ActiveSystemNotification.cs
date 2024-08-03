@@ -44,6 +44,12 @@ public sealed class ActiveSystemNotification
     public string? MoreInfoUrl { get; set; }
 
     /// <summary>
+    /// Specifies whether user can dismiss (close) notification and how he can dismiss this notification (Forever, UntilEmphasize, ForOneDay, UntilCountdown).
+    /// UI should implement dismissal check based on this enumeration value.
+    /// </summary>
+    public SystemNotificationUserDismissType UserDismissType { get; set; }
+
+    /// <summary>
     /// Actual notification message(s) in one or more languages.
     /// </summary>
     public List<SystemNotificationMessage> Messages { get; set; } = [];

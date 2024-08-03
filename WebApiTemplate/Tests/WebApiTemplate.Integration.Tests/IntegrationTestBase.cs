@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using WebApiTemplate.Database.Orm;
 using WebApiTemplate.Domain.Fakes;
+using WebApiTemplate.WebApi;
 
 namespace WebApiTemplate.Integration.Tests;
 

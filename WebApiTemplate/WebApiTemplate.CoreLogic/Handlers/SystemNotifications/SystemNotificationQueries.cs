@@ -44,6 +44,7 @@ public sealed class SystemNotificationQueries : ISystemNotificationQueries
                     IsEmphasized = dbRecord.EmphasizeSince <= currentDateTime,
                     ShowCountdown = dbRecord.CountdownSince <= currentDateTime,
                     MoreInfoUrl = dbRecord.MoreInfoUrl,
+                    UserDismissType = dbRecord.UserDismissType,
                     Messages = dbRecord.Messages.Select(
                         message => new SystemNotificationMessage
                         {
@@ -83,6 +84,7 @@ public sealed class SystemNotificationQueries : ISystemNotificationQueries
             CountdownSince = notificationRecord.CountdownSince,
             MoreInfoUrl = notificationRecord.MoreInfoUrl,
             IsHealthCheck = notificationRecord.IsHealthCheck,
+            UserDismissType = notificationRecord.UserDismissType,
             Messages = notificationRecord.Messages.Select(
                 message => new SystemNotificationMessage
                 {
@@ -112,6 +114,7 @@ public sealed class SystemNotificationQueries : ISystemNotificationQueries
                 EmphasizeType = dbRecord.EmphasizeType,
                 CountdownSince = dbRecord.CountdownSince,
                 MoreInfoUrl = dbRecord.MoreInfoUrl,
+                UserDismissType = dbRecord.UserDismissType,
                 IsHealthCheck = dbRecord.IsHealthCheck,
                 Messages = dbRecord.Messages.Select(
                     message => new SystemNotificationMessage

@@ -2,7 +2,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Salix.AspNetCore.HealthCheck;
 using WebApiTemplate.CoreLogic.Handlers.SystemNotifications;
 
-namespace WebApiTemplate.WebApi.BootSetup;
+namespace WebApiTemplate.WebApi.Bootstrap;
 
 /// <summary>
 /// Handles the HealthCheck results with putting system notification if failing.

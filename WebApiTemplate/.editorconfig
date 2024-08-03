@@ -1042,6 +1042,9 @@ dotnet_diagnostic.IDE0072.severity = suggestion
 # IDE0011: Add braces
 dotnet_diagnostic.IDE0011.severity = error
 
+# IDE0290: Use primary constructor (Unusual new syntax sugar)
+dotnet_diagnostic.IDE0290.severity = suggestion
+
 # IDE0079: Remove unnecessary supression
 dotnet_diagnostic.IDE0079.severity = silent
 

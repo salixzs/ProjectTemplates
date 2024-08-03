@@ -1,7 +1,7 @@
 using WebApiTemplate.CoreLogic.Handlers.Samples;
 using WebApiTemplate.Domain.Samples;
 
-namespace WebApiTemplate.Endpoints.Samples;
+namespace WebApiTemplate.WebApi.Endpoints.Samples;
 
 public class WeatherForecastGet(IWeatherForecastHandler handler) : EndpointWithoutRequest<IEnumerable<WeatherForecast>>
 {

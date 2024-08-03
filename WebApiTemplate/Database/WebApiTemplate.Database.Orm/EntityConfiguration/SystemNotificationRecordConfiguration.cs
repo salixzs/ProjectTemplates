@@ -35,5 +35,10 @@ internal sealed class SystemNotificationRecordConfiguration : IEntityTypeConfigu
 
         builder.Property(e => e.CountdownSince)
             .IsRequired();
+
+        builder.Property(e => e.UserDismissType)
+            .IsRequired()
+            .HasConversion<int>()
+            .HasDefaultValue(SystemNotificationUserDismissType.Permanent);
     }
 }

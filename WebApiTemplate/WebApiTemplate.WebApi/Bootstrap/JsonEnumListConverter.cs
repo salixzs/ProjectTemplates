@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using System.Text.Json;
 
-namespace WebApiTemplate.WebApi.BootSetup;
+namespace WebApiTemplate.WebApi.Bootstrap;
 
 public class JsonEnumListConverter<T> : JsonConverter<List<T>> where T : struct
 {

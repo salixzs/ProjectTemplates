@@ -4,10 +4,9 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using WebApiTemplate.Crosscut.Exceptions;
 using WebApiTemplate.Enumerations;
-using WebApiTemplate.WebApi.BootSetup;
 using WebApiTemplate.WebApi.Middleware;
 
-namespace WebApiTemplate.BootSetup;
+namespace WebApiTemplate.WebApi.Bootstrap;
 
 /// <summary>
 /// Extensions for built WebApp (app) - Use* extensions.
@@ -96,7 +95,7 @@ public static class WebAppExtensions
         app.UseConfigurationValidationErrorPage();
         var healthCheckOptions = new HealthCheckOptions
         {
-            ResponseWriter = (HttpContext context, HealthReport report) => HealthCheckResultHandler(context, report, app),
+            ResponseWriter = (context, report) => HealthCheckResultHandler(context, report, app),
         };
         app.UseHealthChecks("/health", healthCheckOptions);
 

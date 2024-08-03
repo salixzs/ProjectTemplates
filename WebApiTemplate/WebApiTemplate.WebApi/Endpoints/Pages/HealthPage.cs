@@ -5,7 +5,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Salix.AspNetCore.HealthCheck;
 using WebApiTemplate.CoreLogic.Handlers.SystemNotifications;
 
-namespace WebApiTemplate.Endpoints.Pages;
+namespace WebApiTemplate.WebApi.Endpoints.Pages;
 
 [ExcludeFromCodeCoverage]
 public class HealthPageGet(HealthCheckService healthChecks, ISystemNotificationForHealthCheck saveLogic)

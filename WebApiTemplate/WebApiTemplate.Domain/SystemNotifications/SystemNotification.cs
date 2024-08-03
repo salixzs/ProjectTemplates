@@ -64,6 +64,12 @@ public class SystemNotification
     public DateTimeOffset? CountdownSince { get; set; }
 
     /// <summary>
+    /// Specifies whether user can dismiss (close) notification and how he can dismiss this notification (Forever, UntilEmphasize, ForOneDay, UntilCountdown).
+    /// UI should implement dismissal check based on this enumeration value.
+    /// </summary>
+    public SystemNotificationUserDismissType UserDismissType { get; set; }
+
+    /// <summary>
     /// Can hold a link to some page where end-user can find more information on this system notification.<br/>
     /// Can use to add link or button-link to system notification.
     /// </summary>

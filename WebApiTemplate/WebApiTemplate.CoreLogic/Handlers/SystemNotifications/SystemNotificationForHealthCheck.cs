@@ -40,6 +40,7 @@ public sealed class SystemNotificationForHealthCheck(WebApiTemplateDbContext dat
                     Type = Enumerations.SystemNotificationType.Warning,
                     EmphasizeType = Enumerations.SystemNotificationType.Warning,
                     MoreInfoUrl = moreInfoUrl,
+                    UserDismissType = Enumerations.SystemNotificationUserDismissType.Permanent,
                     IsHealthCheck = true,
                     Messages = new List<SystemNotificationMessageRecord>
                     {

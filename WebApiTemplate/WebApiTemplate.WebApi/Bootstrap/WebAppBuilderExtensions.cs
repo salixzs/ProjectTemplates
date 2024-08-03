@@ -6,7 +6,7 @@ using Serilog;
 using WebApiTemplate.CoreLogic.Security;
 using WebApiTemplate.Crosscut.Exceptions;
 
-namespace WebApiTemplate.BootSetup;
+namespace WebApiTemplate.WebApi.Bootstrap;
 
 /// <summary>
 /// Extensions for WebApp builder - Host, Services, Configuration.

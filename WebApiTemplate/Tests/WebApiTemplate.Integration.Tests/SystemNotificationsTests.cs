@@ -4,6 +4,7 @@ using Salix.AspNetCore.JsonExceptionHandler;
 using WebApiTemplate.Database.Orm;
 using WebApiTemplate.Domain.SystemNotifications;
 using System.Text.Json;
+using WebApiTemplate.WebApi;
 
 namespace WebApiTemplate.Integration.Tests;
 

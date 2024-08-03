@@ -2,9 +2,8 @@ using ConfigurationValidation.AspNetCore;
 using Salix.AspNetCore.TitlePage;
 using WebApiTemplate.CoreLogic.Security;
 using WebApiTemplate.Crosscut.Services;
-using WebApiTemplate.WebApi.BootSetup;
 
-namespace WebApiTemplate.BootSetup;
+namespace WebApiTemplate.WebApi.Bootstrap;
 
 public static class DependencyInjectionSetup
 {
