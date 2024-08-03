@@ -1,4 +1,5 @@
 using System.Data;
+using DotNet.Testcontainers.Builders;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -19,6 +20,9 @@ public class IntegrationTestFactory<TProgram, TDbContext> : WebApplicationFactor
         _sqlContainer = new MsSqlBuilder()
             .WithPassword("localdev#123")
             .WithImage("mcr.microsoft.com/mssql/server:2022-latest")
+            .WithWaitStrategy(Wait
+                .ForUnixContainer()
+                .UntilCommandIsCompleted("/opt/mssql-tools18/bin/sqlcmd", "-C", "-Q", "SELECT 1;"))
             .WithCleanUp(true)
             .Build();
 
