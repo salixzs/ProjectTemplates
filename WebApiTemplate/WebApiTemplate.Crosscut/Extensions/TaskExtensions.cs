@@ -14,20 +14,18 @@ public static class TaskExtensions
     /// <param name="errorHandler">Handler for case when task throws exception.</param>
     public static void FireAndForget(
         this Task task,
-        Action<Exception?>? errorHandler = null)
-    {
-        task.ContinueWith(
-            tsk =>
-            {
-                if (!tsk.IsFaulted || errorHandler == null)
+        Action<Exception?>? errorHandler = null) =>
+            task.ContinueWith(
+                tsk =>
                 {
-                    return;
-                }
+                    if (!tsk.IsFaulted || errorHandler == null)
+                    {
+                        return;
+                    }
 
-                errorHandler(tsk.Exception);
-            },
-            TaskContinuationOptions.OnlyOnFaulted);
-    }
+                    errorHandler(tsk.Exception);
+                },
+                TaskContinuationOptions.OnlyOnFaulted);
 
     /// <summary>
     /// This method will retry the task until it succeeds or the maximum number of retries is reached.<br/>

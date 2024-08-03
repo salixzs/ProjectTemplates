@@ -6,10 +6,10 @@ namespace WebApiTemplate.CoreLogic.Handlers.Samples;
 [ExcludeFromCodeCoverage]
 public class WeatherForecastHandler : IWeatherForecastHandler
 {
-    private static readonly string[] Summaries = new[]
-    {
+    private static readonly string[] Summaries =
+    [
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+    ];
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
     public async Task<IEnumerable<WeatherForecast>> Handle() =>

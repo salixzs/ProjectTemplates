@@ -2,7 +2,7 @@ using WebApiTemplate.Crosscut.Extensions;
 
 namespace WebApiTemplate.Crosscut.Tests;
 
-public class DateTimeOffsetExtensionsIsBetweenTests
+public class ValidationExtensionsDateTimeOffsetIsBetweenTests
 {
     [Theory]
     [MemberData(nameof(BetweenData))]

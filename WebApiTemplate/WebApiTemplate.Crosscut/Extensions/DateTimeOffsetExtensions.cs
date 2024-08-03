@@ -3,59 +3,6 @@ namespace WebApiTemplate.Crosscut.Extensions;
 public static class DateTimeOffsetExtensions
 {
     /// <summary>
-    /// Determines whether the evaluated DateTimeOffset value is between (inclusive) two specified dates (UTC times are compared).<br/>
-    /// Time part is significant. Take care if specify <paramref name="endTime" /> without Time part - it may give logically false results near endDate (time should be 23:59:59).
-    /// </summary>
-    /// <param name="dateToCheck">The date to check.</param>
-    /// <param name="startTime">The start time.</param>
-    /// <param name="endTime">The end time.</param>
-    /// <returns>
-    ///   <c>true</c> if the specified start time is between; otherwise, <c>false</c>.
-    /// </returns>
-    /// <exception cref="ArgumentException">DateTime.IsBetween() extension method got startTime bigger than endTime</exception>
-    public static bool IsBetween(this DateTimeOffset dateToCheck, DateTimeOffset startTime, DateTimeOffset endTime)
-    {
-        if (startTime.UtcDateTime > endTime.UtcDateTime)
-        {
-            throw new ArgumentException("DateTime.IsBetween() extension method got startTime bigger than endTime");
-        }
-
-        return dateToCheck.Ticks >= startTime.Ticks && dateToCheck.Ticks <= endTime.Ticks;
-    }
-
-    /// <summary>
-    /// Determines whether the evaluated DateTimeOffset value is between (inclusive) two specified dates (UTC times are compared).<br/>
-    /// Null values are considered as valid (produces true outcome).<br/>
-    /// Time part is significant. Take care if specify <paramref name="endTime" /> without Time part - it may give logically false results near endDate (time should be 23:59:59).
-    /// </summary>
-    /// <param name="dateToCheck">The date to check.</param>
-    /// <param name="startTime">The start time.</param>
-    /// <param name="endTime">The end time.</param>
-    /// <returns>
-    ///   <c>true</c> if the specified start time is between; otherwise, <c>false</c>.
-    /// </returns>
-    /// <exception cref="ArgumentException">DateTime.IsBetween() extension method got startTime bigger than endTime when both specified.</exception>
-    public static bool IsBetween(this DateTimeOffset dateToCheck, DateTimeOffset? startTime, DateTimeOffset? endTime)
-    {
-        if (startTime.HasValue && endTime.HasValue)
-        {
-            return dateToCheck.IsBetween(startTime.Value.UtcDateTime, endTime.Value.UtcDateTime);
-        }
-
-        if (endTime.HasValue && dateToCheck.UtcTicks >= endTime.Value.UtcTicks)
-        {
-            return false;
-        }
-
-        if (startTime.HasValue && dateToCheck.UtcTicks <= startTime.Value.UtcTicks)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-    /// <summary>
     /// Rounds DateTimeOffset value to nearest given hour/minute/second/millisecond.
     /// </summary>
     /// <param name="originalDateTimeOffset">Original DateTimeOffset value.</param>

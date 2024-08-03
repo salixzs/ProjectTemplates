@@ -9,7 +9,7 @@ namespace WebApiTemplate.Translations;
 /// var translation = l10n["Key"];
 /// </code>
 /// </summary>
-/// <typeparam name="T"></typeparam>
+/// <typeparam name="T">Type of Resource (RESX)</typeparam>
 public interface ITranslate<T> where T : class
 {
     /// <summary>
