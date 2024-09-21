@@ -15,16 +15,33 @@ public static class StringExtensions
     /// <returns>
     /// <c>true</c> if the specified string to check is integer; otherwise (incl. empty/null), <c>false</c>.
     /// </returns>
+    /// <remarks>Benchmarked fastest and no-memory usage approach.</remarks>
     public static bool IsInteger(this string? stringToCheck) =>
-        !string.IsNullOrWhiteSpace(stringToCheck) && stringToCheck.Trim().All(char.IsNumber);
+        !string.IsNullOrWhiteSpace(stringToCheck) && int.TryParse(stringToCheck, out _);
 
     /// <summary>
     /// Checks whether string contains only letters (words), including unicode letters. Empty/null strings are not alpha.
     /// </summary>
     /// <param name="stringToCheck">The string to check</param>
     /// <returns>True, is string does not contains anything else beside normal text</returns>
-    public static bool IsAlphaOnly(this string? stringToCheck) =>
-        !string.IsNullOrEmpty(stringToCheck) && stringToCheck.All(c => char.IsLetter(c) || c == ' ');
+    /// <remarks>Benchmarked fastest and no-memory usage approach.</remarks>
+    public static bool IsAlphaOnly(this string? stringToCheck)
+    {
+        if (string.IsNullOrEmpty(stringToCheck))
+        {
+            return false;
+        }
+
+        foreach (var c in stringToCheck)
+        {
+            if (!char.IsLetter(c) && c != ' ')
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     /// <summary>
     /// Checks whether string contains only letters, space, dash (-) and apostrophes ('`).<br/>
@@ -32,11 +49,31 @@ public static class StringExtensions
     /// Empty/null strings are not human name.
     /// </summary>
     /// <param name="stringToCheck">The string to check</param>
-    /// <returns>True, is string does not contains anything else beside normal text</returns>
-    public static bool IsHumanName(this string? stringToCheck) =>
-        !string.IsNullOrWhiteSpace(stringToCheck)
-            && stringToCheck.All(c => char.IsLetter(c) || c == ' ' || c == '-' || c == '`' || c == '\'')
-            && stringToCheck.Count(char.IsLetter) > 1;
+    /// <returns>True, is string does not contain anything else beside normal text</returns>
+    /// <remarks>Benchmarked fastest and no-memory usage approach.</remarks>
+    public static bool IsHumanName(this string? stringToCheck)
+    {
+        if (string.IsNullOrEmpty(stringToCheck))
+        {
+            return false;
+        }
+
+        var letterCount = 0;
+        foreach (var c in stringToCheck)
+        {
+            if (!char.IsLetter(c) && c != ' ' && c != '-' && c != '`' && c != '\'')
+            {
+                return false;
+            }
+
+            if (char.IsLetter(c))
+            {
+                letterCount++;
+            }
+        }
+
+        return letterCount > 1;
+    }
 
     /// <summary>
     /// Checks whether string contains only uppercase letters, including unicode letters.
@@ -45,6 +82,7 @@ public static class StringExtensions
     /// <param name="stringToCheck">The string to check.</param>
     /// <param name="allowedLowercaseCount">Count of lowercase letters, which are allowed to still consider string as UPPERCASE.</param>
     /// <returns>True, is string contains all letters in their uppercase form, otherwise false.</returns>
+    /// <remarks>Benchmarked fastest and no-memory usage approach.</remarks>
     public static bool IsUppercase(this string? stringToCheck, int allowedLowercaseCount = 0)
     {
         if (string.IsNullOrWhiteSpace(stringToCheck))
@@ -77,6 +115,7 @@ public static class StringExtensions
     /// <param name="stringToCheck">The string to check.</param>
     /// <param name="allowedUppercaseCount">Count of UPPERCASE letters, which are allowed to still consider string as lowercase.</param>
     /// <returns>True, is string contains all letters in their lowercase form, otherwise false.</returns>
+    /// <remarks>Benchmarked fastest and no-memory usage approach.</remarks>
     public static bool IsLowercase(this string? stringToCheck, int allowedUppercaseCount = 0)
     {
         if (string.IsNullOrWhiteSpace(stringToCheck))
@@ -108,16 +147,48 @@ public static class StringExtensions
     /// </summary>
     /// <param name="stringToCheck">The string to check</param>
     /// <returns>True, if string contains any non-Ascii character</returns>
-    public static bool ContainsUnicodeCharacter(this string? stringToCheck) =>
-        !string.IsNullOrWhiteSpace(stringToCheck) && stringToCheck.ToCharArray().Any(c => c > 126);
+    /// <remarks>Benchmarked fastest and no-memory usage approach.</remarks>
+    public static bool ContainsUnicodeCharacter(this string? stringToCheck)
+    {
+        if (string.IsNullOrEmpty(stringToCheck))
+        {
+            return false;
+        }
+
+        foreach (var c in stringToCheck)
+        {
+            if (c > 126)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     /// <summary>
     /// Determines whether the specified string to check contains characters only in western languages (not Greek, Russian, Arab, Chinese).
-    /// Also handles empty/null strings accordingly.
+    /// Empty/null strings are considered "western" :-).
     /// </summary>
     /// <param name="stringToCheck">The string to check.</param>
-    public static bool IsWesternLanguage(this string? stringToCheck) =>
-        string.IsNullOrWhiteSpace(stringToCheck) || stringToCheck.ToCharArray().All(c => c <= 0x017F);
+    /// <remarks>Benchmarked fastest and no-memory usage approach.</remarks>
+    public static bool IsWesternLanguage(this string? stringToCheck)
+    {
+        if (string.IsNullOrEmpty(stringToCheck))
+        {
+            return true;
+        }
+
+        foreach (var c in stringToCheck)
+        {
+            if (c > 0x017E)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     /// <summary>
     /// Gives corresponding Excel Column name to given integer (zero-based, max value: 16383).<br/>
@@ -159,7 +230,12 @@ public static class StringExtensions
             return null;
         }
 
-        return original[..Math.Min(original.Length, maxLength)];
+        if (original.Length > maxLength)
+        {
+            return original[..maxLength];
+        }
+
+        return original;
     }
 
     /// <summary>

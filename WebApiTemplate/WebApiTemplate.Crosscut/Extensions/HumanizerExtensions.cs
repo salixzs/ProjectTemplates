@@ -21,7 +21,7 @@ public static class HumanizerExtensions
         }
 
         var totalTransform = humanName.IsUppercase(1) || humanName.IsLowercase();
-        var properName = new StringBuilder();
+        var properName = new StringBuilder(humanName.Length);
         var nextIsUppercase = true;
         for (var letterInWord = 0; letterInWord < humanName.Length; letterInWord++)
         {
